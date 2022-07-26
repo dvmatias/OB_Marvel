@@ -14,3 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "OB Marvel"
 include ':app'
+include ':common'
+include ':core'
+include ':data'
+include ':domain'

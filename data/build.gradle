@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
 
@@ -7,13 +7,11 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.cmdv.obmarvel"
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -32,9 +30,13 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':core')
-    implementation project(path: ':data')
+    api project(path: ':common')
     implementation project(path: ':domain')
+
+    // TESTS
+    testImplementation libs.junit
+    testImplementation libs.junit_ext
+    testImplementation libs.espresso_core
 
     // ANDROID
     implementation libs.core_ktx
