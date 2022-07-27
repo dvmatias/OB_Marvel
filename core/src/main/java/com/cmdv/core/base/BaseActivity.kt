@@ -19,7 +19,7 @@ private const val TAG = "ACTIVITY :: "
  *
  * @param layoutResId Activity layout resource ID.
  * @param A Activity class type.
- * @param B Activity binding class type
+ * @param B Activity binding class type.
  */
 abstract class BaseActivity<in A, B>(
     @LayoutRes private val layoutResId: Int?
@@ -29,7 +29,7 @@ abstract class BaseActivity<in A, B>(
      */
     protected val navigator: Navigator by inject()
     /**
-     * Navigator instance. Activity can navigate to another using this instance.
+     * Activity layout binding.
      */
     protected lateinit var binding: B
     /**
@@ -45,16 +45,19 @@ abstract class BaseActivity<in A, B>(
      */
     protected abstract fun observe()
 
+    // 1'
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         initialize()
     }
 
+    // 1''
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initialize()
     }
 
+    // 2
     private fun onActivityCreated(dataBinder: B) {
         binding = dataBinder
         binding.lifecycleOwner = this
@@ -74,6 +77,9 @@ abstract class BaseActivity<in A, B>(
         observe()
     }
 
+    /**
+     * Log helper function to display Activity name.
+     */
     @Suppress("UNCHECKED_CAST")
     private fun logActivityClassName() {
         Log.d(TAG, (this as A)::class.java.simpleName)

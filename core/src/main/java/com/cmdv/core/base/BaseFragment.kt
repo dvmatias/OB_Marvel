@@ -9,22 +9,33 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
+private const val TAG = "FRAGMENT :: "
+
+/**
+ * Base Fragment class. Every Fragment in the app should extend (be a subclass) of this [BaseFragment] class. Subclassed
+ * fragments must implement data binding pattern.
+ *
+ * @param layoutResId Fragment layout resource ID.
+ * @param F Fragment class type.
+ * @param B Fragment binding class type.
+ */
 abstract class BaseFragment<in F, B>(
     @LayoutRes private val layoutResId: Int, @MenuRes private val menuResId: Int? = null
 ) : Fragment() where F : Fragment, B : ViewDataBinding {
-
+    /**
+     * Fragment layout binding.
+     */
     protected lateinit var binding: B
-
+    /**
+     * Initialize the view. Executed in onStart system callback instance.
+     */
     protected abstract fun initView()
-
+    /**
+     * Declare observe instances. Executed in onStart system callback instance.
+     */
     open fun observe() {}
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if (menuResId != null) setHasOptionsMenu(true)
-    }
-
-    @Suppress("UNCHECKED_CAST")
+    // 1
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,12 +45,19 @@ abstract class BaseFragment<in F, B>(
         binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
         binding.lifecycleOwner = this
 
-        logFragmentClassName((this as F)::class.java.simpleName)
+        logFragmentClassName()
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    // 2
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (menuResId != null) setHasOptionsMenu(true)
+    }
+
+    // 3
+    override fun onStart() {
+        super.onStart()
         initView()
         observe()
     }
@@ -49,7 +67,11 @@ abstract class BaseFragment<in F, B>(
         if (menuResId != null) inflater.inflate(menuResId, menu)
     }
 
-    private fun logFragmentClassName(fragmentClassName: String) {
-        Log.d("  ->  SCREEN :: ", fragmentClassName)
+    /**
+     * Log helper function to display Fragment name.
+     */
+    @Suppress("UNCHECKED_CAST")
+    private fun logFragmentClassName() {
+        Log.d("  ->  $TAG", (this as F)::class.java.simpleName)
     }
 }
