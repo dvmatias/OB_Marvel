@@ -6,5 +6,5 @@ interface CharactersRepository {
     /**
      * API call to get the total characters available.
      */
-    fun getTotalCharacters(): ResponseWrapper<Int>
+    fun getTotalCharactersCount(): ResponseWrapper<Int>
 }

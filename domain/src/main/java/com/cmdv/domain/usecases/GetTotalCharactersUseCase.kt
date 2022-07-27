@@ -9,7 +9,7 @@ class GetTotalCharactersUseCase(
 ) : BaseUseCase<ResponseWrapper<Int>, GetTotalCharactersUseCase.Params>() {
 
     override suspend fun executeUseCase(params: Params): ResponseWrapper<Int> =
-        characterRepository.getTotalCharacters()
+        characterRepository.getTotalCharactersCount()
 
     /**
      * This request doesn't need params.
