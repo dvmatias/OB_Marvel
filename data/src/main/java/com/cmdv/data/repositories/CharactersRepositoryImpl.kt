@@ -2,6 +2,7 @@ package com.cmdv.data.repositories
 
 import com.cmdv.data.networking.ApiHandler
 import com.cmdv.data.sources.apiservices.CharactersApi
+import com.cmdv.domain.uimodels.CharacterUiModel
 import com.cmdv.domain.repositories.CharactersRepository
 import com.cmdv.domain.utils.ResponseWrapper
 
@@ -19,4 +20,11 @@ class CharactersRepositoryImpl(
         apiHandler.doNetworkRequest(charactersApi.getCharacters(1, 0)) {
             it.data?.total ?: 0
         }
+
+    /**
+     * Returns a list with Marvel's characters.
+     */
+    override fun getCharacters(fetch: Boolean, limit: Int, offset: Int): ResponseWrapper<List<CharacterUiModel>> {
+        TODO("Not yet implemented")
+    }
 }

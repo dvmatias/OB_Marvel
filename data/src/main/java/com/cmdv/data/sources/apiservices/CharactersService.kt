@@ -1,6 +1,6 @@
 package com.cmdv.data.sources.apiservices
 
-import com.cmdv.data.entities.GetCharactersResponseEntity
+import com.cmdv.data.models.GetCharactersResponseModel
 import retrofit2.Call
 import retrofit2.Retrofit
 
@@ -21,6 +21,6 @@ class CharactersService(private val retrofit: Retrofit) : CharactersApi {
      *
      * @return The list of characters requested by limit and offset.
      */
-    override fun getCharacters(limit: Int, offset: Int): Call<GetCharactersResponseEntity> =
+    override fun getCharacters(limit: Int, offset: Int): Call<GetCharactersResponseModel> =
         charactersService.getCharacters(limit, offset)
 }

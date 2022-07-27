@@ -1,6 +1,6 @@
 package com.cmdv.data.sources.apiservices
 
-import com.cmdv.data.entities.GetCharactersResponseEntity
+import com.cmdv.data.models.GetCharactersResponseModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -31,5 +31,5 @@ interface CharactersApi {
     fun getCharacters(
         @Query(QUERY_LIMIT) limit: Int,
         @Query(QUERY_OFFSET) offset: Int
-    ): Call<GetCharactersResponseEntity>
+    ): Call<GetCharactersResponseModel>
 }

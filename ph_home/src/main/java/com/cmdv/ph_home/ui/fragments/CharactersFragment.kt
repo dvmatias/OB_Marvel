@@ -15,4 +15,16 @@ class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBi
     override fun initView() {
         binding.viewModel = viewModel
     }
+
+    override fun observe() {
+        with(viewModel) {
+            if (totalCharactersCount != 0) {
+                viewModel.getCharacters(fetch = false)
+            }
+            viewModelState.observe(this@CharactersFragment) {
+                // TODO
+                // if (state == ERROR)  setErrorViewState()
+            }
+        }
+    }
 }
