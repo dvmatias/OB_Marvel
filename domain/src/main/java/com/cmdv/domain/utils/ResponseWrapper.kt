@@ -21,7 +21,7 @@ class ResponseWrapper<out T>(
     enum class Status {
         LOADING,
         ERROR,
-        SUCCESS
+        READY
     }
 
     companion object {
@@ -29,7 +29,7 @@ class ResponseWrapper<out T>(
          * Executed when a request ends up successfully.
          */
         fun <T> success(data: T?): ResponseWrapper<T> =
-            ResponseWrapper(Status.SUCCESS, data, null)
+            ResponseWrapper(Status.READY, data, null)
 
         /**
          * Executed when a request ends up not successfully.
