@@ -5,5 +5,5 @@ import com.cmdv.domain.repositories.CharactersRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory<CharactersRepository> { CharactersRepositoryImpl() }
+    factory<CharactersRepository> { CharactersRepositoryImpl(get()) }
 }

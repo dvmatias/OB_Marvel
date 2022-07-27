@@ -5,14 +5,14 @@ import com.cmdv.domain.utils.FailureType
 import com.cmdv.domain.utils.ResponseWrapper
 import retrofit2.Call
 
-private const val TAG = "ServiceCallHandler"
+private const val TAG = "ApiHandler"
 
 /**
  * Utility class to perform network requests
  *
  * @param networkHandler Offers information regarding network state.
  */
-open class ServiceCallHandler(private val networkHandler: NetworkHandler) {
+open class ApiHandler(private val networkHandler: NetworkHandler) {
     /**
      * Function to perform and handle network requests.
      *
