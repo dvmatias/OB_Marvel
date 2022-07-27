@@ -50,6 +50,11 @@ abstract class BaseActivity<in A, B>(
         initialize()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initialize()
+    }
+
     private fun onActivityCreated(dataBinder: B) {
         binding = dataBinder
         binding.lifecycleOwner = this

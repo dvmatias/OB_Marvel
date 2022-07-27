@@ -18,6 +18,6 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
     }
 
     override fun observe() {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
     }
 }
