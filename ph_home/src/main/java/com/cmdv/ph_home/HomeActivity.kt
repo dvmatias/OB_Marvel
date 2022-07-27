@@ -1,11 +1,14 @@
 package com.cmdv.ph_home
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import com.cmdv.core.base.BaseActivity
+import com.cmdv.ph_home.databinding.ActivityHomeBinding
 
-class HomeActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.activity_home) {
+    override fun initView() {
+        TODO("Not yet implemented")
+    }
+
+    override fun observe() {
+        TODO("Not yet implemented")
     }
 }

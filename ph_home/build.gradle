@@ -27,14 +27,19 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
+    api project(path: ':common')
+    implementation project(path: ':core')
+
     // TESTS
     testImplementation libs.junit
     testImplementation libs.junit_ext
     testImplementation libs.espresso_core
-
     // ANDROID
     implementation libs.core_ktx
     implementation libs.appcompat

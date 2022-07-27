@@ -21,23 +21,25 @@ private const val TAG = "ACTIVITY :: "
  * @param A Activity class type.
  * @param B Activity binding class type
  */
-abstract class BaseActivity<in A, B>(@LayoutRes private val layoutResId: Int?) :
-    AppCompatActivity() where A : Activity, B : ViewDataBinding {
-
+abstract class BaseActivity<in A, B>(
+    @LayoutRes private val layoutResId: Int?
+) : AppCompatActivity() where A : Activity, B : ViewDataBinding {
+    /**
+     * Navigator instance. Activity can navigate to another using this instance.
+     */
     protected val navigator: Navigator by inject()
-
+    /**
+     * Navigator instance. Activity can navigate to another using this instance.
+     */
     protected lateinit var binding: B
-
     /**
      * Implement this function if the activity has to take extra arguments when launched.
      */
     open fun getExtras() {}
-
     /**
      * Initialize the view. Executed in onCreate system callback instance.
      */
     abstract fun initView()
-
     /**
      * Declare observe instances. Executed in onCreate system callback instance.
      */
