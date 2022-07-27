@@ -19,6 +19,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // Configure Kotlin compiler optimisations for releases
+            kotlinOptions {
+                freeCompilerArgs += [
+                        '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi',
+                        '-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi'
+                ]
+            }
         }
     }
     compileOptions {
@@ -46,6 +54,7 @@ dependencies {
     implementation libs.appcompat
     implementation libs.material
     implementation libs.constraintlayout
+    implementation libs.lifecycle_viewmodel_ktx
     // NAVIGATION
     implementation libs.navigation_fragment_ktx
     implementation libs.navigation_ui_ktx

@@ -22,6 +22,8 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
     }
 
     override fun observe() {
-        // TODO("Not yet implemented")
+        if (viewModel.totalCharactersCount == 0) {
+            viewModel.getTotalCharactersCount()
+        }
     }
 }

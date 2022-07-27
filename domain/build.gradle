@@ -18,6 +18,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // Configure Kotlin compiler optimisations for releases
+            kotlinOptions {
+                freeCompilerArgs += [
+                        '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi',
+                        '-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi'
+                ]
+            }
         }
     }
     compileOptions {
@@ -36,9 +44,12 @@ dependencies {
     testImplementation libs.junit
     testImplementation libs.junit_ext
     testImplementation libs.espresso_core
-
     // ANDROID
     implementation libs.core_ktx
     implementation libs.appcompat
     implementation libs.material
+    // COROUTINES
+    implementation libs.coroutines_play_services
+    implementation libs.coroutines_core
+    implementation libs.coroutines_android
 }
