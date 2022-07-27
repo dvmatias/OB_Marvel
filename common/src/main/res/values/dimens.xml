@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="follow_constraints">0dp</dimen>
+
+    <!-- BOTTOM NAV -->
+    <dimen name="bottom_nav_view_height">56dp</dimen>
+
+    <!-- ICONS -->
+    <dimen name="ic_bottom_nav_stroke_width">1.4</dimen>
+</resources>

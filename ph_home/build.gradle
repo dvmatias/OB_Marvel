@@ -45,4 +45,7 @@ dependencies {
     implementation libs.appcompat
     implementation libs.material
     implementation libs.constraintlayout
+    // NAVIGATION
+    implementation libs.navigation_fragment_ktx
+    implementation libs.navigation_ui_ktx
 }
