@@ -49,4 +49,6 @@ dependencies {
     // NAVIGATION
     implementation libs.navigation_fragment_ktx
     implementation libs.navigation_ui_ktx
+    // KOIN
+    implementation libs.koin
 }
