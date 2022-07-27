@@ -23,6 +23,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        DEV {
+            dimension "version"
+            buildConfigField "String", "BASE_URL", "\"https://gateway.marvel.com/\""
+            buildConfigField "String", "API_KEY", API_KEY
+            buildConfigField "String", "PRIVATE_KEY", PRIVATE_KEY
+            buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -30,12 +41,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
+    implementation project(path: ':common')
     implementation project(path: ':core')
     implementation project(path: ':data')
     implementation project(path: ':domain')
+    implementation project(path: ':ph_home')
 
     // ANDROID
     implementation libs.core_ktx
@@ -43,4 +59,11 @@ dependencies {
     implementation libs.material
     // KOIN
     implementation libs.koin
+    // RETROFIT
+    implementation libs.retrofit
+    implementation libs.retrofit_gson_converter
+    // OKHTTP
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
 }

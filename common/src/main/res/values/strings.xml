@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="item_bottom_nav_menu_characters">characters</string>
+    <string name="item_bottom_nav_menu_favorites">favorites</string>
+</resources>

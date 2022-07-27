@@ -8,15 +8,38 @@ buildscript {
         appcompat_version = '1.4.2'
         material_version = '1.6.1'
         koin_version = '3.2.0'
+        constraintlayout_version = '2.1.4'
+        navigation_version = '2.5.0'
+        coroutines_core = '1.6.4'
+        coroutines_android = '1.6.4'
+        coroutines_play_services_version = '1.4.1'
+        lifecycle_livedata_ktx_version = '2.2.0'
+        lifecycle_viewmodel_ktx_version = '2.5.1'
+        gson_version = '2.8.2'
+        retrofit_version = '2.9.0'
 
         libs = [
-                junit           : "junit:junit:${junit_version}",
-                junit_ext       : "androidx.test.ext:junit:${junit_ext_version}",
-                espresso_core   : "androidx.test.espresso:espresso-core:${espresso_core_version}",
-                core_ktx        : "androidx.core:core-ktx:${core_ktx_version}",
-                appcompat       : "androidx.appcompat:appcompat:${appcompat_version}",
-                material        : "com.google.android.material:material:${material_version}",
-                koin            : "io.insert-koin:koin-android:${koin_version}",
+                junit                   : "junit:junit:${junit_version}",
+                junit_ext               : "androidx.test.ext:junit:${junit_ext_version}",
+                espresso_core           : "androidx.test.espresso:espresso-core:${espresso_core_version}",
+                core_ktx                : "androidx.core:core-ktx:${core_ktx_version}",
+                appcompat               : "androidx.appcompat:appcompat:${appcompat_version}",
+                material                : "com.google.android.material:material:${material_version}",
+                koin                    : "io.insert-koin:koin-android:${koin_version}",
+                constraintlayout        : "androidx.constraintlayout:constraintlayout:${constraintlayout_version}",
+                navigation_fragment_ktx : "androidx.navigation:navigation-fragment-ktx:${navigation_version}",
+                navigation_ui_ktx       : "androidx.navigation:navigation-ui-ktx:${navigation_version}",
+                coroutines_core         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines_core}",
+                coroutines_android      : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines_android}",
+                coroutines_play_services: "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${coroutines_play_services_version}",
+                lifecycle_livedata_ktx  : "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle_livedata_ktx_version}",
+                lifecycle_viewmodel_ktx : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle_viewmodel_ktx_version}",
+                gson                    : "com.google.code.gson:gson:${gson_version}",
+                retrofit                : "com.squareup.retrofit2:adapter-rxjava3:${retrofit_version}",
+                retrofit_gson_converter : "com.squareup.retrofit2:converter-gson:${retrofit_version}"
+
+
+
         ]
     }
 
