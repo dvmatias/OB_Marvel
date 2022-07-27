@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph_home">
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/charactersFragment">
 
+    <fragment
+        android:id="@+id/charactersFragment"
+        android:name="com.cmdv.ph_home.ui.fragments.CharactersFragment"
+        android:label="CharactersFragment">
+        <action
+            android:id="@+id/action_charactersFragment_to_favouritesFragment"
+            app:popUpTo="@+id/favouritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.cmdv.ph_home.ui.fragments.FavoritesFragment"
+        android:label="FavouritesFragment">
+        <action
+            android:id="@+id/action_favouritesFragment_to_charactersFragment"
+            app:popUpTo="@+id/charactersFragment" />
+    </fragment>
 </navigation>
