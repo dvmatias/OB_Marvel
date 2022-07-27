@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -27,6 +28,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -38,9 +42,10 @@ dependencies {
     testImplementation libs.junit
     testImplementation libs.junit_ext
     testImplementation libs.espresso_core
-
     // ANDROID
     implementation libs.core_ktx
     implementation libs.appcompat
     implementation libs.material
+    // KOIN
+    implementation libs.koin
 }
