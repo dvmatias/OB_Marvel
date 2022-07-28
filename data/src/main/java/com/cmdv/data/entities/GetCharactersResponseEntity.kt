@@ -3,7 +3,7 @@ package com.cmdv.data.entities
 import com.google.gson.annotations.SerializedName
 
 /**
- *  Be model response class. This class represents the response of a particular API service response.
+ *  Business model response class. This class represents the response of a particular API service response.
  */
 data class GetCharactersResponseEntity(
     @SerializedName("code") val code: Int?,

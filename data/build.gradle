@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -45,4 +46,7 @@ dependencies {
     implementation libs.retrofit
     implementation libs.retrofit_gson_converter
     implementation libs.gson
+    // ROOM DB
+    implementation libs.room
+    kapt libs.room_compiler
 }

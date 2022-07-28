@@ -14,7 +14,6 @@ interface CharactersApi {
 
         private const val QUERY_LIMIT = "limit"
         private const val QUERY_OFFSET = "offset"
-        private const val PATH_CHARACTER_ID = "characterId"
 
         private const val EP_CHARACTERS = ROOT_PATH.plus("characters")
     }

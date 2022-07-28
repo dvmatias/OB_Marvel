@@ -60,4 +60,7 @@ dependencies {
     implementation libs.navigation_ui_ktx
     // KOIN
     implementation libs.koin
+    // GLIDE
+    implementation libs.glide
+    kapt libs.glide
 }

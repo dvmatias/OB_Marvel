@@ -3,7 +3,7 @@ package com.cmdv.data.entities
 import com.google.gson.annotations.SerializedName
 
 /**
- * BE model class. This class represents a single Character BE model.
+ * Business Entity class. This class represents a single Character backend Entity.
  */
 data class CharacterEntity(
     @SerializedName("id") val id: Int?,
