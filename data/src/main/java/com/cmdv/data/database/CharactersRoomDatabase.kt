@@ -8,7 +8,7 @@ import com.cmdv.data.entities.CharacterRoomEntity
 import com.cmdv.data.sources.dbdaos.CharactersDao
 
 /**
- * Room DB. Instance of Room Data Base.
+ * Room DB. Instance of Room Data Base for characters.
  */
 @Database(entities = [ CharacterRoomEntity::class], version = 2)
 abstract class CharactersRoomDatabase : RoomDatabase() {
