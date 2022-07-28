@@ -9,6 +9,7 @@
     <color name="transparent">#00000000</color>
 
     <color name="status_bar">@color/black</color>
+    <color name="activity_bgr">#F6F6F6</color>
 
     <color name="title_primary_light">#2C2C2C</color>
     <color name="body_primary_light">#333333</color>

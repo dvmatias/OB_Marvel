@@ -69,4 +69,7 @@ dependencies {
     // ROOM DB
     implementation libs.room
     kapt libs.room_compiler
+    // GLIDE
+    implementation libs.glide
+    kapt libs.glide
 }
