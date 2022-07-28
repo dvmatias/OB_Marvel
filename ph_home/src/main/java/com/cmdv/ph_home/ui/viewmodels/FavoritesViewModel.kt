@@ -33,15 +33,10 @@ class FavoritesViewModel(
     }
 
     fun getFavoritesCharacters() {
-        TODO()
+        // TODO()
     }
 
     fun removeAll() {
-        TODO()
+        // TODO()
     }
-
-    private fun getCharacter(position: Int): CharacterModel {
-        TODO()
-    }
-
 }
