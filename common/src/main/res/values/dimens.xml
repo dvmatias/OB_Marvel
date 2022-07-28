@@ -20,6 +20,7 @@
     <dimen name="dim_30dp">30dp</dimen>
     <dimen name="dim_32dp">32dp</dimen>
 
+    <dimen name="toolbar_text_size_marvel">48sp</dimen>
     <dimen name="body_text_size_small">11sp</dimen>
     <dimen name="body_text_size_medium">13sp</dimen>
     <dimen name="body_text_size_large">14sp</dimen>

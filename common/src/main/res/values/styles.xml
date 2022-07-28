@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--  Toolbar Marvel's title  -->
+    <style name="ToolbarMarvelText" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/marvel_regular</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:text">@string/toolbar_title_home_activity</item>
+        <item name="android:textColor">@color/marvel_red</item>
+        <item name="android:textSize">@dimen/toolbar_text_size_marvel</item>
+    </style>
+
     <!--  Button  -->
     <style name="ButtonText" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/cereal_medium</item>
