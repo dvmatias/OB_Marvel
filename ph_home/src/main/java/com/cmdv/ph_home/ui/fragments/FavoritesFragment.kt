@@ -1,5 +1,7 @@
 package com.cmdv.ph_home.ui.fragments
 
+import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import com.cmdv.core.base.BaseFragment
 import com.cmdv.domain.utils.ResponseWrapper.Status.ERROR
 import com.cmdv.ph_home.R
@@ -10,10 +12,12 @@ import com.cmdv.ph_home.ui.viewmodels.FavoritesViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 /**
  * This Fragment is used to display the list of user's favorites characters.
  */
-class FavoritesFragment : BaseFragment<FavoritesFragment, FragmentFavoritesBinding>(R.layout.fragment_favorites) {
+class FavoritesFragment :
+    BaseFragment<FavoritesFragment, FragmentFavoritesBinding>(R.layout.fragment_favorites, R.menu.menu_favorites) {
     /**
      * Favorites view model.
      */
@@ -42,6 +46,23 @@ class FavoritesFragment : BaseFragment<FavoritesFragment, FragmentFavoritesBindi
                 if (state == ERROR) setErrorViewState()
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_delete) {
+            AlertDialog.Builder(requireContext()).apply {
+                setTitle(resources.getString(com.cmdv.common.R.string.favorite_fragment_delete_dialog_title))
+                    .setMessage(resources.getString(com.cmdv.common.R.string.favorite_fragment_delete_dialog_message))
+                    .setPositiveButton(resources.getString(com.cmdv.common.R.string.favorite_fragment_delete_dialog_positive)) { dialog, _ ->
+                        dialog.dismiss()
+                        viewModel.removeAllFavorites()
+                    }
+                    .setNegativeButton(resources.getString(com.cmdv.common.R.string.favorite_fragment_delete_dialog_negative)) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+            }.also { it.show() }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setErrorViewState() {

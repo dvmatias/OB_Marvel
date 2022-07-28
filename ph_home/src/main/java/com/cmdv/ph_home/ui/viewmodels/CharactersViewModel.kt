@@ -8,6 +8,7 @@ import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.usecases.*
 import com.cmdv.domain.utils.Event
 import com.cmdv.domain.utils.ResponseWrapper
+import com.cmdv.domain.utils.ResponseWrapper.Status.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -24,7 +25,7 @@ class CharactersViewModel(
     /**
      * Represents the state of this view model (LOADING, READY, ERROR).
      */
-    private val _viewModelState = MutableLiveData(ResponseWrapper.Status.LOADING)
+    private val _viewModelState = MutableLiveData(LOADING)
     val viewModelState: LiveData<ResponseWrapper.Status>
         get() = _viewModelState
 
@@ -84,7 +85,7 @@ class CharactersViewModel(
             viewModelScope.launch {
                 getCharactersUseCase(params).collect { response ->
                     with(response) {
-                        if (status == ResponseWrapper.Status.READY) {
+                        if (status == READY) {
                             data?.let { _characters.value = it }
                         }
                         _viewModelState.value = status

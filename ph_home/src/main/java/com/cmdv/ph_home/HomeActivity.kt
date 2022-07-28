@@ -27,7 +27,7 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
         navController = navHostFragment.navController
         NavigationUI.setupWithNavController(binding.content.bottomNav, navController)
 
-        // TODO setup toolbar
+        setupToolbar()
     }
 
     override fun observe() {
@@ -59,5 +59,13 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT)
             .setBackgroundTint(ContextCompat.getColor(this, com.cmdv.common.R.color.marvel_red))
             .show()
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(false)
+            setDisplayShowTitleEnabled(false)
+        }
     }
 }
