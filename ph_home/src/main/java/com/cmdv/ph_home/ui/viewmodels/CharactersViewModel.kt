@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cmdv.domain.models.CharacterModel
-import com.cmdv.domain.usecases.GetCharactersUseCase
-import com.cmdv.domain.usecases.GetTotalCharactersUseCase
-import com.cmdv.domain.usecases.RemoveStoredCharactersUseCase
+import com.cmdv.domain.usecases.*
+import com.cmdv.domain.utils.Event
 import com.cmdv.domain.utils.ResponseWrapper
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -18,7 +17,9 @@ private const val OFFSET_CHARACTERS_FETCH_DEFAULT = 0
 class CharactersViewModel(
     private val getTotalCharactersUseCase: GetTotalCharactersUseCase,
     private val getCharactersUseCase: GetCharactersUseCase,
-    private val removeStoredCharactersUseCase: RemoveStoredCharactersUseCase
+    private val removeStoredCharactersUseCase: RemoveStoredCharactersUseCase,
+    private val addFavoriteCharacterUseCase: AddFavoriteCharacterUseCase,
+    private val removeFavoriteCharacterUseCase: RemoveFavoriteCharacterUseCase
 ) : ViewModel() {
     /**
      * Represents the state of this view model (LOADING, READY, ERROR).
@@ -32,6 +33,14 @@ class CharactersViewModel(
 
     private val isAllCharactersLoaded: Boolean
         get() = _characters.value?.size.let { totalCharactersCount == it }
+
+    private val _addedFavoritePosition = MutableLiveData<Event<Int>>()
+    val addedFavoritePosition: LiveData<Event<Int>>
+        get() = _addedFavoritePosition
+
+    private val _removedFavoritePosition = MutableLiveData<Event<Int>>()
+    val removedFavoritePosition: LiveData<Event<Int>>
+        get() = _removedFavoritePosition
 
     /**
      * Total amount of characters available in Marvel's API.

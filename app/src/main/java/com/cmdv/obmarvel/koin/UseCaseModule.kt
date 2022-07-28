@@ -10,4 +10,5 @@ val useCaseModule = module {
     factory { GetFavoriteCharactersUseCase() }
     factory { RemoveAllFavoriteCharacterUseCase() }
     factory { RemoveFavoriteCharacterUseCase() }
+    factory { AddFavoriteCharacterUseCase() }
 }
