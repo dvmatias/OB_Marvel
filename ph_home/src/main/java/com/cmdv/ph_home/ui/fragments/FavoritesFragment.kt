@@ -1,5 +1,6 @@
 package com.cmdv.ph_home.ui.fragments
 
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import com.cmdv.core.base.BaseFragment
@@ -42,9 +43,20 @@ class FavoritesFragment :
                     getFavorites()
                 }
             }
+            favoriteCharacters.observe(this@FavoritesFragment) {
+                activity?.invalidateOptionsMenu()
+            }
             viewModelState.observe(this@FavoritesFragment) { state ->
                 if (state == ERROR) setErrorViewState()
             }
+        }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val valid = viewModel.favoriteCharacters.value?.size != 0
+        menu.findItem(R.id.action_delete).apply {
+            isEnabled = valid
+            isVisible = valid
         }
     }
 
@@ -57,9 +69,7 @@ class FavoritesFragment :
                         dialog.dismiss()
                         viewModel.removeAllFavorites()
                     }
-                    .setNegativeButton(resources.getString(com.cmdv.common.R.string.favorite_fragment_delete_dialog_negative)) { dialog, _ ->
-                        dialog.dismiss()
-                    }
+                    .setNegativeButton(resources.getString(com.cmdv.common.R.string.favorite_fragment_delete_dialog_negative)) { dialog, _ -> dialog.dismiss() }
             }.also { it.show() }
         }
         return super.onOptionsItemSelected(item)
