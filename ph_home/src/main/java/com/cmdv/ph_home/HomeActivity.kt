@@ -15,6 +15,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.activity_home),
     CharactersFragmentListener {
+    /**
+     * Android view model.
+     */
     private val viewModel by viewModel<CharactersViewModel>()
 
     private lateinit var navController: NavController
