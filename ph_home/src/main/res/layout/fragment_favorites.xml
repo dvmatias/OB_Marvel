@@ -2,7 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cmdv.ph_home.ui.viewmodels.FavoritesViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.cmdv.ph_home.ui.adapters.IndexFavoriteCharacterAdapter" />
+    </data>
 
     <FrameLayout
         android:layout_width="match_parent"
