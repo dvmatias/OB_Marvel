@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:background="@{character.isFavourite ? @color/marvel_red : @android:color/transparent}"
                 android:ellipsize="end"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:lines="2"
                 android:paddingStart="@dimen/dim_6dp"
                 android:paddingTop="@dimen/dim_4dp"

@@ -23,9 +23,9 @@
     <dimen name="body_text_size_small">11sp</dimen>
     <dimen name="body_text_size_medium">13sp</dimen>
     <dimen name="body_text_size_large">14sp</dimen>
-    <dimen name="title_text_size_small">16sp</dimen>
-    <dimen name="title_text_size_medium">18sp</dimen>
-    <dimen name="title_text_size_big">20sp</dimen>
+    <dimen name="title_text_size_small">14sp</dimen>
+    <dimen name="title_text_size_medium">16sp</dimen>
+    <dimen name="title_text_size_big">18sp</dimen>
     <dimen name="title_text_size_super">24sp</dimen>
     <dimen name="title_text_size_window">13sp</dimen>
     <dimen name="link_text_size_small">12sp</dimen>
