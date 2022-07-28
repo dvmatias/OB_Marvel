@@ -54,13 +54,19 @@ class CharactersViewModel(
         }
     }
 
+    /**
+     * Get a list of Marvel's characters.
+     *
+     * @param fetch If true, fetch from service call, if not, fetch from DB.
+     * @param limit Limit the result set to the specified number of resources (applied only to service call).
+     * @param offset Skip the specified number of resources in the result set (applied only to service call).
+     */
     fun getCharacters(
         fetch: Boolean,
         limit: Int = LIMIT_CHARACTERS_FETCH_DEFAULT,
         offset: Int = OFFSET_CHARACTERS_FETCH_DEFAULT
     ) {
         if (!isAllCharactersLoaded) {
-            _viewModelState.value = ResponseWrapper.Status.LOADING
             val params = GetCharactersUseCase.Params(fetch, limit, offset)
             viewModelScope.launch {
                 getCharactersUseCase(params).collect { response ->
@@ -73,5 +79,13 @@ class CharactersViewModel(
                 }
             }
         }
+    }
+
+    fun addFavorite(characterId: Int, position: Int) {
+        // TODO
+    }
+
+    fun removeFavorite(characterId: Int, position: Int) {
+        // TODO
     }
 }

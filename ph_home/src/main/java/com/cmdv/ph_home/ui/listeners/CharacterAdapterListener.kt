@@ -1,7 +1,7 @@
 package com.cmdv.ph_home.ui.listeners
 
 /**
- * Interface. This interface declares a set of actions over the list of characters.
+ * Interface. Declares a set of actions over the list of characters.
  */
 interface CharacterAdapterListener {
     /**

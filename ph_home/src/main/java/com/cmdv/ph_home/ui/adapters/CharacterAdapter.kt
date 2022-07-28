@@ -13,6 +13,8 @@ import com.cmdv.ph_home.databinding.ItemLoadingBinding
 import com.cmdv.ph_home.ui.adapters.CharacterAdapterViewType.*
 import com.cmdv.ph_home.ui.listeners.CharacterAdapterListener
 
+private const val ITEM_COUNT_BEFORE_LOAD_MORE = 6
+
 /**
  * Adapter class for [CharacterModel] items.
  */
@@ -42,8 +44,6 @@ class CharacterAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         this.characters.addAllNoRepeated(characters)
         notifyItemRangeChanged(startIndex, characters.size)
     }
-
-    fun isEmpty(): Boolean = itemCount == 2
 
     override fun getItemViewType(position: Int): Int =
         when (position) {
@@ -78,6 +78,30 @@ class CharacterAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int = this.characters.size + 2
+
+    /**
+     * The adapter is empty (no characters) when itonly contains the header view and the footer view.
+     */
+    fun isEmpty(): Boolean = itemCount == 2
+
+    fun onScroll(lastVisibleItemPosition: Int) {
+        if (shouldLoadMore(lastVisibleItemPosition) && !isLoading) {
+            isLoading = true
+            listener?.onLoadMoreCharacters(charactersCount())
+        }
+    }
+
+    /**
+     * The app should load more characters if there are characters already displayed the app is not loading characters
+     * and if the last visible character is the sixth counting backwards.
+     */
+    private fun shouldLoadMore(lastVisibleItemPosition: Int): Boolean =
+        !isLoading && charactersCount() != 0 && charactersCount() <= lastVisibleItemPosition + ITEM_COUNT_BEFORE_LOAD_MORE
+
+    /**
+     * Returns the number of characters plus the header and the footer view.
+     */
+    private fun charactersCount() = itemCount - 2
 
     /**
      * View holder class. Header item.
