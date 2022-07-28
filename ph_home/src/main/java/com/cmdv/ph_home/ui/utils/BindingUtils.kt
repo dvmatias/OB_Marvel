@@ -1,9 +1,11 @@
 package com.cmdv.ph_home.ui.utils
 
+import android.graphics.Typeface
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -78,6 +80,19 @@ fun favoritesLoadingVisibility(
     view?.visibility = when (viewModelStatus) {
         LOADING -> View.VISIBLE
         else -> View.GONE
+    }
+}
+
+@BindingAdapter("characterItemDescription")
+fun bindCharacterItemImage(textView: TextView, description: String) {
+    if (description.isBlank()) {
+        textView.apply {
+            text = textView.context.getString(R.string.text_item_character_no_description)
+            alpha = 0.7F
+            setTypeface(textView.typeface, Typeface.ITALIC)
+        }
+    } else {
+        textView.text = description
     }
 }
 

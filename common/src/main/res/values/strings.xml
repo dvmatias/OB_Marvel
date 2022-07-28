@@ -6,4 +6,5 @@
     <string name="item_bottom_nav_menu_favorites">favorites</string>
 
     <string name="text_item_header_choose_your_heroes">choose your heroes!</string>
+    <string name="text_item_character_no_description">No description available</string>
 </resources>
