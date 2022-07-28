@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Toolbar Marvel's title  -->
+    <style name="ToolbarMarvelText" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/marvel_regular</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:text">@string/toolbar_title_home_activity</item>
+        <item name="android:textColor">@color/marvel_red</item>
+        <item name="android:textSize">@dimen/toolbar_text_size_marvel</item>
+    </style>
+
+    <!--  Button  -->
+    <style name="ButtonText" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/cereal_medium</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+    </style>
+
+    <style name="ButtonText.Primary" parent="ButtonText">
+        <item name="android:textColor">@drawable/selector_button_view_custom_primary_text</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ButtonText.Secondary" parent="ButtonText">
+        <item name="android:textColor">@drawable/selector_button_view_custom_secondary_text</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ButtonText.Tertiary" parent="ButtonText">
+        <item name="android:fontFamily">@font/cereal_bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/dim_18dp</item>
+    </style>
+
+    <!--  Body  -->
+    <style name="BodyText" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/cereal_book</item>
+        <item name="android:textColor">@color/body_primary_light</item>
+    </style>
+
+    <style name="BodyText.Small" parent="BodyText">
+        <item name="android:textSize">@dimen/body_text_size_small</item>
+    </style>
+
+    <style name="BodyText.Large" parent="BodyText">
+        <item name="android:textSize">@dimen/body_text_size_large</item>
+    </style>
+
+    <!--  Title  -->
+    <style name="TitleText" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/cereal_medium</item>
+        <item name="android:textColor">@color/title_primary_light</item>
+    </style>
+
+    <style name="TitleText.Small" parent="TitleText">
+        <item name="android:textSize">@dimen/title_text_size_small</item>
+    </style>
+
+    <style name="TitleText.Medium" parent="TitleText">
+        <item name="android:textSize">@dimen/title_text_size_medium</item>
+    </style>
+
+    <style name="TitleText.Big" parent="TitleText">
+        <item name="android:textSize">@dimen/title_text_size_big</item>
+    </style>
+
+    <style name="TitleText.Windows" parent="TitleText">
+        <item name="android:textSize">@dimen/title_text_size_window</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TitleText.Tab" parent="TitleText">
+        <item name="android:textSize">@dimen/title_text_size_small</item>
+        <item name="android:textColor">@color/marvel_red</item>
+    </style>
+
+    <!--  Link  -->
+    <style name="LinkText" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/cereal_medium</item>
+        <item name="android:textColor">@color/marvel_red</item>
+    </style>
+
+    <style name="LinkText.Small" parent="LinkText">
+        <item name="android:textSize">@dimen/link_text_size_small</item>
+    </style>
+
+    <style name="LinkText.Big" parent="LinkText">
+        <item name="android:textSize">@dimen/link_text_size_big</item>
+    </style>
+</resources>
