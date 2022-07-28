@@ -34,8 +34,9 @@ class CharacterDetailsViewModel(
     fun getCharacterDetails(characterId: Int) {
         viewModelScope.launch {
             val params = GetCharacterByIdUserCase.Params(characterId)
-            getCharacterByIdUserCase.invoke(params).collect {
-                _character.value = it
+            getCharacterByIdUserCase.invoke(params).collect { response ->
+                _character.value = response
+                _viewModelState.value = response.status
             }
         }
     }
