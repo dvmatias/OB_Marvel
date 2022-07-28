@@ -29,7 +29,7 @@ abstract class FavouriteCharactersRoomDataBase : RoomDatabase() {
                         Room.databaseBuilder(
                             context.applicationContext,
                             FavouriteCharactersRoomDataBase::class.java,
-                            "favourite-characters-room-database"
+                            "favorite-character-room-database"
                         )
                             .fallbackToDestructiveMigration()
                             .build()

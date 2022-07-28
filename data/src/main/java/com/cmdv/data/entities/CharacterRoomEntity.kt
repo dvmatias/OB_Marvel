@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 /**
  * TODO
  */
-@Entity(tableName = "characters-room-database")
+@Entity(tableName = "character-room-database")
 data class CharacterRoomEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long?,
     @ColumnInfo(name = "characterId") val characterId: Int,

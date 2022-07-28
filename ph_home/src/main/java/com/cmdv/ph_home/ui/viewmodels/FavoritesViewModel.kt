@@ -9,9 +9,9 @@ import com.cmdv.domain.usecases.GetFavoriteCharactersUseCase
 import com.cmdv.domain.usecases.RemoveAllFavoriteCharacterUseCase
 import com.cmdv.domain.usecases.RemoveFavoriteCharacterUseCase
 import com.cmdv.domain.utils.Event
-import com.cmdv.domain.utils.ResponseWrapper
 import com.cmdv.domain.utils.ResponseWrapper.Status
-import com.cmdv.domain.utils.ResponseWrapper.Status.*
+import com.cmdv.domain.utils.ResponseWrapper.Status.LOADING
+import com.cmdv.domain.utils.ResponseWrapper.Status.READY
 import kotlinx.coroutines.launch
 
 class FavoritesViewModel(
@@ -21,29 +21,31 @@ class FavoritesViewModel(
 ) : ViewModel() {
 
     private val _viewModelState = MutableLiveData(LOADING)
-    val viewModelState: LiveData<Status> = _viewModelState
+    val viewModelState: LiveData<Status>
+        get() = _viewModelState
 
     private val _favoriteCharacters = MutableLiveData<List<CharacterModel>>()
-    val favoriteCharacters: LiveData<List<CharacterModel>> = _favoriteCharacters
+    val favoriteCharacters: LiveData<List<CharacterModel>>
+        get() = _favoriteCharacters
 
     private val _removeAll = MutableLiveData<Event<Int>>()
-    val removeAll: LiveData<Event<Int>> = _removeAll
+    val removeAll: LiveData<Event<Int>>
+        get() = _removeAll
 
     init {
-        getFavoritesCharacters()
+        getFavorites()
     }
 
     /**
      * Get all user's favorite characters stored in DB.
      */
-    fun getFavoritesCharacters() {
+    fun getFavorites() {
         viewModelScope.launch {
-            _viewModelState.value = LOADING
             val params = GetFavoriteCharactersUseCase.Params()
             getFavoriteCharactersUseCase(params).collect { response ->
-                _viewModelState.value = response.status
-                if (response.status == READY) {
-                    _favoriteCharacters.value = response.data
+                with(response) {
+                    _viewModelState.value = status
+                    if (status == READY) data?.let { _favoriteCharacters.value = it }
                 }
             }
         }
@@ -52,16 +54,24 @@ class FavoritesViewModel(
     /**
      * Remove all favorite characters from DB.
      */
-    fun removeAll() {
+    fun removeAllFavorites() {
         viewModelScope.launch {
-            _viewModelState.value = LOADING
             val params = RemoveAllFavoriteCharacterUseCase.Params()
             removeAllFavoriteCharacterUseCase(params).collect { response ->
-                _viewModelState.value = response.status
-                response.data?.let { event ->
-                    _removeAll.value = event
+                with(response) {
+                    _viewModelState.value = status
+                    if (status == READY) data?.let { _removeAll.value = it }
                 }
             }
         }
+    }
+
+    /**
+     * Remove a single favorite character from DB.
+     *
+     * @param characterId Character unique identifier to be removed from favorites DB.
+     */
+    fun removeFavorite(characterId: Int) {
+        // TODO
     }
 }

@@ -22,7 +22,7 @@ class IndexFavoriteCharacterAdapter :
             addAll(favoriteCharacters)
         }
         setItems()
-        notifyItemRangeChanged(0, characters.size)
+        notifyDataSetChanged()
     }
 
     private fun setItems() {
@@ -43,7 +43,7 @@ class IndexFavoriteCharacterAdapter :
         items.clear()
         indexes.clear()
         characters.clear()
-        notifyItemRangeChanged(0, characters.size)
+        notifyDataSetChanged()
     }
 
     private fun setIndexes() {

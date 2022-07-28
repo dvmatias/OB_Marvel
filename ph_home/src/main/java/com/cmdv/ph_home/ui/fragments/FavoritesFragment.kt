@@ -17,7 +17,7 @@ class FavoritesFragment : BaseFragment<FavoritesFragment, FragmentFavoritesBindi
     /**
      * Favorites view model.
      */
-    private val viewModel by viewModel<FavoritesViewModel>()
+    private val viewModel: FavoritesViewModel by viewModel()
 
     /**
      * Indexed favorites adapter.
@@ -25,27 +25,22 @@ class FavoritesFragment : BaseFragment<FavoritesFragment, FragmentFavoritesBindi
     private val indexFavoriteCharacterAdapter: IndexFavoriteCharacterAdapter by inject()
 
     override fun initView() {
-        setupRecycler()
+        binding.recyclerIndexFavoriteCharacter.addItemDecoration(IndexFavoriteCharacterDecorator())
         binding.adapter = indexFavoriteCharacterAdapter
         binding.viewModel = viewModel
     }
 
     override fun observe() {
         with(viewModel) {
+            getFavorites()
             removeAll.observe(this@FavoritesFragment) { event ->
                 event.getContentIfNotHandled()?.let {
-                    viewModel.getFavoritesCharacters()
+                    getFavorites()
                 }
             }
             viewModelState.observe(this@FavoritesFragment) { state ->
                 if (state == ERROR) setErrorViewState()
             }
-        }
-    }
-
-    private fun setupRecycler() {
-        binding.recyclerIndexFavoriteCharacter.apply {
-            addItemDecoration(IndexFavoriteCharacterDecorator())
         }
     }
 

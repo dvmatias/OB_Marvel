@@ -25,18 +25,23 @@ class CharactersViewModel(
      * Represents the state of this view model (LOADING, READY, ERROR).
      */
     private val _viewModelState = MutableLiveData(ResponseWrapper.Status.LOADING)
-    val viewModelState: LiveData<ResponseWrapper.Status> = _viewModelState
+    val viewModelState: LiveData<ResponseWrapper.Status>
+        get() = _viewModelState
 
     private var _characters = MutableLiveData<List<CharacterModel>>()
-    val characters: LiveData<List<CharacterModel>> = _characters
+    val characters: LiveData<List<CharacterModel>>
+        get() = _characters
 
-    private val isAllCharactersLoaded: Boolean = _characters.value?.size.let { totalCharactersCount == it }
+    private val isAllCharactersLoaded: Boolean
+        get() = _characters.value?.size.let { totalCharactersCount == it }
 
     private val _addedFavoritePosition = MutableLiveData<Event<Int>>()
-    val addedFavoritePosition: LiveData<Event<Int>> = _addedFavoritePosition
+    val addedFavoritePosition: LiveData<Event<Int>>
+        get() = _addedFavoritePosition
 
     private val _removedFavoritePosition = MutableLiveData<Event<Int>>()
-    val removedFavoritePosition: LiveData<Event<Int>> = _removedFavoritePosition
+    val removedFavoritePosition: LiveData<Event<Int>>
+        get() = _removedFavoritePosition
 
     /**
      * Total amount of characters available in Marvel's API.

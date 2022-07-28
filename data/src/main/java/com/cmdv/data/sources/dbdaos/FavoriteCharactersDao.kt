@@ -11,18 +11,18 @@ import com.cmdv.data.entities.FavoriteCharacterRoomEntity
  */
 @Dao
 interface FavoriteCharactersDao {
-    @Query("SELECT * FROM `favorite-characters-room-database`")
+    @Query("SELECT * FROM `favorite-character-room-database`")
     fun getAll(): List<FavoriteCharacterRoomEntity>
 
-    @Query("SELECT * FROM `favorite-characters-room-database` WHERE characterId IN (:id)")
+    @Query("SELECT * FROM `favorite-character-room-database` WHERE characterId IN (:id)")
     fun getById(id: Int): FavoriteCharacterRoomEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(character: FavoriteCharacterRoomEntity): Long
 
-    @Query("DELETE FROM `favorite-characters-room-database` WHERE characterId IN (:id)")
+    @Query("DELETE FROM `favorite-character-room-database` WHERE characterId IN (:id)")
     fun delete(id: Int): Int
 
-    @Query("DELETE FROM `favorite-characters-room-database`")
+    @Query("DELETE FROM `favorite-character-room-database`")
     fun deleteAll()
 }
