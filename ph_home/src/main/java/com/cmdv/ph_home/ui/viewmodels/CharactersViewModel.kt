@@ -25,22 +25,18 @@ class CharactersViewModel(
      * Represents the state of this view model (LOADING, READY, ERROR).
      */
     private val _viewModelState = MutableLiveData(ResponseWrapper.Status.LOADING)
-    val viewModelState: LiveData<ResponseWrapper.Status>
-        get() = _viewModelState
+    val viewModelState: LiveData<ResponseWrapper.Status> = _viewModelState
 
     private var _characters = MutableLiveData<List<CharacterModel>>()
     val characters: LiveData<List<CharacterModel>> = _characters
 
-    private val isAllCharactersLoaded: Boolean
-        get() = _characters.value?.size.let { totalCharactersCount == it }
+    private val isAllCharactersLoaded: Boolean = _characters.value?.size.let { totalCharactersCount == it }
 
     private val _addedFavoritePosition = MutableLiveData<Event<Int>>()
-    val addedFavoritePosition: LiveData<Event<Int>>
-        get() = _addedFavoritePosition
+    val addedFavoritePosition: LiveData<Event<Int>> = _addedFavoritePosition
 
     private val _removedFavoritePosition = MutableLiveData<Event<Int>>()
-    val removedFavoritePosition: LiveData<Event<Int>>
-        get() = _removedFavoritePosition
+    val removedFavoritePosition: LiveData<Event<Int>> = _removedFavoritePosition
 
     /**
      * Total amount of characters available in Marvel's API.
@@ -102,11 +98,37 @@ class CharactersViewModel(
         }
     }
 
+    /**
+     * Add a character as favorite into the DB.
+     *
+     * @param characterId Character unique identifier to be added as favorite.
+     * @param position Character's position inside the adapter.
+     */
     fun addFavorite(characterId: Int, position: Int) {
-        // TODO
+        val params = AddFavoriteCharacterUseCase.Params(characterId, position)
+        viewModelScope.launch {
+            addFavoriteCharacterUseCase(params).collect { response ->
+                response.data?.let { event ->
+                    _addedFavoritePosition.value = event
+                }
+            }
+        }
     }
 
+    /**
+     * Removed a character as favorite from the DB.
+     *
+     * @param characterId Character unique identifier to be added as favorite.
+     * @param position Character's position inside the adapter.
+     */
     fun removeFavorite(characterId: Int, position: Int) {
-        // TODO
+        val params = RemoveFavoriteCharacterUseCase.Params(characterId, position)
+        viewModelScope.launch {
+            removeFavoriteCharacterUseCase(params).collect { response ->
+                response.data?.let { event ->
+                    _removedFavoritePosition.value = event
+                }
+            }
+        }
     }
 }
