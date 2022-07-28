@@ -86,10 +86,30 @@ class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBi
             if (totalCharactersCount != 0) {
                 viewModel.getCharacters(fetch = false)
             }
+            addedFavoritePosition.observe(this@CharactersFragment) { event ->
+                event.getContentIfNotHandled()?.let { position ->
+                    handleFavorite(position, true)
+                }
+            }
+            removedFavoritePosition.observe(this@CharactersFragment) { event ->
+                event.getContentIfNotHandled()?.let { position ->
+                    handleFavorite(position, false)
+                }
+            }
             viewModelState.observe(this@CharactersFragment) {state ->
                 if (state == ERROR) setErrorViewState()
             }
         }
+    }
+
+    /**
+     * Handles the update favorite status action over a character.
+     *
+     * @param updatedPosition Character position to be updated.
+     * @param isFavorite true if the character is currently a favorite, false if not.
+     */
+    private fun handleFavorite(updatedPosition: Int, isFavorite: Boolean) {
+        characterAdapter.updateFavorite(updatedPosition, isFavorite)
     }
 
     private fun setErrorViewState() {

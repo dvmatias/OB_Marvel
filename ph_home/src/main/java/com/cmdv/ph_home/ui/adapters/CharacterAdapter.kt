@@ -91,6 +91,11 @@ class CharacterAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
+    fun updateFavorite(position: Int, isFavourite: Boolean) {
+        this.characters[position].isFavourite = isFavourite
+        notifyItemChanged(position + 1)
+    }
+
     /**
      * The app should load more characters if there are characters already displayed the app is not loading characters
      * and if the last visible character is the sixth counting backwards.

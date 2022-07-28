@@ -6,4 +6,10 @@
     <string name="item_bottom_nav_menu_favorites">favorites</string>
 
     <string name="text_item_header_choose_your_heroes">choose your heroes!</string>
+    <string name="text_item_character_no_description">No description available</string>
+
+    <string name="favorite_fragment_delete_dialog_title">Delete all your favorites!</string>
+    <string name="favorite_fragment_delete_dialog_message">You\'re about to delete all your favorite characters. Do you want to continue?</string>
+    <string name="favorite_fragment_delete_dialog_positive">YES</string>
+    <string name="favorite_fragment_delete_dialog_negative">NO</string>
 </resources>
