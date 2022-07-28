@@ -1,6 +1,5 @@
 package com.cmdv.data.repositories
 
-import com.cmdv.data.mappers.CharacterMapper
 import com.cmdv.data.mappers.CharacterRoomMapper
 import com.cmdv.data.mappers.GetCharactersResponseMapper
 import com.cmdv.data.networking.ApiHandler
@@ -24,16 +23,6 @@ class CharactersRepositoryImpl(
     override fun getTotalCharactersCount(): ResponseWrapper<Int> =
         apiHandler.doNetworkRequest(charactersApi.getCharacters(1, 0)) {
             it.data?.total ?: 0
-        }
-
-    /**
-     * API call to get a specific character by its ID.
-     */
-    override fun getCharacterById(characterId: Int): ResponseWrapper<CharacterModel> =
-        apiHandler.doNetworkRequest(charactersApi.getCharacterById(characterId)) { response ->
-            response.data?.results?.get(0)!!.let {
-                CharacterMapper.transformEntityToModel(it)
-            }
         }
 
     /**

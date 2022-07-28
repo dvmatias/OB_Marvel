@@ -13,11 +13,6 @@ interface CharactersRepository {
     fun getTotalCharactersCount(): ResponseWrapper<Int>
 
     /**
-     * API call to get a specific character by its ID.
-     */
-    fun getCharacterById(characterId: Int): ResponseWrapper<CharacterModel>
-
-    /**
      * Returns a list with Marvel's characters.
      */
     fun getCharacters(fetch: Boolean, limit: Int, offset: Int): ResponseWrapper<List<CharacterModel>>
