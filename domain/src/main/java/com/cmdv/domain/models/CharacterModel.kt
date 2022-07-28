@@ -3,7 +3,7 @@ package com.cmdv.domain.models
 import java.io.Serializable
 
 /**
- * TODO
+ * Model class. This class is the UI model to represent a Marvel's character in the screen.
  */
 data class CharacterModel(
     val id: Int,
