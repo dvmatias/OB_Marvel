@@ -20,11 +20,21 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
     private lateinit var navController: NavController
 
     override fun initView() {
+        // Every time this activity starts, remove DB stored characters to get them from service.
+        viewModel.removeStoredCharacters()
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.navController
         NavigationUI.setupWithNavController(binding.content.bottomNav, navController)
 
         // TODO setup toolbar
+    }
+
+    override fun observe() {
+        // Get the total characters available in Marvel's API if this fields has not been set.
+        if (viewModel.totalCharactersCount == 0) {
+            viewModel.getTotalCharactersCount()
+        }
     }
 
     /**
@@ -49,11 +59,5 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT)
             .setBackgroundTint(ContextCompat.getColor(this, com.cmdv.common.R.color.marvel_red))
             .show()
-    }
-
-    override fun observe() {
-        if (viewModel.totalCharactersCount == 0) {
-            viewModel.getTotalCharactersCount()
-        }
     }
 }

@@ -16,4 +16,9 @@ interface CharactersRepository {
      * Returns a list with Marvel's characters.
      */
     fun getCharacters(fetch: Boolean, limit: Int, offset: Int): ResponseWrapper<List<CharacterModel>>
+
+    /**
+     * Removed all stored characters in DB.
+     */
+    fun removeStoredCharacters()
 }

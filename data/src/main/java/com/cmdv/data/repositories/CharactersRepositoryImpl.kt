@@ -48,6 +48,13 @@ class CharactersRepositoryImpl(
     }
 
     /**
+     * Removed all stored characters in DB.
+     */
+    override fun removeStoredCharacters() {
+        charactersDao.deleteAll()
+    }
+
+    /**
      * Fetch Marvel's characters from Marvel's API service call.
      *
      * @param limit Limit the result set to the specified number of resources (applied only to service call).

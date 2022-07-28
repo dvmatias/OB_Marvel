@@ -7,7 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.usecases.GetCharactersUseCase
 import com.cmdv.domain.usecases.GetTotalCharactersUseCase
+import com.cmdv.domain.usecases.RemoveStoredCharactersUseCase
 import com.cmdv.domain.utils.ResponseWrapper
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 private const val LIMIT_CHARACTERS_FETCH_DEFAULT = 32
@@ -15,7 +17,8 @@ private const val OFFSET_CHARACTERS_FETCH_DEFAULT = 0
 
 class CharactersViewModel(
     private val getTotalCharactersUseCase: GetTotalCharactersUseCase,
-    private val getCharactersUseCase: GetCharactersUseCase
+    private val getCharactersUseCase: GetCharactersUseCase,
+    private val removeStoredCharactersUseCase: RemoveStoredCharactersUseCase
 ) : ViewModel() {
     /**
      * Represents the state of this view model (LOADING, READY, ERROR).
@@ -78,6 +81,15 @@ class CharactersViewModel(
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * Remove stored characters in DB.
+     */
+    fun removeStoredCharacters() {
+        viewModelScope.launch {
+            removeStoredCharactersUseCase(RemoveStoredCharactersUseCase.Params()).collect()
         }
     }
 
