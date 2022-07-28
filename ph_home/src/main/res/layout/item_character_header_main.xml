@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- HEADER IMAGE -->
+        <ImageView
+            android:id="@+id/imageViewHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@null"
+            android:src="@drawable/img_characters_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- HEADER TEXT -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dim_12dp"
+            android:gravity="center"
+            android:paddingTop="@dimen/dim_8dp"
+            android:paddingBottom="@dimen/dim_8dp"
+            android:paddingStart="@dimen/dim_24dp"
+            android:paddingEnd="@dimen/dim_24dp"
+            android:text="@string/text_item_header_choose_your_heroes"
+            android:textAllCaps="true"
+            android:textColor="@color/title_primary_light"
+            android:textSize="@dimen/title_text_size_super"
+            app:layout_constraintTop_toBottomOf="@id/imageViewHeader" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

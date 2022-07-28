@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cmdv.domain.uimodels.CharacterUiModel
+import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.usecases.GetCharactersUseCase
 import com.cmdv.domain.usecases.GetTotalCharactersUseCase
 import com.cmdv.domain.utils.ResponseWrapper
@@ -24,8 +24,8 @@ class CharactersViewModel(
     val viewModelState: LiveData<ResponseWrapper.Status>
         get() = _viewModelState
 
-    private var _characters = MutableLiveData<List<CharacterUiModel>>()
-    val characters: LiveData<List<CharacterUiModel>> = _characters
+    private var _characters = MutableLiveData<List<CharacterModel>>()
+    val characters: LiveData<List<CharacterModel>> = _characters
 
     private val isAllCharactersLoaded: Boolean
         get() = _characters.value?.size.let { totalCharactersCount == it }

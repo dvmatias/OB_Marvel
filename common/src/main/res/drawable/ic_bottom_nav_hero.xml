@@ -9,27 +9,27 @@
         <path
             android:name="path"
             android:pathData="M 12 1.167 C 9.128 1.167 6.371 2.309 4.34 4.34 C 2.309 6.371 1.167 9.128 1.167 12 C 1.167 14.872 2.309 17.629 4.34 19.66 C 6.371 21.691 9.128 22.833 12 22.833 C 14.287 22.833 16.517 22.109 18.367 20.764 C 20.218 19.42 21.596 17.523 22.303 15.348 C 23.01 13.172 23.01 10.828 22.303 8.652 C 21.596 6.477 20.218 4.58 18.367 3.236 C 16.517 1.891 14.287 1.167 12 1.167 Z"
-            android:strokeColor="@color/color_black"
+            android:strokeColor="@color/black"
             android:strokeWidth="@dimen/ic_bottom_nav_stroke_width"/>
         <path
             android:name="path_1"
             android:pathData="M 16.959 9.932 C 16.478 10.294 16.086 10.75 15.841 11.234 C 15.596 11.717 15.509 12.205 15.593 12.625 C 15.677 13.045 15.928 13.376 16.309 13.571 C 16.69 13.767 17.182 13.816 17.715 13.711 C 18.247 13.607 18.792 13.354 19.271 12.99 C 19.752 12.628 20.143 12.173 20.389 11.689 C 20.634 11.205 20.721 10.718 20.637 10.298 C 20.553 9.878 20.302 9.547 19.921 9.351 C 19.54 9.156 19.047 9.107 18.515 9.211 C 17.983 9.316 17.438 9.568 16.959 9.932 Z"
-            android:strokeColor="@color/color_black"
+            android:strokeColor="@color/black"
             android:strokeWidth="@dimen/ic_bottom_nav_stroke_width"/>
         <path
             android:name="path_2"
             android:pathData="M 16.617 2.198 C 16.617 2.198 8.614 14.802 19.574 19.743"
-            android:strokeColor="@color/color_black"
+            android:strokeColor="@color/black"
             android:strokeWidth="@dimen/ic_bottom_nav_stroke_width"/>
         <path
             android:name="path_3"
             android:pathData="M 4.728 12.991 C 5.207 13.355 5.752 13.608 6.284 13.712 C 6.817 13.816 7.309 13.767 7.69 13.572 C 8.072 13.376 8.323 13.045 8.407 12.625 C 8.491 12.204 8.404 11.717 8.159 11.234 C 7.914 10.75 7.523 10.294 7.043 9.932 C 6.564 9.568 6.019 9.316 5.487 9.212 C 4.954 9.107 4.462 9.157 4.081 9.352 C 3.699 9.547 3.448 9.879 3.364 10.299 C 3.28 10.719 3.367 11.206 3.612 11.69 C 3.857 12.174 4.248 12.63 4.728 12.991 Z"
-            android:strokeColor="@color/color_black"
+            android:strokeColor="@color/black"
             android:strokeWidth="@dimen/ic_bottom_nav_stroke_width"/>
         <path
             android:name="path_4"
             android:pathData="M 7.383 2.198 C 7.383 2.198 15.386 14.802 4.425 19.743"
-            android:strokeColor="@color/color_black"
+            android:strokeColor="@color/black"
             android:strokeWidth="@dimen/ic_bottom_nav_stroke_width"/>
     </group>
 </vector>

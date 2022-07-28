@@ -1,6 +1,6 @@
 package com.cmdv.data.sources.apiservices
 
-import com.cmdv.data.models.GetCharactersResponseModel
+import com.cmdv.data.entities.GetCharactersResponseEntity
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,7 +14,6 @@ interface CharactersApi {
 
         private const val QUERY_LIMIT = "limit"
         private const val QUERY_OFFSET = "offset"
-        private const val PATH_CHARACTER_ID = "characterId"
 
         private const val EP_CHARACTERS = ROOT_PATH.plus("characters")
     }
@@ -31,5 +30,5 @@ interface CharactersApi {
     fun getCharacters(
         @Query(QUERY_LIMIT) limit: Int,
         @Query(QUERY_OFFSET) offset: Int
-    ): Call<GetCharactersResponseModel>
+    ): Call<GetCharactersResponseEntity>
 }

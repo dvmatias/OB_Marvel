@@ -66,4 +66,7 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+    // ROOM DB
+    implementation libs.room
+    kapt libs.room_compiler
 }

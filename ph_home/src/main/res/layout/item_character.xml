@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="character"
+            type="com.cmdv.domain.models.CharacterModel" />
+
+        <variable
+            name="listener"
+            type="com.cmdv.ph_home.ui.listeners.CharacterAdapterListener" />
+
+        <variable
+            name="characterIndex"
+            type="int" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(view) -> listener != null ? listener.onCharacterClick(character.id) : Void}"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dim_4dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- CHARACTER'S IMAGE -->
+            <ImageView
+                android:id="@+id/imageViewThumbnail"
+                android:layout_width="@dimen/follow_constraints"
+                android:layout_height="@dimen/follow_constraints"
+                android:background="@android:color/transparent"
+                android:contentDescription="@null"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/img_mock_character" />
+
+            <!-- FAVORITE INDICATOR/SELECTOR -->
+            <ImageView
+                android:id="@+id/imageViewFavourite"
+                android:layout_width="@dimen/dim_32dp"
+                android:layout_height="@dimen/dim_32dp"
+                android:contentDescription="@null"
+                android:onClick="@{(view) -> listener != null ? listener.onFavoriteClick(character.id, characterIndex, !character.isFavourite) : Void}"
+                android:padding="@dimen/dim_6dp"
+                android:src="@{character.isFavourite ? @drawable/ic_favorite_selected : @drawable/ic_favorite_unselected}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- CHARACTER'S NAME -->
+            <TextView
+                android:id="@+id/textViewName"
+                style="@style/TitleText.Small"
+                android:layout_width="@dimen/follow_constraints"
+                android:layout_height="wrap_content"
+                android:background="@{character.isFavourite ? @color/marvel_red : @android:color/transparent}"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lines="2"
+                android:paddingStart="@dimen/dim_6dp"
+                android:paddingTop="@dimen/dim_4dp"
+                android:paddingEnd="@dimen/dim_6dp"
+                android:paddingBottom="@dimen/dim_4dp"
+                android:text="@{character.name}"
+                android:textColor="@{character.isFavourite ? @color/white : @color/black}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageViewThumbnail"
+                tools:text="Character's Name" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

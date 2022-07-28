@@ -27,7 +27,7 @@
             android:id="@+id/bottomNav"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_nav_view_height"
-            android:background="@color/color_primary"
+            android:background="@color/primary"
             app:itemIconTint="@drawable/selector_bottom_nav_home"
             app:itemTextColor="@drawable/selector_bottom_nav_home"
             app:layout_constraintBottom_toBottomOf="parent"

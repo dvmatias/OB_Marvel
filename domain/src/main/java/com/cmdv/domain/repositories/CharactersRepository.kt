@@ -1,6 +1,6 @@
 package com.cmdv.domain.repositories
 
-import com.cmdv.domain.uimodels.CharacterUiModel
+import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.utils.ResponseWrapper
 
 /**
@@ -15,5 +15,5 @@ interface CharactersRepository {
     /**
      * Returns a list with Marvel's characters.
      */
-    fun getCharacters(fetch: Boolean, limit: Int, offset: Int): ResponseWrapper<List<CharacterUiModel>>
+    fun getCharacters(fetch: Boolean, limit: Int, offset: Int): ResponseWrapper<List<CharacterModel>>
 }
