@@ -12,4 +12,7 @@
     <string name="favorite_fragment_delete_dialog_message">You\'re about to delete all your favorite characters. Do you want to continue?</string>
     <string name="favorite_fragment_delete_dialog_positive">YES</string>
     <string name="favorite_fragment_delete_dialog_negative">NO</string>
+
+    <string name="character_details_description_title">Description</string>
+    <string name="character_details_description_empty">- No description available for %s -</string>
 </resources>

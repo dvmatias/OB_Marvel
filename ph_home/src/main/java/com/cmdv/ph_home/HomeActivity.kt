@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.cmdv.common.KEY_CHARACTER_ID_ARG
+import com.cmdv.common.KEY_CHARACTER_NAME_ARG
 import com.cmdv.core.base.BaseActivity
 import com.cmdv.ph_home.databinding.ActivityHomeBinding
 import com.cmdv.ph_home.ui.listeners.CharactersFragmentListener
@@ -45,9 +46,10 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
      *
      * @param characterId
      */
-    override fun onCharacterClick(characterId: Int) {
+    override fun onCharacterClick(characterId: Int, characterName: String) {
         Bundle().apply {
             putInt(KEY_CHARACTER_ID_ARG, characterId)
+            putString(KEY_CHARACTER_NAME_ARG, characterName)
         }.also {
             navigator.toCharacterDetails(this, it, false)
         }

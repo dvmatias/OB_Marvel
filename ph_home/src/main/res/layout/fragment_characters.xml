@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.cmdv.ph_home.ui.viewmodels.CharactersViewModel" />
+
         <variable
             name="adapter"
             type="com.cmdv.ph_home.ui.adapters.CharacterAdapter" />
+
         <variable
             name="layoutManager"
             type="com.cmdv.ph_home.ui.layoutmanagers.CharacterLayoutManager" />
@@ -21,6 +24,7 @@
         android:layout_height="match_parent"
         tools:context=".CharactersFragment">
 
+        <!-- CHARACTERS LIST -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCharacter"
             android:layout_width="match_parent"
@@ -39,6 +43,7 @@
             tools:spanCount="3"
             tools:visibility="visible" />
 
+        <!-- LOADING VIEW -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,6 +60,5 @@
                 android:elevation="8dp"
                 android:indeterminateDrawable="@drawable/layer_list_screen_loading" />
         </FrameLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

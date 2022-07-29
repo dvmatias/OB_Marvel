@@ -17,7 +17,13 @@
     <style name="Theme.HomeActivity" parent="Theme.AppCompat.NoActionBar" >
         <item name="android:statusBarColor">@color/status_bar</item>
         <item name="android:navigationBarColor">@color/primary</item>
-        <item name="background">@color/white</item>
+        <item name="android:windowBackground">@color/activity_bgr</item>
+    </style>
+
+    <style name="Theme.CharacterDetailsActivity" parent="Theme.AppCompat.NoActionBar" >
+        <item name="android:statusBarColor">@color/status_bar</item>
+        <item name="android:navigationBarColor">@color/primary</item>
+        <item name="android:windowBackground">@color/activity_bgr</item>
     </style>
 
     <style name="Theme.MyApplication.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />

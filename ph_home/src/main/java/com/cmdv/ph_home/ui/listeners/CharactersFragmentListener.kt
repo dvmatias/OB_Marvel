@@ -9,7 +9,7 @@ interface CharactersFragmentListener {
      *
      * @param characterId
      */
-    fun onCharacterClick(characterId: Int)
+    fun onCharacterClick(characterId: Int, characterName: String)
 
     /**
      * Triggered when something went wrong in the characters loading.

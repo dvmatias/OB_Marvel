@@ -25,12 +25,12 @@ class CharacterDetailsViewModel(
     val viewModelState: LiveData<ResponseWrapper.Status>
         get() = _viewModelState
 
-    private val _character = MutableLiveData<ResponseWrapper<CharacterModel>>()
-    val character: LiveData<ResponseWrapper<CharacterModel>>
+    private val _character = MutableLiveData<CharacterModel>()
+    val character: LiveData<CharacterModel>
         get() = _character
 
-    private val _comics = MutableLiveData<ResponseWrapper<List<ComicModel>>>()
-    val comics: LiveData<ResponseWrapper<List<ComicModel>>>
+    private val _comics = MutableLiveData<List<ComicModel>>()
+    val comics: LiveData<List<ComicModel>>
         get() = _comics
 
     /**
@@ -42,7 +42,7 @@ class CharacterDetailsViewModel(
         viewModelScope.launch {
             val params = GetCharacterByIdUserCase.Params(characterId)
             getCharacterByIdUserCase.invoke(params).collect { response ->
-                _character.value = response
+                response.data?.let { _character.value = it }
                 _viewModelState.value = response.status
             }
         }
@@ -57,7 +57,7 @@ class CharacterDetailsViewModel(
         viewModelScope.launch {
             val params = GetComicsByCharacterIdUserCase.Params(characterId)
             getComicsByCharacterIdUserCase.invoke(params).collect { response ->
-                _comics.value = response
+                response.data?.let { _comics.value = it }
                 _viewModelState.value = response.status
             }
         }
