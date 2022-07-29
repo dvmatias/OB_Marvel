@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="comic"
+            type="com.cmdv.domain.models.ComicModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dim_4dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
+        android:fitsSystemWindows="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- COMIC IMAGE -->
+            <ImageView
+                android:id="@+id/imageViewThumbnail"
+                android:layout_width="@dimen/follow_constraints"
+                android:layout_height="@dimen/follow_constraints"
+                app:loadCharacterImage="@{comic.thumbnail}"
+                android:background="@android:color/transparent"
+                android:contentDescription="@null"
+                android:src="@drawable/img_mock_character"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

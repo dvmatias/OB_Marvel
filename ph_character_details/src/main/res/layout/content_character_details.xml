@@ -25,6 +25,22 @@
             android:layout_height="match_parent">
 
             <!-- CHARACTER'S IMAGE -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/dim_14dp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_end="@dimen/dim_14dp" />
+
             <ImageView
                 android:id="@+id/imageViewThumbnail"
                 android:layout_width="match_parent"
@@ -39,28 +55,50 @@
             <TextView
                 android:id="@+id/textViewDescriptionTitle"
                 style="@style/TitleText.Medium"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/follow_constraints"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dim_12dp"
                 android:layout_marginTop="@dimen/dim_12dp"
-                android:layout_marginEnd="@dimen/dim_12dp"
                 android:text="@string/character_details_description_title"
+                app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@id/imageViewThumbnail" />
 
             <!-- CHARACTER'S DESCRIPTION DATA -->
             <TextView
+                android:id="@+id/textViewDescriptionData"
                 style="@style/BodyText.Large"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/follow_constraints"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dim_12dp"
                 android:layout_marginTop="@dimen/dim_12dp"
-                android:layout_marginEnd="@dimen/dim_12dp"
                 android:text="@{!viewModel.character.description.empty ? viewModel.character.description : @string/character_details_description_empty(viewModel.character.name)}"
                 android:visibility="@{viewModel.viewModelState.equals(Status.READY) ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@id/textViewDescriptionTitle"
                 tools:text="@tools:sample/lorem/random"
                 tools:visibility="visible" />
 
+            <!-- CHARACTER'S COMICS TITLE -->
+            <TextView
+                android:id="@+id/textViewComicsTitle"
+                style="@style/TitleText.Medium"
+                android:layout_width="@dimen/follow_constraints"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_12dp"
+                android:text="@string/character_details_comics_title"
+                app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/textViewDescriptionData" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerComic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewComicsTitle"
+                tools:itemCount="20"
+                tools:orientation="horizontal"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_comic" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
