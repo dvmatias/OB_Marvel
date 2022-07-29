@@ -16,4 +16,5 @@
     <string name="character_details_description_title">Description</string>
     <string name="character_details_description_empty">- No description available for %s -</string>
     <string name="character_details_comics_title">Comics</string>
+    <string name="character_details_comics_empty">No comics info available</string>
 </resources>

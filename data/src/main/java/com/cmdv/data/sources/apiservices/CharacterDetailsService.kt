@@ -28,9 +28,10 @@ class CharacterDetailsService(private val retrofit: Retrofit) : CharacterDetails
      * API call. Makes a service call to get the response with list of character's comics.
      *
      * @param characterId The character's unique identifier.
+     * @param offset Offset applied to the service query call.
      *
      * @return The list of comics for a particular character.
      */
-    override fun getComicsByCharacterId(characterId: Int): Call<GetComicsResponseEntity> =
-        charactersService.getComicsByCharacterId(characterId)
+    override fun getComicsByCharacterId(characterId: Int, offset: Int): Call<GetComicsResponseEntity> =
+        charactersService.getComicsByCharacterId(characterId, offset)
 }

@@ -13,7 +13,7 @@ class GetComicsByCharacterIdUserCase(
 ) : BaseUseCase<ResponseWrapper<List<ComicModel>>, GetComicsByCharacterIdUserCase.Params>() {
 
     override suspend fun executeUseCase(params: Params): ResponseWrapper<List<ComicModel>> =
-        charactersRepository.getComics(params.characterId)
+        charactersRepository.getComics(params.characterId, params.offset)
 
-    data class Params(val characterId: Int)
+    data class Params(val characterId: Int, val offset: Int)
 }

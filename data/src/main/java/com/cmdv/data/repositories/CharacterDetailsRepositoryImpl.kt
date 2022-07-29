@@ -28,8 +28,8 @@ class CharacterDetailsRepositoryImpl(
      *
      * @param characterId The character's unique identifier.
      */
-    override fun getComics(characterId: Int): ResponseWrapper<List<ComicModel>> =
-        apiHandler.doNetworkRequest(characterDetailsApi.getComicsByCharacterId(characterId)) { response ->
+    override fun getComics(characterId: Int, offset: Int): ResponseWrapper<List<ComicModel>> =
+        apiHandler.doNetworkRequest(characterDetailsApi.getComicsByCharacterId(characterId, offset)) { response ->
             GetComicsResponseMapper.transformEntityToModel(response).comics
         }
 

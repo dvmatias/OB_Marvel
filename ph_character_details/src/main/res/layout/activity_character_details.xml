@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <import type="com.cmdv.domain.utils.ResponseWrapper.Status" />
@@ -61,26 +62,23 @@
         <!-- CHARACTER DETAILS ACTIVITY CONTENT - LAYOUT -->
         <include
             android:id="@+id/content"
-            app:viewModel="@{viewModel}"
-            app:comicAdapter="@{comicAdapter}"
+            layout="@layout/content_character_details"
             android:visibility="@{viewModel.viewModelState.equals(Status.READY) ? View.VISIBLE : View.GONE}"
-            layout="@layout/content_character_details" />
+            app:comicAdapter="@{comicAdapter}"
+            app:viewModel="@{viewModel}" />
 
         <!-- LOADING VIEW -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="@{viewModel.viewModelState.equals(Status.LOADING) ? View.VISIBLE : View.GONE}"
-            tools:visibility="visible">
+        <include
+            android:id="@+id/layoutLoading"
+            layout="@layout/loading_layout"
+            app:isVisible="@{viewModel.viewModelState.equals(Status.LOADING)}"
+            tools:visibility="gone" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:elevation="8dp"
-                android:indeterminateDrawable="@drawable/layer_list_screen_loading" />
-        </FrameLayout>
+        <!-- ERROR VIEW -->
+        <include
+            android:id="@+id/layoutError"
+            layout="@layout/error_layout"
+            app:isVisible="@{viewModel.viewModelState.equals(Status.ERROR)}"
+            tools:visibility="gone" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

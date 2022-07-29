@@ -82,30 +82,10 @@
                 tools:text="@tools:sample/lorem/random"
                 tools:visibility="visible" />
 
-            <!-- CHARACTER'S COMICS TITLE -->
-            <TextView
-                android:id="@+id/textViewComicsTitle"
-                style="@style/TitleText.Medium"
-                android:layout_width="@dimen/follow_constraints"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dim_12dp"
-                android:text="@string/character_details_comics_title"
-                app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
-                app:layout_constraintStart_toEndOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/textViewDescriptionData" />
-
-            <!-- CHARACTER'S COMICS LIST -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerComic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adapter="@{comicAdapter}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/textViewComicsTitle"
-                app:loadComics="@{viewModel.comics}"
-                tools:itemCount="20"
-                tools:listitem="@layout/item_comic"
-                android:orientation="horizontal" />
+            <include
+                layout="@layout/content_character_details_comics"
+                app:comicAdapter="@{comicAdapter}"
+                app:viewModel="@{viewModel}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

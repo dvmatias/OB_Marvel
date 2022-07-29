@@ -16,6 +16,7 @@ interface CharacterDetailsApi {
         private const val ROOT_PATH = "v1/public/"
 
         private const val PATH_CHARACTER_ID = "characterId"
+        private const val QUERY_OFFSET = "offset"
 
         private const val EP_CHARACTER = ROOT_PATH.plus("characters/{$PATH_CHARACTER_ID}")
         private const val EP_CHARACTER_COMICS = ROOT_PATH.plus("characters/{$PATH_CHARACTER_ID}/comics")
@@ -37,11 +38,13 @@ interface CharacterDetailsApi {
      * API call. Makes a service call to get the response with list of character's comics.
      *
      * @param characterId The character's unique identifier.
+     * @param offset Offset applied to the service query call.
      *
      * @return The list of comics for a particular character.
      */
     @GET(EP_CHARACTER_COMICS)
     fun getComicsByCharacterId(
-        @Path(PATH_CHARACTER_ID) characterId: Int
+        @Path(PATH_CHARACTER_ID) characterId: Int,
+        @Query(QUERY_OFFSET) offset: Int
     ): Call<GetComicsResponseEntity>
 }

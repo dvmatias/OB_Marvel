@@ -8,8 +8,10 @@ import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.models.ComicModel
 import com.cmdv.domain.usecases.GetCharacterByIdUserCase
 import com.cmdv.domain.usecases.GetComicsByCharacterIdUserCase
-import com.cmdv.domain.utils.ResponseWrapper
+import com.cmdv.domain.utils.ResponseWrapper.Status
 import kotlinx.coroutines.launch
+
+private const val OFFSET_COMICS_FETCH_DEFAULT = 0
 
 /**
  * Android View Model.
@@ -21,8 +23,8 @@ class CharacterDetailsViewModel(
     /**
      * Represents the state of this view model (LOADING, READY, ERROR).
      */
-    private val _viewModelState = MutableLiveData(ResponseWrapper.Status.LOADING)
-    val viewModelState: LiveData<ResponseWrapper.Status>
+    private val _viewModelState = MutableLiveData(Status.LOADING)
+    val viewModelState: LiveData<Status>
         get() = _viewModelState
 
     private val _character = MutableLiveData<CharacterModel>()
@@ -33,16 +35,27 @@ class CharacterDetailsViewModel(
     val comics: LiveData<List<ComicModel>>
         get() = _comics
 
+    private var totalComicsCount: Int = 0
+
+    private var comicsCount: Int = 0
+
     /**
      * Get the character details.
      *
      * @param characterId The character unique identifier fer getting details.
      */
-    fun getCharacterDetails(characterId: Int) {
+    fun getCharacterDetails(characterId: Int?) {
+        if (characterId == null) {
+            _viewModelState.value = Status.ERROR
+            return
+        }
         viewModelScope.launch {
             val params = GetCharacterByIdUserCase.Params(characterId)
             getCharacterByIdUserCase.invoke(params).collect { response ->
-                response.data?.let { _character.value = it }
+                response.data?.let {
+                    totalComicsCount = it.comicsCount
+                    _character.value = it
+                }
                 _viewModelState.value = response.status
             }
         }
@@ -53,12 +66,27 @@ class CharacterDetailsViewModel(
      *
      * @param characterId The character unique identifier fer getting details.
      */
-    fun getCharacterComics(characterId: Int) {
+    fun getCharacterComics(
+        characterId: Int,
+        offset: Int = OFFSET_COMICS_FETCH_DEFAULT
+    ) {
+        if (totalComicsCount == 0) {
+            _comics.value = listOf()
+            return
+        }
+
         viewModelScope.launch {
-            val params = GetComicsByCharacterIdUserCase.Params(characterId)
+            val params = GetComicsByCharacterIdUserCase.Params(characterId, offset)
             getComicsByCharacterIdUserCase.invoke(params).collect { response ->
-                response.data?.let { _comics.value = it }
-                _viewModelState.value = response.status
+                if (response.status == Status.READY) {
+                    response.data?.let {
+                        _comics.value = it
+                        comicsCount += it.size
+                        if (comicsCount < totalComicsCount) {
+                            getCharacterComics(characterId, comicsCount)
+                        }
+                    }
+                }
             }
         }
     }

@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.cmdv.domain.utils.ResponseWrapper.Status" />
+
         <variable
             name="viewModel"
             type="com.cmdv.ph_home.ui.viewmodels.FavoritesViewModel" />
@@ -34,23 +36,11 @@
             tools:itemCount="3"
             tools:listitem="@layout/item_index_favorite_character" />
 
-        <!-- LOADING STATE -->
-        <FrameLayout
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            app:favoritesLoadingVisibility="@{viewModel.viewModelState}"
-            tools:visibility="visible">
-
-            <ProgressBar
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:elevation="8dp"
-                android:indeterminateDrawable="@drawable/layer_list_screen_loading" />
-        </FrameLayout>
+        <!-- LOADING VIEW -->
+        <include
+            android:id="@+id/layoutLoading"
+            layout="@layout/loading_layout"
+            app:isVisible="@{viewModel.viewModelState.equals(Status.LOADING)}" />
 
         <!-- EMPTY STATE -->
         <ImageView

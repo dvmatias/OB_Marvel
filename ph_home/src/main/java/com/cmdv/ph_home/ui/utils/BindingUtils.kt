@@ -60,17 +60,6 @@ fun RecyclerView.loadFavoriteCharacters(
     }
 }
 
-@BindingAdapter("favoritesLoadingVisibility")
-fun favoritesLoadingVisibility(
-    view: FrameLayout?,
-    viewModelStatus: Status
-) {
-    view?.visibility = when (viewModelStatus) {
-        LOADING -> View.VISIBLE
-        else -> View.GONE
-    }
-}
-
 @BindingAdapter("characterItemDescription")
 fun bindCharacterItemImage(textView: TextView, description: String) {
     if (description.isBlank()) {

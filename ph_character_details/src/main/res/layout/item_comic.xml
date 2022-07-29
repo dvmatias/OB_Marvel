@@ -31,7 +31,7 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="@null"
                 android:src="@drawable/img_mock_character"
-                app:layout_constraintDimensionRatio="4:3"
+                app:layout_constraintDimensionRatio="560:850"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

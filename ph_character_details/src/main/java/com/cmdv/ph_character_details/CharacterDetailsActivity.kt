@@ -47,9 +47,9 @@ class CharacterDetailsActivity :
 
     override fun observe() {
         with(viewModel) {
-            characterId?.let {
-                getCharacterDetails(it)
-                getCharacterComics(it)
+            getCharacterDetails(characterId)
+            character.observe(this@CharacterDetailsActivity) { character ->
+                getCharacterComics(character.id)
             }
         }
     }

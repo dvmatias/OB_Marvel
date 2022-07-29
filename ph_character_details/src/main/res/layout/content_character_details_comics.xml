@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.cmdv.domain.utils.ResponseWrapper.Status" />
+
+        <variable
+            name="viewModel"
+            type="com.cmdv.ph_character_details.ui.viewmodels.CharacterDetailsViewModel" />
+
+        <variable
+            name="comicAdapter"
+            type="com.cmdv.ph_character_details.ui.adapters.ComicAdapter" />
+    </data>
+
+    <merge tools:showIn="@layout/content_character_details">
+
+        <!-- CHARACTER'S COMICS TITLE -->
+        <TextView
+            android:id="@+id/textViewComicsTitle"
+            style="@style/TitleText.Medium"
+            android:layout_width="@dimen/follow_constraints"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim_12dp"
+            android:text="@string/character_details_comics_title"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/textViewDescriptionData" />
+
+        <!-- CHARACTER'S COMICS NO INFO -->
+        <TextView
+            android:id="@+id/textViewComicsNoData"
+            style="@style/TitleText.Small"
+            android:layout_width="@dimen/follow_constraints"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim_12dp"
+            android:text="@string/character_details_comics_empty"
+            android:visibility="@{viewModel.comics.empty ? View.VISIBLE : View.GONE, default = gone}"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/textViewComicsTitle" />
+
+        <!-- CHARACTER'S COMICS LIST -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerComic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adapter="@{comicAdapter}"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/textViewComicsTitle"
+            app:loadComics="@{viewModel.comics}"
+            tools:itemCount="20"
+            tools:listitem="@layout/item_comic" />
+    </merge>
+</layout>

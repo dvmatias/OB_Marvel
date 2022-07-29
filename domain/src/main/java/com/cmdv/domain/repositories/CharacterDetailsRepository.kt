@@ -17,7 +17,7 @@ interface CharacterDetailsRepository {
      *
      * @param characterId The character's unique identifier.
      */
-    fun getComics(characterId: Int): ResponseWrapper<List<ComicModel>>
+    fun getComics(characterId: Int, offset: Int): ResponseWrapper<List<ComicModel>>
 
     /**
      * API call to get the list of series for a specific character
