@@ -9,4 +9,5 @@ data class ComicModel(
     val id: Int,
     val description: String,
     val thumbnail: String,
+    val title: String
 ) : Serializable

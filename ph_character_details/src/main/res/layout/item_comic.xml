@@ -4,37 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="comic"
             type="com.cmdv.domain.models.ComicModel" />
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="false"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/dim_4dp"
         app:cardElevation="3dp"
-        app:cardUseCompatPadding="true"
-        android:fitsSystemWindows="false">
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <!-- COMIC IMAGE -->
             <ImageView
-                android:id="@+id/imageViewThumbnail"
-                android:layout_width="@dimen/follow_constraints"
+                android:id="@+id/imageViewComicThumbnail"
+                android:layout_width="@dimen/item_comic_width"
                 android:layout_height="@dimen/follow_constraints"
-                app:loadCharacterImage="@{comic.thumbnail}"
                 android:background="@android:color/transparent"
                 android:contentDescription="@null"
                 android:src="@drawable/img_mock_character"
-                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintDimensionRatio="4:3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadCharacterImage="@{comic.thumbnail}" />
+
+            <!-- COMIC TITLE -->
+            <TextView
+                style="@style/TitleText.Small"
+                android:id="@+id/textViewComicTitle"
+                android:layout_width="@dimen/follow_constraints"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lines="2"
+                android:ellipsize="end"
+                android:text="@{comic.title}"
+                android:paddingStart="@dimen/dim_4dp"
+                android:paddingEnd="@dimen/dim_4dp"
+                android:paddingTop="@dimen/dim_6dp"
+                android:paddingBottom="@dimen/dim_6dp"
+                app:layout_constraintEnd_toEndOf="@id/imageViewComicThumbnail"
+                app:layout_constraintStart_toStartOf="@id/imageViewComicThumbnail"
+                app:layout_constraintTop_toBottomOf="@id/imageViewComicThumbnail"
+                tools:text="Comic title" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

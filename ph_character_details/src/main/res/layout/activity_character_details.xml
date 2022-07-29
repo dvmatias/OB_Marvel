@@ -15,6 +15,10 @@
         <variable
             name="characterName"
             type="String" />
+
+        <variable
+            name="comicAdapter"
+            type="com.cmdv.ph_character_details.ui.adapters.ComicAdapter" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -58,6 +62,7 @@
         <include
             android:id="@+id/content"
             app:viewModel="@{viewModel}"
+            app:comicAdapter="@{comicAdapter}"
             android:visibility="@{viewModel.viewModelState.equals(Status.READY) ? View.VISIBLE : View.GONE}"
             layout="@layout/content_character_details" />
 

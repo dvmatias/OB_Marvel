@@ -20,6 +20,8 @@
     <dimen name="dim_30dp">30dp</dimen>
     <dimen name="dim_32dp">32dp</dimen>
 
+    <dimen name="item_comic_width">180dp</dimen>
+
     <dimen name="toolbar_text_size_marvel">48sp</dimen>
     <dimen name="toolbar_text_size_normal">18sp</dimen>
     <dimen name="body_text_size_small">11sp</dimen>

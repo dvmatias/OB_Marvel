@@ -12,6 +12,10 @@
         <variable
             name="viewModel"
             type="com.cmdv.ph_character_details.ui.viewmodels.CharacterDetailsViewModel" />
+
+        <variable
+            name="comicAdapter"
+            type="com.cmdv.ph_character_details.ui.adapters.ComicAdapter" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -90,15 +94,18 @@
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@id/textViewDescriptionData" />
 
+            <!-- CHARACTER'S COMICS LIST -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerComic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:adapter="@{comicAdapter}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/textViewComicsTitle"
+                app:loadComics="@{viewModel.comics}"
                 tools:itemCount="20"
-                tools:orientation="horizontal"
-                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_comic" />
+                tools:listitem="@layout/item_comic"
+                android:orientation="horizontal" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

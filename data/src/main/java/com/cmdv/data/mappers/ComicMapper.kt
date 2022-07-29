@@ -16,7 +16,8 @@ object ComicMapper : BaseMapper<ComicEntity, ComicModel>() {
         ComicModel(
             id = e.id ?: DEFAULT_INT,
             description = e.description ?: DEFAULT_STRING,
-            transformThumbnail(e.thumbnail)
+            transformThumbnail(e.thumbnail),
+            title = e.title ?: DEFAULT_STRING
         )
 
     private fun transformThumbnail(thumbnail: ComicEntity.ThumbnailEntity?): String {
