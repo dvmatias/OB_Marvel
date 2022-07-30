@@ -2,6 +2,7 @@ package com.cmdv.data.sources.apiservices
 
 import com.cmdv.data.entities.GetCharactersResponseEntity
 import com.cmdv.data.entities.GetComicsResponseEntity
+import com.cmdv.data.entities.GetSeriesResponseEntity
 import retrofit2.Call
 import retrofit2.Retrofit
 
@@ -34,4 +35,15 @@ class CharacterDetailsService(private val retrofit: Retrofit) : CharacterDetails
      */
     override fun getComicsByCharacterId(characterId: Int, offset: Int): Call<GetComicsResponseEntity> =
         charactersService.getComicsByCharacterId(characterId, offset)
+
+    /**
+     * API call. Makes a service call to get the response with list of character's series.
+     *
+     * @param characterId The character's unique identifier.
+     * @param offset Offset applied to the service query call.
+     *
+     * @return The list of comics for a particular character.
+     */
+    override fun getSeriesByCharacterId(characterId: Int, offset: Int): Call<GetSeriesResponseEntity> =
+        charactersService.getSeriesByCharacterId(characterId, offset)
 }

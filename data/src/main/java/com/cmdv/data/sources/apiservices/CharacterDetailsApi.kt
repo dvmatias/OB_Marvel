@@ -2,6 +2,7 @@ package com.cmdv.data.sources.apiservices
 
 import com.cmdv.data.entities.GetCharactersResponseEntity
 import com.cmdv.data.entities.GetComicsResponseEntity
+import com.cmdv.data.entities.GetSeriesResponseEntity
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -20,6 +21,7 @@ interface CharacterDetailsApi {
 
         private const val EP_CHARACTER = ROOT_PATH.plus("characters/{$PATH_CHARACTER_ID}")
         private const val EP_CHARACTER_COMICS = ROOT_PATH.plus("characters/{$PATH_CHARACTER_ID}/comics")
+        private const val EP_CHARACTER_SERIES = ROOT_PATH.plus("characters/{$PATH_CHARACTER_ID}/series")
     }
 
     /**
@@ -47,4 +49,18 @@ interface CharacterDetailsApi {
         @Path(PATH_CHARACTER_ID) characterId: Int,
         @Query(QUERY_OFFSET) offset: Int
     ): Call<GetComicsResponseEntity>
+
+    /**
+     * API call. Makes a service call to get the response with list of character's series.
+     *
+     * @param characterId The character's unique identifier.
+     * @param offset Offset applied to the service query call.
+     *
+     * @return The list of comics for a particular character.
+     */
+    @GET(EP_CHARACTER_SERIES)
+    fun getSeriesByCharacterId(
+        @Path(PATH_CHARACTER_ID) characterId: Int,
+        @Query(QUERY_OFFSET) offset: Int
+    ): Call<GetSeriesResponseEntity>
 }

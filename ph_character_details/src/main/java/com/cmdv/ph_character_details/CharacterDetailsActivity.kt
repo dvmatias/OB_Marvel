@@ -50,6 +50,7 @@ class CharacterDetailsActivity :
             getCharacterDetails(characterId)
             character.observe(this@CharacterDetailsActivity) { character ->
                 getCharacterComics(character.id)
+                getCharacterSeries(character.id)
             }
         }
     }
