@@ -60,6 +60,10 @@ class FavoriteCharacterRepositoryImpl(
         return ResponseWrapper.success(favoriteCharacters)
     }
 
+    override fun isFavorite(characterId: Int): ResponseWrapper<Boolean> {
+        return ResponseWrapper.success(favoriteCharactersDao.exists(characterId))
+    }
+
     /**
      * Remove all favorite characters in the DB
      */

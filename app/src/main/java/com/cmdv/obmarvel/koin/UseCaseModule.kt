@@ -14,4 +14,5 @@ val useCaseModule = module {
     factory { GetCharacterByIdUserCase(get()) }
     factory { GetComicsByCharacterIdUserCase(get()) }
     factory { GetSeriesByCharacterIdUserCase(get()) }
+    factory { GetIsFavoriteCharacterUserCase(get()) }
 }

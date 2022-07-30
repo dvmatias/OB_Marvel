@@ -24,6 +24,11 @@ interface FavoriteCharacterRepository {
     fun getAll(): ResponseWrapper<List<CharacterModel>>
 
     /**
+     * Get all favorite characters in the DB
+     */
+    fun isFavorite(characterId: Int): ResponseWrapper<Boolean>
+
+    /**
      * Remove all favorite characters in the DB
      */
     fun removeAll(): ResponseWrapper<Event<Int>>

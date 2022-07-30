@@ -58,6 +58,7 @@ class CharacterDetailsActivity :
             character.observe(this@CharacterDetailsActivity) { character ->
                 getCharacterComics(character.id)
                 getCharacterSeries(character.id)
+                getIsFavoriteCharacter(character.id)
             }
         }
     }
