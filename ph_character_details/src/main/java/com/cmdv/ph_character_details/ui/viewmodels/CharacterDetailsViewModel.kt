@@ -163,6 +163,12 @@ class CharacterDetailsViewModel(
         }
     }
 
+    /**
+     * Publishes the value for [viewModelState] only if the service calls for getting the character's details, getting
+     * the character's comics and series are completed (only the first calls for the last two services).
+     *
+     * This function as synchronized access to the logic since the involved service calls are concurrent/non-thread-safe.
+     */
     private fun evaluateViewModelState() {
         synchronized(this) {
             if (detailsDone && comicsDone && seriesDone) _viewModelState.value = Status.READY
