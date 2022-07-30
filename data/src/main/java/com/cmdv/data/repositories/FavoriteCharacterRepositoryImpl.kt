@@ -97,9 +97,11 @@ class FavoriteCharacterRepositoryImpl(
      * Updates the favorite status for all the stored characters in DB.
      */
     private fun updateModel() = kotlin.run {
-        charactersDao.getAll().forEach {
+        charactersDao.getAll().forEach { characterRoom ->
             // If the stored character is in the favorite DB, then set it as favorite
-            it.isFavorite = favoriteCharactersDao.getById(it.characterId) != null
+            with(characterRoom.characterId) {
+                charactersDao.update(isFavorite = favoriteCharactersDao.getById(this) != null, this)
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ import com.cmdv.data.mappers.GetCharactersResponseMapper
 import com.cmdv.data.networking.ApiHandler
 import com.cmdv.data.sources.apiservices.CharactersApi
 import com.cmdv.data.sources.dbdaos.CharactersDao
+import com.cmdv.data.sources.dbdaos.FavoriteCharactersDao
 import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.repositories.CharactersRepository
 import com.cmdv.domain.utils.ResponseWrapper
@@ -15,6 +16,7 @@ import com.cmdv.domain.utils.ResponseWrapper
 class CharactersRepositoryImpl(
     private val charactersApi: CharactersApi,
     private val charactersDao: CharactersDao,
+    private val favoriteCharactersDao: FavoriteCharactersDao,
     private val apiHandler: ApiHandler
 ) : CharactersRepository {
     /**
@@ -33,18 +35,15 @@ class CharactersRepositoryImpl(
      * @param offset Skip the specified number of resources in the result set (applied only to service call).
      */
     override fun getCharacters(fetch: Boolean, limit: Int, offset: Int): ResponseWrapper<List<CharacterModel>> {
-        // Get DB stored characters if any.
-        var response = getStoredCharacters()
         // If fetch true or no stored characters found
-        if (fetch || response.isEmpty()) {
+        if (fetch || getStoredCharacters().isEmpty()) {
             // Get characters from service call
             val fetchedCharacters = fetchCharacters(limit, offset)
             // Store characters in DB
             fetchedCharacters.data?.let { data -> storeCharacters(data) }
-            // Get DB stored characters if any.
-            response = getStoredCharacters()
         }
-        return ResponseWrapper.success(response)
+        updateModel()
+        return ResponseWrapper.success(getStoredCharacters())
     }
 
     /**
@@ -81,6 +80,18 @@ class CharactersRepositoryImpl(
             CharacterRoomMapper.transformModelToEntity(it)
         }.also {
             charactersDao.insert(it)
+        }
+    }
+
+    /**
+     * Updates the favorite status for all the stored characters in DB.
+     */
+    private fun updateModel() = kotlin.run {
+        charactersDao.getAll().forEach { characterRoom ->
+            // If the stored character is in the favorite DB, then set it as favorite
+            with(characterRoom.characterId) {
+                charactersDao.update(isFavorite = favoriteCharactersDao.getById(this) != null, this)
+            }
         }
     }
 }
