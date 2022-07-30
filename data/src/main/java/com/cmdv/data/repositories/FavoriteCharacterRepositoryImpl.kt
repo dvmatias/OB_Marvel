@@ -17,7 +17,11 @@ class FavoriteCharacterRepositoryImpl(
     private val favoriteCharactersDao: FavoriteCharactersDao
 ) : FavoriteCharacterRepository {
     /**
-     * Add a favorite character to the DB
+     * Add a favorite character to the DB.
+     *
+     * @param characterId Character's unique identifier.
+     *
+     * @return An event with the updated character's adapter position.
      */
     override fun add(
         characterId: Int,
@@ -32,7 +36,12 @@ class FavoriteCharacterRepositoryImpl(
     }
 
     /**
-     * Remove a favorite character from the DB
+     * Remove a favorite character from the DB.
+     *
+     * @param characterId Character's unique identifier.
+     * @param position Character's adapter position.
+     *
+     * @return An event with the updated character's adapter position.
      */
     override fun remove(
         characterId: Int,
@@ -47,6 +56,8 @@ class FavoriteCharacterRepositoryImpl(
 
     /**
      * Get all favorite characters in the DB
+     *
+     * @return A list with all the favorite characters.
      */
     override fun getAll(): ResponseWrapper<List<CharacterModel>> {
         val favoriteCharacterIds = favoriteCharactersDao.getAll().map {
@@ -60,6 +71,13 @@ class FavoriteCharacterRepositoryImpl(
         return ResponseWrapper.success(favoriteCharacters)
     }
 
+    /**
+     * Check if a specific character is favorite
+     *
+     * @param characterId Character's unique identifier
+     *
+     * @return true if the character is favorite, false otherwise
+     */
     override fun isFavorite(characterId: Int): ResponseWrapper<Boolean> {
         return ResponseWrapper.success(favoriteCharactersDao.exists(characterId))
     }
