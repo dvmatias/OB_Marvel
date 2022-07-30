@@ -15,7 +15,10 @@ object CharacterRoomMapper : BaseMapper<CharacterRoomEntity, CharacterModel>() {
             e.name,
             e.description,
             e.thumbnail,
-            e.isFavorite
+            e.isFavorite,
+            e.comicsCount,
+            e.seriesCount,
+            e.storiesCount
         )
 
     override fun transformModelToEntity(m: CharacterModel): CharacterRoomEntity =
@@ -25,6 +28,9 @@ object CharacterRoomMapper : BaseMapper<CharacterRoomEntity, CharacterModel>() {
             m.name,
             m.description,
             m.thumbnail,
-            m.isFavourite
+            m.isFavourite,
+            m.comicsCount,
+            m.seriesCount,
+            m.storiesCount
         )
 }

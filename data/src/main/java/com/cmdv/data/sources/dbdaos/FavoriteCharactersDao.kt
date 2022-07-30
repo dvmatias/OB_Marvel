@@ -25,4 +25,7 @@ interface FavoriteCharactersDao {
 
     @Query("DELETE FROM `favorite-character-room-database`")
     fun deleteAll()
+
+    @Query("SELECT EXISTS (SELECT * FROM `favorite-character-room-database` WHERE characterId = :id)")
+    fun exists(id: Int): Boolean
 }

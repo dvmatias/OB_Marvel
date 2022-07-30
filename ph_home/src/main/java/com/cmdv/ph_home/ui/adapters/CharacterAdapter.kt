@@ -19,7 +19,6 @@ private const val ITEM_COUNT_BEFORE_LOAD_MORE = 6
  * Adapter class for [CharacterModel] items.
  */
 class CharacterAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     /**
      * List of characters to be displayed.
      */

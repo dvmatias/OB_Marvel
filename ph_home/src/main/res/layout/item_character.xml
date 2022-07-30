@@ -21,7 +21,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{(view) -> listener != null ? listener.onCharacterClick(character.id) : Void}"
+        android:onClick="@{(view) -> listener != null ? listener.onCharacterClick(character.id, character.name) : Void}"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/dim_4dp"
         app:cardElevation="3dp"

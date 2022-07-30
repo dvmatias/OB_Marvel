@@ -23,4 +23,7 @@ class CharactersService(private val retrofit: Retrofit) : CharactersApi {
      */
     override fun getCharacters(limit: Int, offset: Int): Call<GetCharactersResponseEntity> =
         charactersService.getCharacters(limit, offset)
+
+    override fun getCharacterById(characterId: Int): Call<GetCharactersResponseEntity> =
+        charactersService.getCharacterById(characterId)
 }

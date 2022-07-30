@@ -8,7 +8,7 @@ import com.cmdv.domain.utils.ResponseWrapper
  */
 interface CharactersRepository {
     /**
-     * API call to get the total characters available in Marvel's API..
+     * API call to get the total characters available in Marvel's API.
      */
     fun getTotalCharactersCount(): ResponseWrapper<Int>
 

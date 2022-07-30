@@ -48,4 +48,7 @@ dependencies {
     implementation libs.material
     // KOIN
     implementation libs.koin
+    // GLIDE
+    implementation libs.glide
+    kapt libs.glide
 }

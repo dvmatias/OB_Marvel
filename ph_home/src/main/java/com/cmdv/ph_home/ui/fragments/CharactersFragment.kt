@@ -45,8 +45,8 @@ class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBi
             viewModel.getCharacters(fetch = true, offset = offset)
         }
 
-        override fun onCharacterClick(characterId: Int) {
-            fragmentListener.onCharacterClick(characterId)
+        override fun onCharacterClick(characterId: Int, characterName: String) {
+            fragmentListener.onCharacterClick(characterId, characterName)
         }
 
         override fun onFavoriteClick(characterId: Int, characterIndex: Int, isFavourite: Boolean) {

@@ -7,5 +7,5 @@ import android.os.Bundle
  * Contract. Declares all the functions to navigate between activities from different modules/features.
  */
 interface Navigator {
-    fun toCharacterDetails(origin: Activity, it: Bundle, b: Boolean)
+    fun toCharacterDetails(origin: Activity, bundle: Bundle, finishPrevious: Boolean)
 }

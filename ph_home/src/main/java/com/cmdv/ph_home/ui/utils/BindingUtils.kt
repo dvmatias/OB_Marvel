@@ -49,18 +49,6 @@ fun loadingVisibility(
     }
 }
 
-@BindingAdapter("loadCharacterImage")
-fun loadCharacterImage(imageView: ImageView, imageUrl: String?) {
-    imageUrl?.let {
-        Glide.with(imageView.context)
-            .load(it.secureUrl())
-            .placeholder(R.drawable.img_mock_character)
-            .dontAnimate()
-            .centerCrop()
-            .into(imageView)
-    }
-}
-
 @BindingAdapter("loadFavoriteCharacters")
 fun RecyclerView.loadFavoriteCharacters(
     data: MutableList<CharacterModel>?
@@ -69,17 +57,6 @@ fun RecyclerView.loadFavoriteCharacters(
         if (this is IndexFavoriteCharacterAdapter && data != null) {
             if (data.isEmpty()) clear() else setCharacters(data)
         }
-    }
-}
-
-@BindingAdapter("favoritesLoadingVisibility")
-fun favoritesLoadingVisibility(
-    view: FrameLayout?,
-    viewModelStatus: Status
-) {
-    view?.visibility = when (viewModelStatus) {
-        LOADING -> View.VISIBLE
-        else -> View.GONE
     }
 }
 

@@ -13,9 +13,9 @@ object RetrofitClient {
     private const val QUERY_PRAM_API_KEY = "apikey"
     private const val QUERY_PRAM_HASH = "hash"
     private const val QUERY_PRAM_TIMESTAMP = "ts"
-    private const val READ_TIMEOUT = 40L
-    private const val WRITE_TIMEOUT = 40L
-    private const val CONNECTION_TIMEOUT = 40L
+    private const val READ_TIMEOUT = 20L
+    private const val WRITE_TIMEOUT = 20L
+    private const val CONNECTION_TIMEOUT = 20L
     private const val MD5_ALGORITHM = "MD5"
 
     val client: OkHttpClient = OkHttpClient.Builder()
