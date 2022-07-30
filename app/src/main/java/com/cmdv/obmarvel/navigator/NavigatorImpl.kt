@@ -2,7 +2,9 @@ package com.cmdv.obmarvel.navigator
 
 import android.app.Activity
 import android.os.Bundle
+import com.cmdv.common.extensions.navigateTo
 import com.cmdv.core.navigator.Navigator
+import com.cmdv.ph_character_details.CharacterDetailsActivity
 
 /**
  * Implementation class for [Navigator] contract class.
@@ -11,7 +13,7 @@ import com.cmdv.core.navigator.Navigator
  * needs to launch another Activity must use a function declared implemented in this class.
  */
 class NavigatorImpl : Navigator {
-    override fun toCharacterDetails(origin: Activity, it: Bundle, b: Boolean) {
-        // TODO
+    override fun toCharacterDetails(origin: Activity, bundle: Bundle, finishPrevious: Boolean) {
+        origin.navigateTo<CharacterDetailsActivity>(bundle, finishPrevious)
     }
 }

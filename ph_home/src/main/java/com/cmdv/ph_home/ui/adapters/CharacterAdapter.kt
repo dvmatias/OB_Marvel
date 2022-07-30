@@ -19,7 +19,6 @@ private const val ITEM_COUNT_BEFORE_LOAD_MORE = 6
  * Adapter class for [CharacterModel] items.
  */
 class CharacterAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     /**
      * List of characters to be displayed.
      */
@@ -89,6 +88,11 @@ class CharacterAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             isLoading = true
             listener?.onLoadMoreCharacters(charactersCount())
         }
+    }
+
+    fun updateFavorite(position: Int, isFavourite: Boolean) {
+        this.characters[position].isFavourite = isFavourite
+        notifyItemChanged(position + 1)
     }
 
     /**

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isVisible"
+            type="boolean" />
+
+        <variable
+            name="message"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/marvel_green"
+        android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
+        tools:visibility="visible">
+
+        <!-- ERROR IMAGE -->
+        <ImageView
+            android:id="@+id/imageViewError"
+            android:layout_width="@dimen/error_layout_image_width"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_hulk_error"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- ERROR MESSAGE -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim_16dp"
+            android:gravity="center"
+            android:paddingStart="56dp"
+            android:paddingEnd="56dp"
+            android:text="@{message}"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/imageViewError"
+            tools:text="This is the error description." />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

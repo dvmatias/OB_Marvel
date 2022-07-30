@@ -25,6 +25,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.cmdv.ph_character_details.CharacterDetailsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CharacterDetailsActivity"/>
     </application>
 
 </manifest>

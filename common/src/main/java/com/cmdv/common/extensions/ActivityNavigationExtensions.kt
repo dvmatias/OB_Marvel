@@ -16,11 +16,11 @@ import androidx.core.app.ActivityCompat
  * @param A Calling Activity. Marked as reified since the app needs to access the type of the calling Activity class.
  */
 @Suppress("KDocUnresolvedReference")
-inline fun <reified A : Activity> Activity.navigateTo(data: Bundle?, finish: Boolean) {
+inline fun <reified A : Activity> Activity.navigateTo(data: Bundle?, finishPrevious: Boolean) {
     Intent(this, A::class.java).also { i ->
         data?.let { b -> i.putExtras(b) }
         overridePendingTransition(0, 0)
         ActivityCompat.startActivity(this, i, null)
-        if (finish) this.finish()
+        if (finishPrevious) this.finish()
     }
 }

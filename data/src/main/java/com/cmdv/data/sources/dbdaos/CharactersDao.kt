@@ -11,15 +11,15 @@ import com.cmdv.data.entities.CharacterRoomEntity
  */
 @Dao
 interface CharactersDao {
-    @Query(value = "SELECT * FROM `characters-room-database`")
+    @Query(value = "SELECT * FROM `character-room-database`")
     fun getAll(): List<CharacterRoomEntity>
 
-    @Query(value = "DELETE FROM `characters-room-database`")
+    @Query(value = "DELETE FROM `character-room-database`")
     fun deleteAll()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(characters: List<CharacterRoomEntity>)
 
-    @Query(value = "SELECT * FROM `characters-room-database`  WHERE characterId IN (:ids)")
+    @Query(value = "SELECT * FROM `character-room-database`  WHERE characterId IN (:ids)")
     fun getById(ids: List<Int>): List<CharacterRoomEntity>
 }

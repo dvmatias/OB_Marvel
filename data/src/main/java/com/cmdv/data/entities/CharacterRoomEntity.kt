@@ -7,12 +7,15 @@ import androidx.room.PrimaryKey
 /**
  * TODO
  */
-@Entity(tableName = "characters-room-database")
+@Entity(tableName = "character-room-database")
 data class CharacterRoomEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long?,
     @ColumnInfo(name = "characterId") val characterId: Int,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "thumbnail") val thumbnail: String,
-    @ColumnInfo(name = "is_favorite") var isFavorite: Boolean
+    @ColumnInfo(name = "is_favorite") var isFavorite: Boolean,
+    @ColumnInfo(name = "comics_count") var comicsCount: Int,
+    @ColumnInfo(name = "series_count") var seriesCount: Int,
+    @ColumnInfo(name = "stories_count") var storiesCount: Int
 )

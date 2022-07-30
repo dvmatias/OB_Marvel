@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cmdv.domain.models.CharacterModel
-import com.cmdv.domain.usecases.GetCharactersUseCase
-import com.cmdv.domain.usecases.GetTotalCharactersUseCase
-import com.cmdv.domain.usecases.RemoveStoredCharactersUseCase
+import com.cmdv.domain.usecases.*
+import com.cmdv.domain.utils.Event
 import com.cmdv.domain.utils.ResponseWrapper
+import com.cmdv.domain.utils.ResponseWrapper.Status.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -18,20 +18,31 @@ private const val OFFSET_CHARACTERS_FETCH_DEFAULT = 0
 class CharactersViewModel(
     private val getTotalCharactersUseCase: GetTotalCharactersUseCase,
     private val getCharactersUseCase: GetCharactersUseCase,
-    private val removeStoredCharactersUseCase: RemoveStoredCharactersUseCase
+    private val removeStoredCharactersUseCase: RemoveStoredCharactersUseCase,
+    private val addFavoriteCharacterUseCase: AddFavoriteCharacterUseCase,
+    private val removeFavoriteCharacterUseCase: RemoveFavoriteCharacterUseCase
 ) : ViewModel() {
     /**
      * Represents the state of this view model (LOADING, READY, ERROR).
      */
-    private val _viewModelState = MutableLiveData(ResponseWrapper.Status.LOADING)
+    private val _viewModelState = MutableLiveData(LOADING)
     val viewModelState: LiveData<ResponseWrapper.Status>
         get() = _viewModelState
 
     private var _characters = MutableLiveData<List<CharacterModel>>()
-    val characters: LiveData<List<CharacterModel>> = _characters
+    val characters: LiveData<List<CharacterModel>>
+        get() = _characters
 
     private val isAllCharactersLoaded: Boolean
         get() = _characters.value?.size.let { totalCharactersCount == it }
+
+    private val _addedFavoritePosition = MutableLiveData<Event<Int>>()
+    val addedFavoritePosition: LiveData<Event<Int>>
+        get() = _addedFavoritePosition
+
+    private val _removedFavoritePosition = MutableLiveData<Event<Int>>()
+    val removedFavoritePosition: LiveData<Event<Int>>
+        get() = _removedFavoritePosition
 
     /**
      * Total amount of characters available in Marvel's API.
@@ -74,7 +85,7 @@ class CharactersViewModel(
             viewModelScope.launch {
                 getCharactersUseCase(params).collect { response ->
                     with(response) {
-                        if (status == ResponseWrapper.Status.READY) {
+                        if (status == READY) {
                             data?.let { _characters.value = it }
                         }
                         _viewModelState.value = status
@@ -93,11 +104,37 @@ class CharactersViewModel(
         }
     }
 
+    /**
+     * Add a character as favorite into the DB.
+     *
+     * @param characterId Character unique identifier to be added as favorite.
+     * @param position Character's position inside the adapter.
+     */
     fun addFavorite(characterId: Int, position: Int) {
-        // TODO
+        val params = AddFavoriteCharacterUseCase.Params(characterId, position)
+        viewModelScope.launch {
+            addFavoriteCharacterUseCase(params).collect { response ->
+                response.data?.let { event ->
+                    _addedFavoritePosition.value = event
+                }
+            }
+        }
     }
 
+    /**
+     * Removed a character as favorite from the DB.
+     *
+     * @param characterId Character unique identifier to be added as favorite.
+     * @param position Character's position inside the adapter.
+     */
     fun removeFavorite(characterId: Int, position: Int) {
-        // TODO
+        val params = RemoveFavoriteCharacterUseCase.Params(characterId, position)
+        viewModelScope.launch {
+            removeFavoriteCharacterUseCase(params).collect { response ->
+                response.data?.let { event ->
+                    _removedFavoritePosition.value = event
+                }
+            }
+        }
     }
 }

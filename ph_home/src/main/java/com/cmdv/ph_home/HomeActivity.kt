@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.cmdv.common.KEY_CHARACTER_ID_ARG
+import com.cmdv.common.KEY_CHARACTER_NAME_ARG
 import com.cmdv.core.base.BaseActivity
 import com.cmdv.ph_home.databinding.ActivityHomeBinding
 import com.cmdv.ph_home.ui.listeners.CharactersFragmentListener
@@ -15,6 +16,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.activity_home),
     CharactersFragmentListener {
+    /**
+     * Android view model.
+     */
     private val viewModel by viewModel<CharactersViewModel>()
 
     private lateinit var navController: NavController
@@ -27,7 +31,7 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
         navController = navHostFragment.navController
         NavigationUI.setupWithNavController(binding.content.bottomNav, navController)
 
-        // TODO setup toolbar
+        setupToolbar()
     }
 
     override fun observe() {
@@ -42,9 +46,10 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
      *
      * @param characterId
      */
-    override fun onCharacterClick(characterId: Int) {
+    override fun onCharacterClick(characterId: Int, characterName: String) {
         Bundle().apply {
             putInt(KEY_CHARACTER_ID_ARG, characterId)
+            putString(KEY_CHARACTER_NAME_ARG, characterName)
         }.also {
             navigator.toCharacterDetails(this, it, false)
         }
@@ -59,5 +64,13 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT)
             .setBackgroundTint(ContextCompat.getColor(this, com.cmdv.common.R.color.marvel_red))
             .show()
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(false)
+            setDisplayShowTitleEnabled(false)
+        }
     }
 }
