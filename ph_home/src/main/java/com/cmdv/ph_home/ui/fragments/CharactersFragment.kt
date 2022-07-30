@@ -70,7 +70,10 @@ class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBi
     }
 
     override fun initView() {
-        fragmentListener = activity as CharactersFragmentListener
+        if (activity is CharactersFragmentListener)
+            fragmentListener = activity as CharactersFragmentListener
+        else
+            throw IllegalAccessError("Calling activity must implement CharactersFragmentListener")
         characterLayoutManager = CharacterLayoutManager(requireContext(), characterAdapter)
         binding.recyclerCharacter.apply {
             addOnScrollListener(scrollListener)
@@ -97,7 +100,7 @@ class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBi
                     handleFavorite(position, false)
                 }
             }
-            viewModelState.observe(this@CharactersFragment) {state ->
+            viewModelState.observe(this@CharactersFragment) { state ->
                 if (state == ResponseWrapper.Status.ERROR && !characterAdapter.isEmpty()) setErrorViewState()
             }
         }

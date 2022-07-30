@@ -9,6 +9,7 @@ import com.cmdv.ph_home.R
 import com.cmdv.ph_home.databinding.FragmentFavoritesBinding
 import com.cmdv.ph_home.ui.adapters.IndexFavoriteCharacterAdapter
 import com.cmdv.ph_home.ui.itemdecorators.IndexFavoriteCharacterDecorator
+import com.cmdv.ph_home.ui.listeners.CharactersFragmentListener
 import com.cmdv.ph_home.ui.viewmodels.FavoritesViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,7 +30,16 @@ class FavoritesFragment :
      */
     private val indexFavoriteCharacterAdapter: IndexFavoriteCharacterAdapter by inject()
 
+    /**
+     * Listener to communicate actions in this fragment with [com.cmdv.ph_home.HomeActivity].
+     */
+    private lateinit var fragmentListener: CharactersFragmentListener
+
     override fun initView() {
+        if (activity is CharactersFragmentListener)
+            fragmentListener = activity as CharactersFragmentListener
+        else
+            throw IllegalAccessError("Calling activity must implement CharactersFragmentListener")
         binding.recyclerIndexFavoriteCharacter.addItemDecoration(IndexFavoriteCharacterDecorator())
         binding.adapter = indexFavoriteCharacterAdapter
         binding.viewModel = viewModel
@@ -76,6 +86,6 @@ class FavoritesFragment :
     }
 
     private fun setErrorViewState() {
-        // TODO
+        fragmentListener.showErrorSnackBar("Something went wrong. Please try again later.")
     }
 }
