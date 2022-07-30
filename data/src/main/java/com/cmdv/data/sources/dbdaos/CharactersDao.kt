@@ -20,6 +20,9 @@ interface CharactersDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(characters: List<CharacterRoomEntity>)
 
-    @Query(value = "SELECT * FROM `character-room-database`  WHERE characterId IN (:ids)")
+    @Query(value = "SELECT * FROM `character-room-database` WHERE characterId IN (:ids)")
     fun getById(ids: List<Int>): List<CharacterRoomEntity>
+
+    @Query("UPDATE `character-room-database` SET is_favorite=:isFavorite WHERE characterId = :characterId")
+    fun update(isFavorite: Boolean?, characterId: Int)
 }
