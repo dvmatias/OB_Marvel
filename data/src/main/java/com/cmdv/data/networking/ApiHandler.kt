@@ -1,6 +1,7 @@
 package com.cmdv.data.networking
 
 import android.util.Log
+import com.cmdv.data.errorhandling.ApiErrorHandler
 import com.cmdv.domain.utils.FailureType
 import com.cmdv.domain.utils.ResponseWrapper
 import retrofit2.Call
@@ -12,15 +13,20 @@ private const val TAG = "ApiHandler"
  *
  * @param networkHandler Offers information regarding network state.
  */
-open class ApiHandler(private val networkHandler: NetworkHandler) {
+class ApiHandler(private val networkHandler: NetworkHandler) {
     /**
      * Function to perform and handle network requests.
      *
      * @param call Retrofit service call instance to execute.
      * @param transformResponse Function that provides a data transformation.
+     * @param errorHandler Helper class that declares errors for a specific network call.
      * @return This function returns an implementation of [ResponseWrapper] with a given type.
      */
-    open fun <E, M> doNetworkRequest(call: Call<E>, transformResponse: (E) -> M): ResponseWrapper<M> {
+    fun <E, M> doNetworkRequest(
+        call: Call<E>,
+        errorHandler: ApiErrorHandler? = null,
+        transformResponse: (E) -> M
+    ): ResponseWrapper<M> {
         return try {
             when (networkHandler.isConnected) {
                 true -> {
@@ -35,22 +41,22 @@ open class ApiHandler(private val networkHandler: NetworkHandler) {
                             } catch (e: Exception) {
                                 Log.d(TAG, "Network error: response transformation did not complete successfully")
                                 // Respond with error if transformation fails
-                                ResponseWrapper.error(failureType = FailureType.ResponseTransformError)
+                                errorHandler?.handleError(509) ?: ResponseWrapper.error(failureType = FailureType.ResponseTransformError)
                             }
                         } else {
                             Log.d(TAG, "Network error: request did not complete successfully")
-                            ResponseWrapper.error(failureType = FailureType.ServerError)
+                            errorHandler?.handleError(response.code()) ?: ResponseWrapper.error(failureType = FailureType.ServerError(response.message()))
                         }
                     }
                 }
                 false, null -> {
                     Log.d(TAG, "Network error: Internet connection problems")
-                    ResponseWrapper.error(failureType = FailureType.ConnectionError)
+                    errorHandler?.handleError(400) ?: ResponseWrapper.error(failureType = FailureType.ConnectionError("Network error: Internet connection problems"))
                 }
             }
         } catch (e: Exception) {
             Log.d(TAG, "Network error: $e")
-            ResponseWrapper.error(null, FailureType.ServerError)
+            ResponseWrapper.error(null, FailureType.ServerError(""))
         }
     }
 }

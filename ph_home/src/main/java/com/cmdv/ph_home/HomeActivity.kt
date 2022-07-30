@@ -23,6 +23,14 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
 
     private lateinit var navController: NavController
 
+    /**
+     * Error snack bar. Displayed when load more characters has an error.
+     */
+    private val errorSnack: Snackbar by lazy {
+        Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_SHORT)
+            .setBackgroundTint(ContextCompat.getColor(this, com.cmdv.common.R.color.marvel_red))
+    }
+
     override fun initView() {
         // Every time this activity starts, remove DB stored characters to get them from service.
         viewModel.removeStoredCharacters()
@@ -37,7 +45,7 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
     override fun observe() {
         // Get the total characters available in Marvel's API if this fields has not been set.
         if (viewModel.totalCharactersCount == 0) {
-            viewModel.getTotalCharactersCount()
+            viewModel.getTotalCharacters()
         }
     }
 
@@ -61,9 +69,7 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
      * @param message Error message to display.
      */
     override fun showErrorSnackBar(message: String) {
-        Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT)
-            .setBackgroundTint(ContextCompat.getColor(this, com.cmdv.common.R.color.marvel_red))
-            .show()
+        if (!errorSnack.isShown) errorSnack.setText(message).show()
     }
 
     private fun setupToolbar() {
