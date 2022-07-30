@@ -5,6 +5,7 @@ import com.cmdv.common.KEY_CHARACTER_NAME_ARG
 import com.cmdv.core.base.BaseActivity
 import com.cmdv.ph_character_details.databinding.ActivityCharacterDetailsBinding
 import com.cmdv.ph_character_details.ui.adapters.ComicAdapter
+import com.cmdv.ph_character_details.ui.adapters.SerieAdapter
 import com.cmdv.ph_character_details.ui.viewmodels.CharacterDetailsViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -31,6 +32,11 @@ class CharacterDetailsActivity :
      */
     private val comicAdapter: ComicAdapter by inject()
 
+    /**
+     * View adapter for [R.id.recyclerSerie]
+     */
+    private val serieAdapter: SerieAdapter by inject()
+
     override fun getExtras() {
         // Get the character's ID to fetch its details
         characterId = intent.extras?.getInt(KEY_CHARACTER_ID_ARG)
@@ -43,6 +49,7 @@ class CharacterDetailsActivity :
         binding.viewModel = viewModel
         binding.characterName = characterName
         binding.comicAdapter = comicAdapter
+        binding.serieAdapter = serieAdapter
     }
 
     override fun observe() {

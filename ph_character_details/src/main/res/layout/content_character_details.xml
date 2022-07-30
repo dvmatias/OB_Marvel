@@ -16,6 +16,10 @@
         <variable
             name="comicAdapter"
             type="com.cmdv.ph_character_details.ui.adapters.ComicAdapter" />
+
+        <variable
+            name="serieAdapter"
+            type="com.cmdv.ph_character_details.ui.adapters.SerieAdapter" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -28,7 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- CHARACTER'S IMAGE -->
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineStart"
                 android:layout_width="wrap_content"
@@ -45,12 +48,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintGuide_end="@dimen/dim_14dp" />
 
+            <!-- CHARACTER'S IMAGE -->
             <ImageView
                 android:id="@+id/imageViewThumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/follow_constraints"
                 android:contentDescription="@null"
-                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintDimensionRatio="4:3"
                 app:layout_constraintTop_toTopOf="parent"
                 app:loadCharacterImage="@{viewModel.character.thumbnail}"
                 tools:src="@drawable/img_mock_character" />
@@ -79,13 +83,94 @@
                 app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@id/textViewDescriptionTitle"
-                tools:text="@tools:sample/lorem/random"
+                tools:text="@tools:sample/lorem"
                 tools:visibility="visible" />
 
-            <include
-                layout="@layout/content_character_details_comics"
-                app:comicAdapter="@{comicAdapter}"
-                app:viewModel="@{viewModel}" />
+            <!-- CHARACTER'S COMICS TITLE -->
+            <TextView
+                android:id="@+id/textViewComicsTitle"
+                style="@style/TitleText.Medium"
+                android:layout_width="@dimen/follow_constraints"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_16dp"
+                android:text="@string/character_details_comics_title"
+                app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/textViewDescriptionData" />
+
+            <!-- CHARACTER'S COMICS NO INFO -->
+            <TextView
+                android:id="@+id/textViewComicsNoData"
+                style="@style/BodyText.Large"
+                android:layout_width="@dimen/follow_constraints"
+                android:layout_height="wrap_content"
+                android:textColor="@color/marvel_red"
+                android:layout_marginTop="@dimen/dim_12dp"
+                android:text="@string/character_details_comics_empty"
+                android:visibility="@{viewModel.comics.empty ? View.VISIBLE : View.GONE, default = gone}"
+                app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/textViewComicsTitle" />
+
+            <!-- CHARACTER'S COMICS LIST -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerComic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adapter="@{comicAdapter}"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/textViewComicsTitle"
+                app:loadComics="@{viewModel.comics}"
+                tools:itemCount="20"
+                tools:listitem="@layout/item_comic" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierComics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="recyclerComic,textViewComicsNoData,textViewComicsTitle"
+                app:layout_constraintTop_toBottomOf="@id/recyclerComic" />
+
+            <!-- CHARACTER'S SERIES TITLE -->
+            <TextView
+                android:id="@+id/textViewSeriesTitle"
+                style="@style/TitleText.Medium"
+                android:layout_width="@dimen/follow_constraints"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_16dp"
+                android:text="@string/character_details_series_title"
+                app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintTop_toTopOf="@id/barrierComics" />
+
+            <!-- CHARACTER'S SERIES NO INFO -->
+            <TextView
+                android:id="@+id/textViewSeriesNoData"
+                style="@style/BodyText.Large"
+                android:layout_width="@dimen/follow_constraints"
+                android:layout_height="wrap_content"
+                android:textColor="@color/marvel_red"
+                android:layout_marginTop="@dimen/dim_12dp"
+                android:text="@string/character_details_series_empty"
+                android:visibility="@{viewModel.series.empty ? View.VISIBLE : View.GONE, default = gone}"
+                app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/textViewSeriesTitle" />
+
+            <!-- CHARACTER'S SERIES LIST -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerSerie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adapter="@{serieAdapter}"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/textViewSeriesTitle"
+                app:loadSeries="@{viewModel.series}"
+                tools:itemCount="20"
+                tools:listitem="@layout/item_comic" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

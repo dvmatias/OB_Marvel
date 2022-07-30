@@ -43,13 +43,31 @@ class CharacterDetailsViewModel(
     val series: LiveData<List<SerieModel>>
         get() = _series
 
+    private var detailsDone = false
+        set(value) {
+            field = value
+            evaluateViewModelState()
+        }
+
     private var totalComicsCount: Int = 0
 
     private var comicsCount: Int = 0
 
+    private var comicsDone = false
+        set(value) {
+            field = value
+            evaluateViewModelState()
+        }
+
     private var totalSeriesCount: Int = 0
 
     private var seriesCount: Int = 0
+
+    private var seriesDone = false
+        set(value) {
+            field = value
+            evaluateViewModelState()
+        }
 
     /**
      * Get the character details.
@@ -69,7 +87,12 @@ class CharacterDetailsViewModel(
                     totalSeriesCount = it.seriesCount
                     _character.value = it
                 }
-                _viewModelState.value = response.status
+                when (response.status) {
+                    Status.READY -> detailsDone = true
+                    Status.ERROR,
+                    Status.LOADING -> _viewModelState.value = response.status
+                }
+
             }
         }
     }
@@ -95,10 +118,13 @@ class CharacterDetailsViewModel(
                     response.data?.let {
                         _comics.value = it
                         comicsCount += it.size
+                        comicsDone = true
                         if (comicsCount < totalComicsCount) {
                             getCharacterComics(characterId, comicsCount)
                         }
                     }
+                } else if (response.status == Status.ERROR) {
+                    comicsDone = true
                 }
             }
         }
@@ -125,12 +151,21 @@ class CharacterDetailsViewModel(
                     response.data?.let {
                         _series.value = it
                         seriesCount += it.size
+                        seriesDone = true
                         if (seriesCount < totalSeriesCount) {
                             getCharacterSeries(characterId, seriesCount)
                         }
                     }
+                } else if (response.status == Status.ERROR) {
+                    seriesDone = true
                 }
             }
+        }
+    }
+
+    private fun evaluateViewModelState() {
+        synchronized(this) {
+            if (detailsDone && comicsDone && seriesDone) _viewModelState.value = Status.READY
         }
     }
 }
