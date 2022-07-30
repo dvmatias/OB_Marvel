@@ -5,7 +5,7 @@ import com.cmdv.domain.repositories.FavoriteCharacterRepository
 import com.cmdv.domain.utils.ResponseWrapper
 
 /**
- * Use Case: User want to see a specific character's details.
+ * Use Case: User want to see if a character is favorite.
  */
 class GetIsFavoriteCharacterUserCase(
     private val favoriteCharacterRepository: FavoriteCharacterRepository
