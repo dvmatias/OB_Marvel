@@ -29,7 +29,8 @@ class App : Application() {
                     roomModule,
                     serviceModule,
                     useCaseModule,
-                    viewModelModule
+                    viewModelModule,
+                    errorHandlerModule
                 )
             )
         }

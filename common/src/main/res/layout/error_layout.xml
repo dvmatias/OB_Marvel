@@ -19,13 +19,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/marvel_green"
+        android:background="@color/marvel_red"
         android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
         tools:visibility="visible">
 
         <!-- ERROR IMAGE -->
         <ImageView
-            android:id="@+id/imageViewError"
+            android:id="@+id/imageViewErrorImage"
             android:layout_width="@dimen/error_layout_image_width"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
@@ -39,6 +39,7 @@
 
         <!-- ERROR MESSAGE -->
         <TextView
+            android:id="@+id/textViewErrorMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_16dp"
@@ -47,7 +48,7 @@
             android:paddingEnd="56dp"
             android:text="@{message}"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/imageViewError"
+            app:layout_constraintTop_toBottomOf="@id/imageViewErrorImage"
             tools:text="This is the error description." />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

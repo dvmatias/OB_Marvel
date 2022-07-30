@@ -5,6 +5,10 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <import type="com.cmdv.domain.utils.ResponseWrapper.Status" />
+
         <variable
             name="viewModel"
             type="com.cmdv.ph_home.ui.viewmodels.CharactersViewModel" />
@@ -60,5 +64,26 @@
                 android:elevation="8dp"
                 android:indeterminateDrawable="@drawable/layer_list_screen_loading" />
         </FrameLayout>
+
+        <!-- ERROR VIEW -->
+        <include
+            android:id="@+id/layoutError"
+            layout="@layout/error_layout"
+            app:isVisible="@{viewModel.viewModelState.equals(Status.ERROR) &amp;&amp; adapter.empty}"
+            app:message="@{viewModel.errorMessage}"
+            tools:visibility="gone" />
+
+        <Button
+            style="@style/ButtonText.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dim_32dp"
+            android:onClick="@{ (view) ->  adapter.empty ? viewModel.getTotalCharacters() : viewModel.getCharacters(true, viewModel.LIMIT_CHARACTERS_FETCH_DEFAULT, viewModel.OFFSET_CHARACTERS_FETCH_DEFAULT)}"
+            android:text="@string/fragment_characters_button_retry"
+            android:visibility="@{viewModel.viewModelState.equals(Status.ERROR) &amp;&amp; adapter.empty ? View.VISIBLE : View.GONE, default = gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

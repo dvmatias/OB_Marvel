@@ -1,5 +1,6 @@
 package com.cmdv.data.repositories
 
+import com.cmdv.data.errorhandling.CharactersApiErrorHandler
 import com.cmdv.data.mappers.CharacterRoomMapper
 import com.cmdv.data.mappers.GetCharactersResponseMapper
 import com.cmdv.data.networking.ApiHandler
@@ -17,13 +18,14 @@ class CharactersRepositoryImpl(
     private val charactersApi: CharactersApi,
     private val charactersDao: CharactersDao,
     private val favoriteCharactersDao: FavoriteCharactersDao,
-    private val apiHandler: ApiHandler
+    private val apiHandler: ApiHandler,
+    private val errorHandler: CharactersApiErrorHandler
 ) : CharactersRepository {
     /**
      * Get the total amount of characters available in Marvel's API.
      */
     override fun getTotalCharactersCount(): ResponseWrapper<Int> =
-        apiHandler.doNetworkRequest(charactersApi.getCharacters(1, 0)) {
+        apiHandler.doNetworkRequest(charactersApi.getCharacters(1, 0), errorHandler) {
             it.data?.total ?: 0
         }
 
@@ -41,6 +43,13 @@ class CharactersRepositoryImpl(
             val fetchedCharacters = fetchCharacters(limit, offset)
             // Store characters in DB
             fetchedCharacters.data?.let { data -> storeCharacters(data) }
+            updateModel()
+
+            return when(fetchedCharacters.status) {
+                ResponseWrapper.Status.LOADING -> ResponseWrapper.loading()
+                ResponseWrapper.Status.ERROR -> ResponseWrapper.error(getStoredCharacters(), fetchedCharacters.failureType!!)
+                ResponseWrapper.Status.READY -> ResponseWrapper.success(getStoredCharacters())
+            }
         }
         updateModel()
         return ResponseWrapper.success(getStoredCharacters())

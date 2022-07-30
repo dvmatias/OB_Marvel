@@ -2,7 +2,7 @@ package com.cmdv.ph_home.ui.fragments
 
 import androidx.recyclerview.widget.RecyclerView
 import com.cmdv.core.base.BaseFragment
-import com.cmdv.domain.utils.ResponseWrapper.Status.*
+import com.cmdv.domain.utils.ResponseWrapper
 import com.cmdv.ph_home.R
 import com.cmdv.ph_home.databinding.FragmentCharactersBinding
 import com.cmdv.ph_home.ui.adapters.CharacterAdapter
@@ -64,7 +64,8 @@ class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBi
     private val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
-            characterAdapter.onScroll(characterLayoutManager.findLastVisibleItemPosition())
+            // Only cares for scrolling up direction
+            if (dy > 0) characterAdapter.onScroll(characterLayoutManager.findLastVisibleItemPosition())
         }
     }
 
@@ -97,7 +98,7 @@ class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBi
                 }
             }
             viewModelState.observe(this@CharactersFragment) {state ->
-                if (state == ERROR) setErrorViewState()
+                if (state == ResponseWrapper.Status.ERROR && !characterAdapter.isEmpty()) setErrorViewState()
             }
         }
     }

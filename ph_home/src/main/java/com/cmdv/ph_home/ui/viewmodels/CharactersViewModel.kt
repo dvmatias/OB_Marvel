@@ -7,13 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.usecases.*
 import com.cmdv.domain.utils.Event
+import com.cmdv.domain.utils.FailureType
 import com.cmdv.domain.utils.ResponseWrapper
-import com.cmdv.domain.utils.ResponseWrapper.Status.*
+import com.cmdv.domain.utils.ResponseWrapper.Status.LOADING
+import com.cmdv.domain.utils.ResponseWrapper.Status.READY
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-
-private const val LIMIT_CHARACTERS_FETCH_DEFAULT = 32
-private const val OFFSET_CHARACTERS_FETCH_DEFAULT = 0
 
 class CharactersViewModel(
     private val getTotalCharactersUseCase: GetTotalCharactersUseCase,
@@ -44,6 +43,8 @@ class CharactersViewModel(
     val removedFavoritePosition: LiveData<Event<Int>>
         get() = _removedFavoritePosition
 
+    val errorMessage = MutableLiveData("")
+
     /**
      * Total amount of characters available in Marvel's API.
      */
@@ -53,7 +54,7 @@ class CharactersViewModel(
      * Get the total amount of characters available in Marvel's API. App shouldn't ask for more characters once the
      * maximum of characters has being fetched.
      */
-    fun getTotalCharactersCount() {
+    fun getTotalCharacters() {
         viewModelScope.launch {
             val params = GetTotalCharactersUseCase.Params()
             getTotalCharactersUseCase(params).collect { response ->
@@ -63,6 +64,7 @@ class CharactersViewModel(
                         getCharacters(fetch = true)
                     }
                     _viewModelState.value = status
+                    setErrorMessageIfAny(response.failureType)
                 }
             }
         }
@@ -89,6 +91,7 @@ class CharactersViewModel(
                             data?.let { _characters.value = it }
                         }
                         _viewModelState.value = status
+                        setErrorMessageIfAny(response.failureType)
                     }
                 }
             }
@@ -136,5 +139,17 @@ class CharactersViewModel(
                 }
             }
         }
+    }
+
+    private fun setErrorMessageIfAny(failureType: FailureType?) {
+        failureType?.let {
+            errorMessage.value = it.message
+        }
+    }
+
+    companion object {
+        const val LIMIT_CHARACTERS_FETCH_DEFAULT = 32
+        const val OFFSET_CHARACTERS_FETCH_DEFAULT = 0
+
     }
 }
