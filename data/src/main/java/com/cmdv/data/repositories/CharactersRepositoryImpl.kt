@@ -13,6 +13,8 @@ import com.cmdv.domain.utils.ResponseWrapper
 
 /**
  * Repository class implementation. This class implements functions to handle Characters requests.
+ *
+ * @author matias.delv.dom@gmail.com
  */
 class CharactersRepositoryImpl(
     private val charactersApi: CharactersApi,

@@ -23,7 +23,13 @@
     <string name="character_details_series_empty">- No series info available -</string>
     <string name="character_details_stories_empty">- No stories info available -</string>
 
-    <string name="error_characters_server">Please make sure you\'re connected to Internet and the service works properly. Try again later.</string>
-    <string name="error_characters_local">Your request did not complete successfully.</string>
+    <string name="error_characters_connection">Please make sure you\'re connected to Internet and the service works properly. Try again later.</string>
+    <string name="error_characters_transformation">Your request did not complete successfully.</string>
     <string name="error_characters_others">Something went wrong.</string>
+
+    <string name="error_character_details_server">Please make sure you\'re connected to Internet and the service works properly. Try again later.</string>
+    <string name="error_character_details_transformation">Your request did not complete successfully.</string>
+    <string name="error_character_details_character_not_found">Character not found. We ran into a problem trying to get the details.</string>
+    <string name="error_character_details_data">We ran into a problem trying to get some information about the character.</string>
+
 </resources>

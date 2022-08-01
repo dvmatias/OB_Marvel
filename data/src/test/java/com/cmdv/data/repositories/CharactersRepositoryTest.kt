@@ -14,12 +14,12 @@ import com.cmdv.data.networking.NetworkHandler
 import com.cmdv.data.sources.apiservices.CharactersApi
 import com.cmdv.data.sources.dbdaos.CharactersDao
 import com.cmdv.data.sources.dbdaos.FavoriteCharactersDao
+import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.repositories.CharactersRepository
 import com.cmdv.domain.utils.ResponseWrapper
 import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.runBlocking
-import org.hamcrest.CoreMatchers.equalTo
-import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
@@ -87,6 +87,7 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
         // Check correct data response
         assertThat(response?.data, notNullValue())
         assertThat(response?.data, equalTo(getCharactersResponseEntity.data!!.total))
+        assertThat(response?.data, instanceOf(Int::class.java))
         // Check no failures in response
         assertThat(response?.failureType, equalTo(null))
     }
@@ -106,7 +107,8 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
         assertThat(response?.status, equalTo(ResponseWrapper.Status.READY))
         // Check correct data response
         assertThat(response?.data, notNullValue())
-        // Check correct data response size
+        assertThat(response?.data, instanceOf(List::class.java))
+        assertThat(response?.data?.get(0), instanceOf(CharacterModel::class.java))
         assertThat(response?.data?.size, equalTo(32))
         // Check characters were stored in DB
         assertThat(charactersDao.getAll().size, equalTo(32))
@@ -127,7 +129,8 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
         assertThat(response?.status, equalTo(ResponseWrapper.Status.READY))
         // Check correct data response
         assertThat(response?.data, notNullValue())
-        // Check correct data response size
+        assertThat(response?.data, instanceOf(List::class.java))
+        assertThat(response?.data?.get(0), instanceOf(CharacterModel::class.java))
         assertThat(response?.data?.size, equalTo(32))
         // Check characters were stored in DB
         assertThat(charactersDao.getAll().size, equalTo(32))
@@ -148,7 +151,8 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
         assertThat(response?.status, equalTo(ResponseWrapper.Status.READY))
         // Check correct data response
         assertThat(response?.data, notNullValue())
-        // Check correct data response size
+        assertThat(response?.data, instanceOf(List::class.java))
+        assertThat(response?.data?.get(0), instanceOf(CharacterModel::class.java))
         assertThat(response?.data?.size, equalTo(64))
         // Check characters were stored in DB
         assertThat(charactersDao.getAll().size, equalTo(64))
@@ -167,7 +171,8 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
         assertThat(response?.status, equalTo(ResponseWrapper.Status.READY))
         // Check correct data response
         assertThat(response?.data, notNullValue())
-        // Check correct data response size
+        assertThat(response?.data, instanceOf(List::class.java))
+        assertThat(response?.data?.get(0), instanceOf(CharacterModel::class.java))
         assertThat(response?.data?.size, equalTo(32))
         // Check characters were stored in DB
         assertThat(charactersDao.getAll().size, equalTo(32))
