@@ -4,7 +4,7 @@ import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.cmdv.core.base.BaseUnitTest
-import com.cmdv.data.database.CharactersRoomDatabase
+import com.cmdv.data.database.CharacterRoomDatabase
 import com.cmdv.data.entities.GetCharactersResponseEntity
 import com.cmdv.data.errorhandling.CharactersApiErrorHandler
 import com.cmdv.data.mappers.CharacterRoomMapper
@@ -12,8 +12,8 @@ import com.cmdv.data.mappers.GetCharactersResponseMapper
 import com.cmdv.data.networking.ApiHandler
 import com.cmdv.data.networking.NetworkHandler
 import com.cmdv.data.sources.apiservices.CharactersApi
-import com.cmdv.data.sources.dbdaos.CharactersDao
-import com.cmdv.data.sources.dbdaos.FavoriteCharactersDao
+import com.cmdv.data.sources.dbdaos.CharacterDao
+import com.cmdv.data.sources.dbdaos.FavoriteCharacterDao
 import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.repositories.CharactersRepository
 import com.cmdv.domain.utils.ResponseWrapper
@@ -37,7 +37,7 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
     private lateinit var charactersApi: CharactersApi
 
     @Mock
-    private lateinit var favoriteCharactersDao: FavoriteCharactersDao
+    private lateinit var favoriteCharacterDao: FavoriteCharacterDao
 
     @Mock
     private lateinit var networkHandler: NetworkHandler
@@ -48,9 +48,9 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
     @Mock
     private lateinit var apiHandler: ApiHandler
 
-    private lateinit var charactersDB: CharactersRoomDatabase
+    private lateinit var characterDB: CharacterRoomDatabase
 
-    private lateinit var charactersDao: CharactersDao
+    private lateinit var characterDao: CharacterDao
 
     private lateinit var getCharactersResponseEntity: GetCharactersResponseEntity
 
@@ -64,13 +64,13 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
         initApiHandler()
         initDb()
 
-        uut = CharactersRepositoryImpl(charactersApi, charactersDao, favoriteCharactersDao, apiHandler, errorHandler)
+        uut = CharactersRepositoryImpl(charactersApi, characterDao, favoriteCharacterDao, apiHandler, errorHandler)
     }
 
     @After
     @Throws(IOException::class)
     fun closeDb() {
-        charactersDB.close()
+        characterDB.close()
     }
 
     @Test
@@ -95,7 +95,7 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
     @Test
     fun get_characters_success_with_fetch_true_and_no_stored_characters_in_db() = runBlocking {
         // Remove characters from DB
-        charactersDao.deleteAll()
+        characterDao.deleteAll()
         // Prepare service call
         setupSuccessGetCharactersServiceCall(32, 0)
 
@@ -111,13 +111,13 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
         assertThat(response?.data?.get(0), instanceOf(CharacterModel::class.java))
         assertThat(response?.data?.size, equalTo(32))
         // Check characters were stored in DB
-        assertThat(charactersDao.getAll().size, equalTo(32))
+        assertThat(characterDao.getAll().size, equalTo(32))
     }
 
     @Test
     fun get_characters_success_with_fetch_false_and_no_stored_characters_in_db() = runBlocking {
         // Remove characters from DB
-        charactersDao.deleteAll()
+        characterDao.deleteAll()
         // Prepare service call
         setupSuccessGetCharactersServiceCall(32, 0)
 
@@ -133,7 +133,7 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
         assertThat(response?.data?.get(0), instanceOf(CharacterModel::class.java))
         assertThat(response?.data?.size, equalTo(32))
         // Check characters were stored in DB
-        assertThat(charactersDao.getAll().size, equalTo(32))
+        assertThat(characterDao.getAll().size, equalTo(32))
     }
 
     @Test
@@ -155,7 +155,7 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
         assertThat(response?.data?.get(0), instanceOf(CharacterModel::class.java))
         assertThat(response?.data?.size, equalTo(64))
         // Check characters were stored in DB
-        assertThat(charactersDao.getAll().size, equalTo(64))
+        assertThat(characterDao.getAll().size, equalTo(64))
     }
 
     @Test
@@ -175,7 +175,7 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
         assertThat(response?.data?.get(0), instanceOf(CharacterModel::class.java))
         assertThat(response?.data?.size, equalTo(32))
         // Check characters were stored in DB
-        assertThat(charactersDao.getAll().size, equalTo(32))
+        assertThat(characterDao.getAll().size, equalTo(32))
     }
 
     @Test
@@ -184,14 +184,14 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
         storeCharactersInDb()
 
         // Check characters were stored in DB
-        assertThat(charactersDao.getAll().size, equalTo(32))
+        assertThat(characterDao.getAll().size, equalTo(32))
 
         uut?.removeStoredCharacters()
 
         // Verify no service call made
         verify(charactersApi, times(0)).getCharacters(32, 0)
         // Check characters were deleted from DB
-        assertThat(charactersDao.getAll().size, equalTo(0))
+        assertThat(characterDao.getAll().size, equalTo(0))
     }
 
     private fun initEntities() {
@@ -206,18 +206,18 @@ class CharactersRepositoryTest : BaseUnitTest<CharactersRepository>() {
 
     private fun initDb() {
         val context = InstrumentationRegistry.getInstrumentation().context
-        charactersDB = Room.inMemoryDatabaseBuilder(
+        characterDB = Room.inMemoryDatabaseBuilder(
             context,
-            CharactersRoomDatabase::class.java
+            CharacterRoomDatabase::class.java
         ).allowMainThreadQueries().build()
-        charactersDao = charactersDB.charactersDao
+        characterDao = characterDB.characterDao
     }
 
     private fun storeCharactersInDb() {
         GetCharactersResponseMapper.transformEntityToModel(getCharactersResponseEntity).characters.map {
             CharacterRoomMapper.transformModelToEntity(it)
         }.also {
-            charactersDao.insert(it)
+            characterDao.insert(it)
         }
     }
 

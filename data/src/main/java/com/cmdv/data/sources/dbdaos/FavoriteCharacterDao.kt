@@ -10,7 +10,7 @@ import com.cmdv.data.entities.FavoriteCharacterRoomEntity
  * Data Access Object - Room DB. Favorite characters DAO to perform DB operations on User's favorite characters.
  */
 @Dao
-interface FavoriteCharactersDao {
+interface FavoriteCharacterDao {
     @Query("SELECT * FROM `favorite-character-room-database`")
     fun getAll(): List<FavoriteCharacterRoomEntity>
 

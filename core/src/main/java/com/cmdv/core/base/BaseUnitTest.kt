@@ -2,7 +2,6 @@ package com.cmdv.core.base
 
 import com.cmdv.common.tests.AssetsHelpTestHelper
 import com.cmdv.common.tests.DataMapperTestHelper
-import com.cmdv.data.entities.GetCharactersResponseEntity
 
 /**
  * Base unit test class.

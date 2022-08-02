@@ -5,29 +5,29 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.cmdv.data.entities.CharacterRoomEntity
-import com.cmdv.data.sources.dbdaos.CharactersDao
+import com.cmdv.data.sources.dbdaos.CharacterDao
 
 /**
  * Room DB. Instance of Room Data Base for characters.
  */
 @Database(entities = [ CharacterRoomEntity::class], version = 2)
-abstract class CharactersRoomDatabase : RoomDatabase() {
-    abstract val charactersDao: CharactersDao
+abstract class CharacterRoomDatabase : RoomDatabase() {
+    abstract val characterDao: CharacterDao
 
     companion object {
         @Volatile
-        private var INSTANCE: CharactersRoomDatabase? = null
+        private var INSTANCE: CharacterRoomDatabase? = null
 
         /**
          * Get an instance using singleton pattern.
          */
-        fun getInstance(context: Context): CharactersRoomDatabase {
+        fun getInstance(context: Context): CharacterRoomDatabase {
             synchronized(this) {
-                var instance: CharactersRoomDatabase? = INSTANCE
+                var instance: CharacterRoomDatabase? = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        CharactersRoomDatabase::class.java,
+                        CharacterRoomDatabase::class.java,
                         "character-room-database")
                         .fallbackToDestructiveMigration()
                         .build()
