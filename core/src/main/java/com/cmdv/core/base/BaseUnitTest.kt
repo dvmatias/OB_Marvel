@@ -17,7 +17,7 @@ open class BaseUnitTest<T> {
     /**
      * Data mapper helper. Use this instance to map a json file to an object.
      */
-    open val mapper = DataMapperTestHelper()
+    private val mapper = DataMapperTestHelper()
 
     /**
      * Assets helper. User this instance to transform json raw files to json objects.
