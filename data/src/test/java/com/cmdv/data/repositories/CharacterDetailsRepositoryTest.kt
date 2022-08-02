@@ -83,7 +83,7 @@ class CharacterDetailsRepositoryTest : BaseUnitTest<CharacterDetailsRepository>(
     }
 
     @Test
-    fun get_character_by_id_fails() {
+    fun get_character_by_id_failure() {
         // Prepare service call
         setupFailureGetCharacterBiIdServiceCall()
 
@@ -119,7 +119,7 @@ class CharacterDetailsRepositoryTest : BaseUnitTest<CharacterDetailsRepository>(
     }
 
     @Test
-    fun get_comics_fails() {
+    fun get_comics_failure() {
         // Prepare service call
         setupFailureGetComicsByCharacterIdServiceCall()
 
@@ -155,7 +155,7 @@ class CharacterDetailsRepositoryTest : BaseUnitTest<CharacterDetailsRepository>(
     }
 
     @Test
-    fun get_series_fails() {
+    fun get_series_failure() {
         // Prepare service call
         setupFailureGetSeriesByCharacterIdServiceCall()
 
