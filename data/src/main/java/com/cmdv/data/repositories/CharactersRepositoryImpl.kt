@@ -5,19 +5,21 @@ import com.cmdv.data.mappers.CharacterRoomMapper
 import com.cmdv.data.mappers.GetCharactersResponseMapper
 import com.cmdv.data.networking.ApiHandler
 import com.cmdv.data.sources.apiservices.CharactersApi
-import com.cmdv.data.sources.dbdaos.CharactersDao
-import com.cmdv.data.sources.dbdaos.FavoriteCharactersDao
+import com.cmdv.data.sources.dbdaos.CharacterDao
+import com.cmdv.data.sources.dbdaos.FavoriteCharacterDao
 import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.repositories.CharactersRepository
 import com.cmdv.domain.utils.ResponseWrapper
 
 /**
  * Repository class implementation. This class implements functions to handle Characters requests.
+ *
+ * @author matias.delv.dom@gmail.com
  */
 class CharactersRepositoryImpl(
     private val charactersApi: CharactersApi,
-    private val charactersDao: CharactersDao,
-    private val favoriteCharactersDao: FavoriteCharactersDao,
+    private val characterDao: CharacterDao,
+    private val favoriteCharacterDao: FavoriteCharacterDao,
     private val apiHandler: ApiHandler,
     private val errorHandler: CharactersApiErrorHandler
 ) : CharactersRepository {
@@ -59,7 +61,7 @@ class CharactersRepositoryImpl(
      * Removed all stored characters in DB.
      */
     override fun removeStoredCharacters() {
-        charactersDao.deleteAll()
+        characterDao.deleteAll()
     }
 
     /**
@@ -77,7 +79,7 @@ class CharactersRepositoryImpl(
      * Get characters stored in DB.
      */
     private fun getStoredCharacters(): List<CharacterModel> =
-        charactersDao.getAll().map {
+        characterDao.getAll().map {
             CharacterRoomMapper.transformEntityToModel(it)
         }
 
@@ -88,7 +90,7 @@ class CharactersRepositoryImpl(
         characters.map {
             CharacterRoomMapper.transformModelToEntity(it)
         }.also {
-            charactersDao.insert(it)
+            characterDao.insert(it)
         }
     }
 
@@ -96,10 +98,10 @@ class CharactersRepositoryImpl(
      * Updates the favorite status for all the stored characters in DB.
      */
     private fun updateModel() = kotlin.run {
-        charactersDao.getAll().forEach { characterRoom ->
+        characterDao.getAll().forEach { characterRoom ->
             // If the stored character is in the favorite DB, then set it as favorite
             with(characterRoom.characterId) {
-                charactersDao.update(isFavorite = favoriteCharactersDao.getById(this) != null, this)
+                characterDao.update(isFavorite = favoriteCharacterDao.getById(this) != null, this)
             }
         }
     }

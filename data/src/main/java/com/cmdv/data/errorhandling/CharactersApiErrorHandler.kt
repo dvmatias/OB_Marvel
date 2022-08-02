@@ -17,8 +17,8 @@ class CharactersApiErrorHandler(context: Context) : ApiErrorHandler {
         return ResponseWrapper.error(
             null,
             when (code) {
-                INTERNET_CONNECTION.code -> FailureType.ServerError(resources.getString(R.string.error_characters_server))
-                TRANSFORMATION_ERROR.code -> FailureType.LocalError(resources.getString(R.string.error_characters_local))
+                INTERNET_CONNECTION.code -> FailureType.ServerError(resources.getString(R.string.error_characters_connection))
+                TRANSFORMATION_ERROR.code -> FailureType.LocalError(resources.getString(R.string.error_characters_transformation))
                 OTHERS.code -> FailureType.LocalError(resources.getString(R.string.error_characters_others))
                 else -> FailureType.None
             }

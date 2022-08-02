@@ -10,7 +10,7 @@ import com.cmdv.data.entities.CharacterRoomEntity
  * Data Access Object - Room DB. Characters DAO to perform DB operations on Marvel's characters.
  */
 @Dao
-interface CharactersDao {
+interface CharacterDao {
     @Query(value = "SELECT * FROM `character-room-database`")
     fun getAll(): List<CharacterRoomEntity>
 

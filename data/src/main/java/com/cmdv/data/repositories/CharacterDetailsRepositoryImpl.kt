@@ -1,5 +1,6 @@
 package com.cmdv.data.repositories
 
+import com.cmdv.data.errorhandling.CharacterDetailsApiErrorHandler
 import com.cmdv.data.mappers.CharacterMapper
 import com.cmdv.data.mappers.GetComicsResponseMapper
 import com.cmdv.data.mappers.GetSeriesResponseMapper
@@ -13,13 +14,14 @@ import com.cmdv.domain.utils.ResponseWrapper
 
 class CharacterDetailsRepositoryImpl(
     private val characterDetailsApi: CharacterDetailsApi,
-    private val apiHandler: ApiHandler
+    private val apiHandler: ApiHandler,
+    private val errorHandler: CharacterDetailsApiErrorHandler
 ) : CharacterDetailsRepository {
     /**
      * API call to get a specific character by its ID.
      */
     override fun getCharacterById(characterId: Int): ResponseWrapper<CharacterModel> =
-        apiHandler.doNetworkRequest(characterDetailsApi.getCharacterById(characterId)) { response ->
+        apiHandler.doNetworkRequest(characterDetailsApi.getCharacterById(characterId), errorHandler) { response ->
             response.data?.results?.get(0)!!.let {
                 CharacterMapper.transformEntityToModel(it)
             }
@@ -32,7 +34,7 @@ class CharacterDetailsRepositoryImpl(
      * @param offset Offset applied to the service query call.
      */
     override fun getComics(characterId: Int, offset: Int): ResponseWrapper<List<ComicModel>> =
-        apiHandler.doNetworkRequest(characterDetailsApi.getComicsByCharacterId(characterId, offset)) { response ->
+        apiHandler.doNetworkRequest(characterDetailsApi.getComicsByCharacterId(characterId, offset), errorHandler) { response ->
             GetComicsResponseMapper.transformEntityToModel(response).comics
         }
 
@@ -43,7 +45,7 @@ class CharacterDetailsRepositoryImpl(
      * @param offset Offset applied to the service query call.
      */
     override fun getSeries(characterId: Int, offset: Int): ResponseWrapper<List<SerieModel>> =
-        apiHandler.doNetworkRequest(characterDetailsApi.getSeriesByCharacterId(characterId, offset)) { response ->
+        apiHandler.doNetworkRequest(characterDetailsApi.getSeriesByCharacterId(characterId, offset), errorHandler) { response ->
             GetSeriesResponseMapper.transformEntityToModel(response).series
         }
 
