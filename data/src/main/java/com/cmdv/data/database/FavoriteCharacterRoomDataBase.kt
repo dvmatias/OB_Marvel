@@ -5,30 +5,30 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.cmdv.data.entities.FavoriteCharacterRoomEntity
-import com.cmdv.data.sources.dbdaos.FavoriteCharactersDao
+import com.cmdv.data.sources.dbdaos.FavoriteCharacterDao
 
 /**
  * Room DB. Instance of Room Data Base for favorite characters.
  */
 @Database(entities = [FavoriteCharacterRoomEntity::class], version = 2)
-abstract class FavouriteCharactersRoomDataBase : RoomDatabase() {
-    abstract val favoriteCharactersDao: FavoriteCharactersDao
+abstract class FavoriteCharacterRoomDataBase : RoomDatabase() {
+    abstract val favoriteCharacterDao: FavoriteCharacterDao
 
     companion object {
         @Volatile
-        private var INSTANCE: FavouriteCharactersRoomDataBase? = null
+        private var INSTANCE: FavoriteCharacterRoomDataBase? = null
 
         /**
          * Get an instance using singleton pattern.
          */
-        fun getInstance(context: Context): FavouriteCharactersRoomDataBase {
+        fun getInstance(context: Context): FavoriteCharacterRoomDataBase {
             synchronized(this) {
-                var instance: FavouriteCharactersRoomDataBase? = INSTANCE
+                var instance: FavoriteCharacterRoomDataBase? = INSTANCE
                 if (instance == null) {
                     instance =
                         Room.databaseBuilder(
                             context.applicationContext,
-                            FavouriteCharactersRoomDataBase::class.java,
+                            FavoriteCharacterRoomDataBase::class.java,
                             "favorite-character-room-database"
                         )
                             .fallbackToDestructiveMigration()

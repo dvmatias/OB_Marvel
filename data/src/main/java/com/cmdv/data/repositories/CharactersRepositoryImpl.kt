@@ -1,27 +1,33 @@
 package com.cmdv.data.repositories
 
+import com.cmdv.data.errorhandling.CharactersApiErrorHandler
 import com.cmdv.data.mappers.CharacterRoomMapper
 import com.cmdv.data.mappers.GetCharactersResponseMapper
 import com.cmdv.data.networking.ApiHandler
 import com.cmdv.data.sources.apiservices.CharactersApi
-import com.cmdv.data.sources.dbdaos.CharactersDao
+import com.cmdv.data.sources.dbdaos.CharacterDao
+import com.cmdv.data.sources.dbdaos.FavoriteCharacterDao
 import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.repositories.CharactersRepository
 import com.cmdv.domain.utils.ResponseWrapper
 
 /**
  * Repository class implementation. This class implements functions to handle Characters requests.
+ *
+ * @author matias.delv.dom@gmail.com
  */
 class CharactersRepositoryImpl(
     private val charactersApi: CharactersApi,
-    private val charactersDao: CharactersDao,
-    private val apiHandler: ApiHandler
+    private val characterDao: CharacterDao,
+    private val favoriteCharacterDao: FavoriteCharacterDao,
+    private val apiHandler: ApiHandler,
+    private val errorHandler: CharactersApiErrorHandler
 ) : CharactersRepository {
     /**
      * Get the total amount of characters available in Marvel's API.
      */
     override fun getTotalCharactersCount(): ResponseWrapper<Int> =
-        apiHandler.doNetworkRequest(charactersApi.getCharacters(1, 0)) {
+        apiHandler.doNetworkRequest(charactersApi.getCharacters(1, 0), errorHandler) {
             it.data?.total ?: 0
         }
 
@@ -33,25 +39,29 @@ class CharactersRepositoryImpl(
      * @param offset Skip the specified number of resources in the result set (applied only to service call).
      */
     override fun getCharacters(fetch: Boolean, limit: Int, offset: Int): ResponseWrapper<List<CharacterModel>> {
-        // Get DB stored characters if any.
-        var response = getStoredCharacters()
         // If fetch true or no stored characters found
-        if (fetch || response.isEmpty()) {
+        if (fetch || getStoredCharacters().isEmpty()) {
             // Get characters from service call
             val fetchedCharacters = fetchCharacters(limit, offset)
             // Store characters in DB
             fetchedCharacters.data?.let { data -> storeCharacters(data) }
-            // Get DB stored characters if any.
-            response = getStoredCharacters()
+            updateModel()
+
+            return when(fetchedCharacters.status) {
+                ResponseWrapper.Status.LOADING -> ResponseWrapper.loading()
+                ResponseWrapper.Status.ERROR -> ResponseWrapper.error(getStoredCharacters(), fetchedCharacters.failureType!!)
+                ResponseWrapper.Status.READY -> ResponseWrapper.success(getStoredCharacters())
+            }
         }
-        return ResponseWrapper.success(response)
+        updateModel()
+        return ResponseWrapper.success(getStoredCharacters())
     }
 
     /**
      * Removed all stored characters in DB.
      */
     override fun removeStoredCharacters() {
-        charactersDao.deleteAll()
+        characterDao.deleteAll()
     }
 
     /**
@@ -69,7 +79,7 @@ class CharactersRepositoryImpl(
      * Get characters stored in DB.
      */
     private fun getStoredCharacters(): List<CharacterModel> =
-        charactersDao.getAll().map {
+        characterDao.getAll().map {
             CharacterRoomMapper.transformEntityToModel(it)
         }
 
@@ -80,7 +90,19 @@ class CharactersRepositoryImpl(
         characters.map {
             CharacterRoomMapper.transformModelToEntity(it)
         }.also {
-            charactersDao.insert(it)
+            characterDao.insert(it)
+        }
+    }
+
+    /**
+     * Updates the favorite status for all the stored characters in DB.
+     */
+    private fun updateModel() = kotlin.run {
+        characterDao.getAll().forEach { characterRoom ->
+            // If the stored character is in the favorite DB, then set it as favorite
+            with(characterRoom.characterId) {
+                characterDao.update(isFavorite = favoriteCharacterDao.getById(this) != null, this)
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ import com.cmdv.domain.repositories.FavoriteCharacterRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory<CharactersRepository> { CharactersRepositoryImpl(get(), get(), get()) }
+    factory<CharactersRepository> { CharactersRepositoryImpl(get(), get(), get(), get(), get()) }
     factory<FavoriteCharacterRepository> { FavoriteCharacterRepositoryImpl(get(), get()) }
-    factory<CharacterDetailsRepository> { CharacterDetailsRepositoryImpl(get(), get()) }
+    factory<CharacterDetailsRepository> { CharacterDetailsRepositoryImpl(get(), get(), get()) }
 }
