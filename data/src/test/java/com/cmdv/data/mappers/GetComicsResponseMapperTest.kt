@@ -40,6 +40,6 @@ class GetComicsResponseMapperTest : BaseUnitTest<GetComicsResponseMapper>() {
 
     private fun initEntities() {
         getComicsResponseEntity =
-            getObject("get_comics_response_entity.json", GetComicsResponseEntity::class.java)
+            fromJson("get_comics_response_entity.json", GetComicsResponseEntity::class.java)
     }
 }

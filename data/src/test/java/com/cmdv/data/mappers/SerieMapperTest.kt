@@ -47,7 +47,7 @@ class SerieMapperTest : BaseUnitTest<SerieMapper>() {
 
     private fun initEntities() {
         serieEntity =
-            getObject("serie_entity.json", SerieEntity::class.java)
+            fromJson("serie_entity.json", SerieEntity::class.java)
     }
 
 }

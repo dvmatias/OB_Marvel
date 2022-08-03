@@ -37,6 +37,6 @@ class GetCharactersResponseMapperTest : BaseUnitTest<GetCharactersResponseMapper
 
     private fun initEntities() {
         getCharactersResponseEntity =
-            getObject("get_characters_response_entity.json", GetCharactersResponseEntity::class.java)
+            fromJson("get_characters_response_entity.json", GetCharactersResponseEntity::class.java)
     }
 }

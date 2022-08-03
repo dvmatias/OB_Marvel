@@ -50,6 +50,6 @@ class CharacterMapperTest : BaseUnitTest<CharacterMapper>() {
 
     private fun initEntities() {
         characterEntity =
-            getObject("character_entity.json", CharacterEntity::class.java)
+            fromJson("character_entity.json", CharacterEntity::class.java)
     }
 }

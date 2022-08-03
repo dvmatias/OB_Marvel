@@ -24,6 +24,7 @@ buildscript {
         mockito_version = '4.2.0'
         mockito_nhaarman_version = '2.1.0'
         roboelectric_version = '4.4'
+        mockwebserver_version = '4.7.2'
 
         libs = [
                 junit                   : "junit:junit:${junit_version}",
@@ -34,6 +35,7 @@ buildscript {
                 mockito_nhaarman        : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockito_nhaarman_version}",
                 roboelectric            : "org.robolectric:robolectric:${roboelectric_version}",
                 espresso_core           : "androidx.test.espresso:espresso-core:${espresso_core_version}",
+                mockwebserver           : "com.squareup.okhttp3:mockwebserver:${mockwebserver_version}",
                 core_ktx                : "androidx.core:core-ktx:${core_ktx_version}",
                 appcompat               : "androidx.appcompat:appcompat:${appcompat_version}",
                 material                : "com.google.android.material:material:${material_version}",

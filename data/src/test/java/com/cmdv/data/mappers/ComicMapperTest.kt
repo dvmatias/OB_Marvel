@@ -44,7 +44,7 @@ class ComicMapperTest : BaseUnitTest<ComicMapper>() {
 
     private fun initEntities() {
         comicEntity =
-            getObject("comic_entity.json", ComicEntity::class.java)
+            fromJson("comic_entity.json", ComicEntity::class.java)
     }
 
 }

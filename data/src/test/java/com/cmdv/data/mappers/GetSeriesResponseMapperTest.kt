@@ -40,6 +40,6 @@ class GetSeriesResponseMapperTest : BaseUnitTest<GetSeriesResponseMapper>() {
 
     private fun initEntities() {
         getSeriesResponseEntity =
-            getObject("get_series_response_entity.json", GetSeriesResponseEntity::class.java)
+            fromJson("get_series_response_entity.json", GetSeriesResponseEntity::class.java)
     }
 }
