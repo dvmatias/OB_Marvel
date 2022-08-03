@@ -25,6 +25,7 @@
 
     <string name="error_characters_connection">Please make sure you\'re connected to Internet and the service works properly. Try again later.</string>
     <string name="error_characters_transformation">Your request did not complete successfully.</string>
+    <string name="error_characters_too_many_requests">You have exceeded your rate limit.  Please try again later.</string>
     <string name="error_characters_others">Something went wrong.</string>
 
     <string name="error_character_details_server">Please make sure you\'re connected to Internet and the service works properly. Try again later.</string>

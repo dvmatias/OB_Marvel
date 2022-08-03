@@ -11,6 +11,7 @@ import com.cmdv.domain.usecases.GetCharacterByIdUserCase
 import com.cmdv.domain.usecases.GetComicsByCharacterIdUserCase
 import com.cmdv.domain.usecases.GetIsFavoriteCharacterUserCase
 import com.cmdv.domain.usecases.GetSeriesByCharacterIdUserCase
+import com.cmdv.domain.utils.Event
 import com.cmdv.domain.utils.ResponseWrapper.Status
 import kotlinx.coroutines.launch
 
@@ -44,6 +45,10 @@ class CharacterDetailsViewModel(
     private val _series = MutableLiveData<List<SerieModel>>()
     val series: LiveData<List<SerieModel>>
         get() = _series
+
+    private val _eventCharacterDetailsReady = MutableLiveData<Event<Int>>()
+    val eventCharacterDetailsReady: LiveData<Event<Int>>
+        get() = _eventCharacterDetailsReady
 
     private var detailsDone = false
         set(value) {
@@ -96,7 +101,10 @@ class CharacterDetailsViewModel(
                     _character.value = it
                 }
                 when (response.status) {
-                    Status.READY -> detailsDone = true
+                    Status.READY -> {
+                        _eventCharacterDetailsReady.value = Event(characterId)
+                        detailsDone = true
+                    }
                     Status.ERROR,
                     Status.LOADING -> _viewModelState.value = response.status
                 }
