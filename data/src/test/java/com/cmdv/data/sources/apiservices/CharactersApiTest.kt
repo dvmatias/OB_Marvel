@@ -3,8 +3,6 @@ package com.cmdv.data.sources.apiservices
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.cmdv.core.base.BaseUnitTest
 import com.cmdv.data.entities.CharacterEntity
-import com.cmdv.data.entities.ComicEntity
-import com.cmdv.data.entities.SerieEntity
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
@@ -122,6 +120,11 @@ class CharactersApiTest : BaseUnitTest<CharactersApi>() {
         }
     }
 
+    /**
+     * TODO Should be extracted to a utility/base class or extension function.
+     *
+     * @see [CharacterDetailsApiTest.getMockResponseSuccess]
+     */
     @Suppress("SameParameterValue")
     private fun getMockResponseSuccess(fileName: String): MockResponse {
         val inputStream = javaClass.getResourceAsStream(fileName)
