@@ -55,10 +55,12 @@ class CharacterDetailsActivity :
     override fun observe() {
         with(viewModel) {
             getCharacterDetails(characterId)
-            character.observe(this@CharacterDetailsActivity) { character ->
-                getCharacterComics(character.id)
-                getCharacterSeries(character.id)
-                getIsFavoriteCharacter(character.id)
+            eventCharacterDetailsReady.observe(this@CharacterDetailsActivity) { event ->
+                if (event.getContentIfNotHandled() != null) {
+                    getCharacterComics(characterId!!)
+                    getCharacterSeries(characterId!!)
+                    getIsFavoriteCharacter(characterId!!)
+                }
             }
         }
     }
