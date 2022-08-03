@@ -9,11 +9,11 @@ import com.cmdv.domain.utils.ResponseWrapper
  * Use Case: User want to see a specific character's details.
  */
 class GetSeriesByCharacterIdUserCase(
-    private val charactersRepository: CharacterDetailsRepository
+    private val characterDetailsRepository: CharacterDetailsRepository
 ) : BaseUseCase<ResponseWrapper<List<SerieModel>>, GetSeriesByCharacterIdUserCase.Params>() {
 
     override suspend fun executeUseCase(params: Params): ResponseWrapper<List<SerieModel>> =
-        charactersRepository.getSeries(params.characterId, params.offset)
+        characterDetailsRepository.getSeries(params.characterId, params.offset)
 
     data class Params(val characterId: Int, val offset: Int)
 }
