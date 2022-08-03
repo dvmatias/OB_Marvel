@@ -42,6 +42,7 @@ dependencies {
     testImplementation libs.mockito
     testImplementation libs.mockito_nhaarman
     testImplementation libs.roboelectric
+    testImplementation libs.mockwebserver
     // ANDROID
     implementation libs.core_ktx
     implementation libs.appcompat

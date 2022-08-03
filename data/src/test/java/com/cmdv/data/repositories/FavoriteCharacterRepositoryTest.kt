@@ -230,11 +230,11 @@ class FavoriteCharacterRepositoryTest : BaseUnitTest<FavoriteCharacterRepository
 
     private fun initEntities() {
         val character1 =
-            getObject("favorite_character_model_1.json", CharacterModel::class.java)
+            fromJson("favorite_character_model_1.json", CharacterModel::class.java)
         val character2 =
-            getObject("favorite_character_model_2.json", CharacterModel::class.java)
+            fromJson("favorite_character_model_2.json", CharacterModel::class.java)
         val character3 =
-            getObject("favorite_character_model_3.json", CharacterModel::class.java)
+            fromJson("favorite_character_model_3.json", CharacterModel::class.java)
         characters = listOf(character1, character2, character3)
     }
 }

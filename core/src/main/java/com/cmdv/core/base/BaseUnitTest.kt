@@ -4,7 +4,7 @@ import com.cmdv.common.tests.AssetsHelpTestHelper
 import com.cmdv.common.tests.DataMapperTestHelper
 
 /**
- * Base unit test class.
+ * Base unit test class. Every unit test class should extend this base class.
  *
  * @author matias.delv.dom@gmail.com
  */
@@ -17,14 +17,14 @@ open class BaseUnitTest<T> {
     /**
      * Data mapper helper. Use this instance to map a json file to an object.
      */
-    open val mapper = DataMapperTestHelper()
+    private val mapper = DataMapperTestHelper()
 
     /**
      * Assets helper. User this instance to transform json raw files to json objects.
      */
     open val assets = AssetsHelpTestHelper()
 
-    fun <O> getObject( fileJsonName: String, objectClazz: Class<O>): O {
+    fun <O> fromJson(fileJsonName: String, objectClazz: Class<O>): O {
         return mapper.fromJson(
             assets.readFileAsString(javaClass, fileJsonName),
             objectClazz

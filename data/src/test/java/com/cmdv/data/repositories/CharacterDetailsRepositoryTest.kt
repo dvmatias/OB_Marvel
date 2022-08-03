@@ -217,11 +217,11 @@ class CharacterDetailsRepositoryTest : BaseUnitTest<CharacterDetailsRepository>(
 
     private fun initEntities() {
         getCharactersByIdResponseEntity =
-            getObject("get_character_by_id_response_entity.json", GetCharactersResponseEntity::class.java)
+            fromJson("get_character_by_id_response_entity.json", GetCharactersResponseEntity::class.java)
         getComicsResponseEntity =
-            getObject("get_comics_response_entity.json", GetComicsResponseEntity::class.java)
+            fromJson("get_comics_response_entity.json", GetComicsResponseEntity::class.java)
         getSeriesResponseEntity =
-            getObject("get_series_response_entity.json", GetSeriesResponseEntity::class.java)
+            fromJson("get_series_response_entity.json", GetSeriesResponseEntity::class.java)
 
     }
 }
