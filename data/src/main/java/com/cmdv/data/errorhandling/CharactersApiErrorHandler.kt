@@ -19,6 +19,7 @@ class CharactersApiErrorHandler(context: Context) : ApiErrorHandler {
             when (code) {
                 INTERNET_CONNECTION.code -> FailureType.ServerError(resources.getString(R.string.error_characters_connection))
                 TRANSFORMATION_ERROR.code -> FailureType.LocalError(resources.getString(R.string.error_characters_transformation))
+                TOO_MANY_REQUESTS.code -> FailureType.LocalError(resources.getString(R.string.error_characters_too_many_requests))
                 OTHERS.code -> FailureType.LocalError(resources.getString(R.string.error_characters_others))
                 else -> FailureType.None
             }
@@ -35,6 +36,7 @@ class CharactersApiErrorHandler(context: Context) : ApiErrorHandler {
     enum class CharactersApiErrorCode(val code: Int) {
         INTERNET_CONNECTION(400),
         TRANSFORMATION_ERROR(509),
+        TOO_MANY_REQUESTS(429),
         OTHERS(409)
     }
 }
