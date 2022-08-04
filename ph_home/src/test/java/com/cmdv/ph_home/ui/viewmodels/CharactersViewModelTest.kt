@@ -9,6 +9,7 @@ import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.repositories.CharactersRepository
 import com.cmdv.domain.repositories.FavoriteCharacterRepository
 import com.cmdv.domain.usecases.*
+import com.cmdv.domain.utils.Event
 import com.cmdv.domain.utils.FailureType
 import com.cmdv.domain.utils.ResponseWrapper
 import com.nhaarman.mockitokotlin2.*
@@ -28,6 +29,9 @@ import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoTestRule
 import org.robolectric.annotation.Config
+
+private const val CHARACTER_ID = 1017100
+private const val POSITION = 5
 
 @Config(sdk = [Config.OLDEST_SDK])
 @RunWith(AndroidJUnit4::class)
@@ -51,20 +55,32 @@ class CharactersViewModelTest : BaseUnitTest<CharactersViewModel>() {
     @Mock
     private lateinit var errorMessageObserver: Observer<String>
 
+    @Captor
+    private lateinit var errorMessageCaptor: ArgumentCaptor<String>
+
     @Mock
     private lateinit var viewModelStateObserver: Observer<ResponseWrapper.Status>
+
+    @Captor
+    private lateinit var viewModelStateCaptor: ArgumentCaptor<ResponseWrapper.Status>
 
     @Mock
     private lateinit var charactersObserver: Observer<List<CharacterModel>>
 
     @Captor
-    private lateinit var errorMessageCaptor: ArgumentCaptor<String>
-
-    @Captor
-    private lateinit var viewModelStateCaptor: ArgumentCaptor<ResponseWrapper.Status>
-
-    @Captor
     private lateinit var charactersCaptor: ArgumentCaptor<List<CharacterModel>>
+
+    @Mock
+    private lateinit var addedFavoritePositionObserver: Observer<Event<Int>>
+
+    @Captor
+    private lateinit var addedFavoritePositionCaptor: ArgumentCaptor<Event<Int>>
+
+    @Mock
+    private lateinit var removedFavoritePositionObserver: Observer<Event<Int>>
+
+    @Captor
+    private lateinit var removedFavoritePositionCaptor: ArgumentCaptor<Event<Int>>
 
     @get:Rule
     val instantExecutionRule = InstantTaskExecutorRule()
@@ -103,6 +119,7 @@ class CharactersViewModelTest : BaseUnitTest<CharactersViewModel>() {
         errorMessageObserver.onChanged(null)
         viewModelStateObserver.onChanged(null)
         charactersObserver.onChanged(null)
+        addedFavoritePositionObserver.onChanged(null)
 
         testCoroutineRule.after()
         testCoroutineRule.testDispatcher.cancel()
@@ -267,6 +284,8 @@ class CharactersViewModelTest : BaseUnitTest<CharactersViewModel>() {
 
         uut?.removeStoredCharacters()
 
+        delay(500)
+
         // Verify repositories interactions
         verify(charactersRepository, times(1)).removeStoredCharacters()
         verifyNoMoreInteractions(charactersRepository)
@@ -283,6 +302,8 @@ class CharactersViewModelTest : BaseUnitTest<CharactersViewModel>() {
 
         uut?.removeStoredCharacters()
 
+        delay(500)
+
         // Verify repositories interactions
         verify(charactersRepository, times(1)).removeStoredCharacters()
         verifyNoMoreInteractions(charactersRepository)
@@ -290,16 +311,51 @@ class CharactersViewModelTest : BaseUnitTest<CharactersViewModel>() {
 
     @Test
     fun add_favorite_success() = runBlocking {
-        // TODO
-    }
+        // Set repository response with expected data
+        whenever(
+            favoriteCharactersRepository.add(CHARACTER_ID, POSITION)
+        ).thenReturn(
+            ResponseWrapper.success(Event(POSITION))
+        )
 
-    @Test
-    fun add_favorite_failure() = runBlocking {
-        // TODO
+        uut?.addedFavoritePosition?.observeForever(addedFavoritePositionObserver)
+
+        uut?.addFavorite(CHARACTER_ID, POSITION)
+
+        delay(500)
+
+        verify(addedFavoritePositionObserver, times(1)).onChanged(addedFavoritePositionCaptor.capture())
+
+        // Verify repositories interactions
+        verify(favoriteCharactersRepository, times(1)).add(CHARACTER_ID, POSITION)
+        verifyNoMoreInteractions(charactersRepository)
+        // Check addedFavoritePosition
+        assertThat(addedFavoritePositionCaptor.allValues, hasSize(1))
+        assertThat(addedFavoritePositionCaptor.firstValue.peekContent(), equalTo(POSITION))
     }
 
     @Test
     fun remove_favorite() = runBlocking {
-        // TODO
+        // Set repository response with expected data
+        whenever(
+            favoriteCharactersRepository.remove(CHARACTER_ID, POSITION)
+        ).thenReturn(
+            ResponseWrapper.success(Event(POSITION))
+        )
+
+        uut?.removedFavoritePosition?.observeForever(removedFavoritePositionObserver)
+
+        uut?.removeFavorite(CHARACTER_ID, POSITION)
+
+        delay(500)
+
+        verify(removedFavoritePositionObserver, times(1)).onChanged(removedFavoritePositionCaptor.capture())
+
+        // Verify repositories interactions
+        verify(favoriteCharactersRepository, times(1)).remove(CHARACTER_ID, POSITION)
+        verifyNoMoreInteractions(charactersRepository)
+        // Check addedFavoritePosition
+        assertThat(removedFavoritePositionCaptor.allValues, hasSize(1))
+        assertThat(removedFavoritePositionCaptor.firstValue.peekContent(), equalTo(POSITION))
     }
 }
