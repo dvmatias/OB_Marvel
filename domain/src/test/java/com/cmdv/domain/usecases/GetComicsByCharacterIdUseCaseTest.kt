@@ -4,6 +4,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.cmdv.core.base.BaseUnitTest
 import com.cmdv.domain.models.ComicModel
 import com.cmdv.domain.repositories.CharacterDetailsRepository
+import com.cmdv.domain.utils.FailureType
 import com.cmdv.domain.utils.ResponseWrapper
 import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.runBlocking
@@ -64,6 +65,33 @@ class GetComicsByCharacterIdUseCaseTest : BaseUnitTest<GetComicsByCharacterIdUse
                 )
                 assertThat(thumbnail, equalTo("http://i.annihil.us/u/prod/marvel/i/mg/c/b0/4bc61dec7755f.jpg"))
             }
+        }
+    }
+
+    @Test
+    fun execute_use_case_response_failure() {
+        val params = GetComicsByCharacterIdUserCase.Params(1010903, 32)
+        // Expected use case response data
+        // Set repository response with expected data
+        whenever(
+            characterDetailsRepository.getComics(any(), any())
+        ).thenReturn(
+            ResponseWrapper.error(null, FailureType.ServerError("Error message"))
+        )
+
+        runBlocking {
+            val result = uut?.executeUseCase(params)
+
+            // Check repository interactions
+            verify(characterDetailsRepository, times(1)).getComics(any(), any())
+            verifyNoMoreInteractions(characterDetailsRepository)
+            // Check use case result
+            assertThat(result, notNullValue())
+            assertThat(result!!.status, equalTo(ResponseWrapper.Status.ERROR))
+            assertThat(result.failureType, notNullValue())
+            assertThat(result.failureType, instanceOf(FailureType.ServerError::class.java))
+            assertThat(result.failureType!!.message, equalTo("Error message"))
+            assertThat(result.data, nullValue())
         }
     }
 }

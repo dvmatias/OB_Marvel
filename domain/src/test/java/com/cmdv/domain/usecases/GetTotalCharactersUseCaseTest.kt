@@ -2,22 +2,26 @@ package com.cmdv.domain.usecases
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.cmdv.core.base.BaseUnitTest
-import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.repositories.CharactersRepository
 import com.cmdv.domain.utils.FailureType
 import com.cmdv.domain.utils.ResponseWrapper
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.*
-import org.hamcrest.MatcherAssert.*
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
+private const val TOTAL_CHARACTERS_COUNT = 1562
+
 @RunWith(AndroidJUnit4::class)
-class GetCharactersUseCaseTest : BaseUnitTest<GetCharactersUseCase>() {
+class GetTotalCharactersUseCaseTest : BaseUnitTest<GetTotalCharactersUseCase>() {
     @Mock
     private lateinit var charactersRepository: CharactersRepository
 
@@ -27,69 +31,53 @@ class GetCharactersUseCaseTest : BaseUnitTest<GetCharactersUseCase>() {
 
     @Before
     fun setUp() {
-        uut = GetCharactersUseCase(charactersRepository)
+        uut = GetTotalCharactersUseCase(charactersRepository)
     }
 
     @Test
     fun execute_use_case_response_success() {
-        val params = GetCharactersUseCase.Params(true, 32, 0)
-        // Expected use case response data
-        val expectedData = fromJson("characters.json", Array<CharacterModel>::class.java).toList()
         // Set repository response with expected data
         whenever(
-            charactersRepository.getCharacters(any(), any(), any())
+            charactersRepository.getTotalCharactersCount()
         ).thenReturn(
-            ResponseWrapper.success(expectedData)
+            ResponseWrapper.success(TOTAL_CHARACTERS_COUNT)
         )
 
         runBlocking {
-            val result = uut?.executeUseCase(params)
+            val result = uut?.executeUseCase(GetTotalCharactersUseCase.Params())
 
             // Check repository interactions
-            verify(charactersRepository, times(1)).getCharacters(any(), any(), any())
+            verify(charactersRepository, times(1)).getTotalCharactersCount()
             verifyNoMoreInteractions(charactersRepository)
             // Check use case result
             assertThat(result, notNullValue())
             assertThat(result!!.status, equalTo(ResponseWrapper.Status.READY))
             assertThat(result.failureType, nullValue())
             assertThat(result.data, notNullValue())
-            assertThat(result.data!!.size, equalTo(32))
-            // Check item 0
-            with(result.data!![0]) {
-                assertThat(this, instanceOf(CharacterModel::class.java))
-                assertThat(id, equalTo(1011334))
-                assertThat(name, equalTo("3-D Man"))
-                assertThat(description, equalTo(""))
-                assertThat(thumbnail, equalTo("http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"))
-                assertThat(isFavourite, equalTo(false))
-                assertThat(comicsCount, equalTo(12))
-                assertThat(seriesCount, equalTo(3))
-                assertThat(storiesCount, equalTo(21))
-            }
+            assertThat(result.data, equalTo(TOTAL_CHARACTERS_COUNT))
         }
     }
 
     @Test
     fun execute_use_case_response_failure() {
-        val params = GetCharactersUseCase.Params(true, 32, 0)
         // Set repository response with expected data
         whenever(
-            charactersRepository.getCharacters(any(), any(), any())
+            charactersRepository.getTotalCharactersCount()
         ).thenReturn(
-            ResponseWrapper.error(null, FailureType.ServerError("Error message"))
+            ResponseWrapper.error(null, FailureType.LocalError("Error message"))
         )
 
         runBlocking {
-            val result = uut?.executeUseCase(params)
+            val result = uut?.executeUseCase(GetTotalCharactersUseCase.Params())
 
             // Check repository interactions
-            verify(charactersRepository, times(1)).getCharacters(any(), any(), any())
+            verify(charactersRepository, times(1)).getTotalCharactersCount()
             verifyNoMoreInteractions(charactersRepository)
             // Check use case result
             assertThat(result, notNullValue())
             assertThat(result!!.status, equalTo(ResponseWrapper.Status.ERROR))
             assertThat(result.failureType, notNullValue())
-            assertThat(result.failureType, instanceOf(FailureType.ServerError::class.java))
+            assertThat(result.failureType, instanceOf(FailureType.LocalError::class.java))
             assertThat(result.failureType!!.message, equalTo("Error message"))
             assertThat(result.data, nullValue())
         }
