@@ -9,6 +9,7 @@ import com.cmdv.data.sources.dbdaos.CharacterDao
 import com.cmdv.data.sources.dbdaos.FavoriteCharacterDao
 import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.repositories.CharactersRepository
+import com.cmdv.domain.utils.FailureType
 import com.cmdv.domain.utils.ResponseWrapper
 
 /**
@@ -47,9 +48,12 @@ class CharactersRepositoryImpl(
             fetchedCharacters.data?.let { data -> storeCharacters(data) }
             updateModel()
 
-            return when(fetchedCharacters.status) {
+            return when (fetchedCharacters.status) {
                 ResponseWrapper.Status.LOADING -> ResponseWrapper.loading()
-                ResponseWrapper.Status.ERROR -> ResponseWrapper.error(getStoredCharacters(), fetchedCharacters.failureType!!)
+                ResponseWrapper.Status.ERROR -> ResponseWrapper.error(
+                    getStoredCharacters(),
+                    fetchedCharacters.failureType!!
+                )
                 ResponseWrapper.Status.READY -> ResponseWrapper.success(getStoredCharacters())
             }
         }
@@ -60,8 +64,13 @@ class CharactersRepositoryImpl(
     /**
      * Removed all stored characters in DB.
      */
-    override fun removeStoredCharacters() {
+    override fun removeStoredCharacters(): ResponseWrapper<Int> {
         characterDao.deleteAll()
+        return if (characterDao.getAll().isEmpty()) {
+            ResponseWrapper.success(1)
+        } else {
+            ResponseWrapper.error(failureType = FailureType.LocalError(""))
+        }
     }
 
     /**

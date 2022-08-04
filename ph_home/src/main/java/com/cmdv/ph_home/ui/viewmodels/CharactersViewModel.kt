@@ -56,6 +56,7 @@ class CharactersViewModel(
      */
     fun getTotalCharacters() {
         viewModelScope.launch {
+            _viewModelState.value = LOADING
             val params = GetTotalCharactersUseCase.Params()
             getTotalCharactersUseCase(params).collect { response ->
                 with(response) {
@@ -150,6 +151,5 @@ class CharactersViewModel(
     companion object {
         const val LIMIT_CHARACTERS_FETCH_DEFAULT = 32
         const val OFFSET_CHARACTERS_FETCH_DEFAULT = 0
-
     }
 }

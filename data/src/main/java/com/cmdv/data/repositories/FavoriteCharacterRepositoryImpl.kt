@@ -7,6 +7,7 @@ import com.cmdv.data.sources.dbdaos.FavoriteCharacterDao
 import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.repositories.FavoriteCharacterRepository
 import com.cmdv.domain.utils.Event
+import com.cmdv.domain.utils.FailureType
 import com.cmdv.domain.utils.ResponseWrapper
 
 /**
@@ -90,7 +91,11 @@ class FavoriteCharacterRepositoryImpl(
         favoriteCharacterDao.deleteAll()
         // Update character status in characters DB
         updateModel()
-        return ResponseWrapper.success(Event(1))
+        return if (favoriteCharacterDao.getAll().isEmpty()) {
+            ResponseWrapper.success(Event(1))
+        } else {
+            ResponseWrapper.error(null, FailureType.LocalError(""))
+        }
     }
 
     /**

@@ -20,5 +20,5 @@ interface CharactersRepository {
     /**
      * Removed all stored characters in DB.
      */
-    fun removeStoredCharacters()
+    fun removeStoredCharacters(): ResponseWrapper<Int>
 }
