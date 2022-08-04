@@ -56,7 +56,8 @@ class CharacterDetailsActivity :
         with(viewModel) {
             getCharacterDetails(characterId)
             eventCharacterDetailsReady.observe(this@CharacterDetailsActivity) { event ->
-                if (event.getContentIfNotHandled() != null) {
+                if (!event.hasBeenHandled) {
+                    event.getContentIfNotHandled()
                     getCharacterComics(characterId!!)
                     getCharacterSeries(characterId!!)
                     getIsFavoriteCharacter(characterId!!)
