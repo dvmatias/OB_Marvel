@@ -12,6 +12,16 @@ import org.junit.rules.ExternalResource
 class TestCoroutineRule(
     val testDispatcher: CoroutineDispatcher = UnconfinedTestDispatcher()
 ) : ExternalResource() {
+    val dispatchers: CoroutineDispatchers by lazy {
+        object : CoroutineDispatchers {
+            override val io: CoroutineDispatcher
+                get() = testDispatcher
+            override val main: CoroutineDispatcher
+                get() = testDispatcher
+            override val default: CoroutineDispatcher
+                get() = testDispatcher
+        }
+    }
     public override fun before() {
         Dispatchers.setMain(testDispatcher)
     }
@@ -19,4 +29,9 @@ class TestCoroutineRule(
     public override fun after() {
         Dispatchers.resetMain()
     }
+}
+interface CoroutineDispatchers {
+    val io: CoroutineDispatcher
+    val main: CoroutineDispatcher
+    val default: CoroutineDispatcher
 }
