@@ -58,16 +58,16 @@ a service locator framework).
 Dependencies are declared in separated files according to the nature and purpose of each one of them.
 For this sake, the app holds a set of files inside _app_ module:
   * [AdapterModule](https://github.com/dvmatias/OB_Marvel/blob/master/app/src/main/java/com/cmdv/obmarvel/koin/AdapterModule.kt): To declare and provide view adapters dependencies.
-  * ErrorHandlerModule: To declare and provide _ApiErrorHandler_ implementations dependencies.
-  * NavigationModule: To declare and provide navigation classes dependencies (custom implementation
+  * [ErrorHandlerModule](https://github.com/dvmatias/OB_Marvel/blob/master/app/src/main/java/com/cmdv/obmarvel/koin/ErrorHandlerModule.kt): To declare and provide _ApiErrorHandler_ implementations dependencies.
+  * [NavigationModule](https://github.com/dvmatias/OB_Marvel/blob/master/app/src/main/java/com/cmdv/obmarvel/koin/NavigationModule.kt): To declare and provide navigation classes dependencies (custom implementation
     of navigation).
-  * NetworkModule: To declare and provide networking related classes such as retrofit and network 
+  * [NetworkModule](https://github.com/dvmatias/OB_Marvel/blob/master/app/src/main/java/com/cmdv/obmarvel/koin/NetworkModule.kt): To declare and provide networking related classes such as retrofit and network 
     handlers implementations.
-  * RepositoryModule: To declare and provide repositories implementations.
-  * RoomModule: To declare and provide Room database classes implementations.
-  * ServiceModule: To declare and provide Retrofit API interfaces implementations.
-  * UseCaseModule: To declare and provide use cases implementations.
-  * ViewModelModule: To declare and provide Android ViewModel implementations.
+  * [RepositoryModule](https://github.com/dvmatias/OB_Marvel/blob/master/app/src/main/java/com/cmdv/obmarvel/koin/RepositoryModule.kt): To declare and provide repositories implementations.
+  * [RoomModule](https://github.com/dvmatias/OB_Marvel/blob/master/app/src/main/java/com/cmdv/obmarvel/koin/RoomModule.kt): To declare and provide Room database classes implementations.
+  * [ServiceModule](https://github.com/dvmatias/OB_Marvel/blob/master/app/src/main/java/com/cmdv/obmarvel/koin/ServiceModule.kt): To declare and provide Retrofit API interfaces implementations.
+  * [UseCaseModule](https://github.com/dvmatias/OB_Marvel/blob/master/app/src/main/java/com/cmdv/obmarvel/koin/UseCaseModule.kt): To declare and provide use cases implementations.
+  * [ViewModelModule](https://github.com/dvmatias/OB_Marvel/blob/master/app/src/main/java/com/cmdv/obmarvel/koin/ViewModelModule.kt): To declare and provide Android ViewModel implementations.
 
 ## Navigation
 ### Navigation Component (Native)
