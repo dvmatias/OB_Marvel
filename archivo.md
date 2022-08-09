@@ -57,7 +57,7 @@ a service locator framework).
 
 Dependencies are declared in separated files according to the nature and purpose of each one of them.
 For this sake, the app holds a set of files inside _app_ module:
-  * AdapterModule: To declare and provide view adapters dependencies.
+  * [AdapterModule](https://github.com/dvmatias/OB_Marvel/blob/master/app/src/main/java/com/cmdv/obmarvel/koin/AdapterModule.kt): To declare and provide view adapters dependencies.
   * ErrorHandlerModule: To declare and provide _ApiErrorHandler_ implementations dependencies.
   * NavigationModule: To declare and provide navigation classes dependencies (custom implementation
     of navigation).
