@@ -59,7 +59,9 @@ navigation is achieved by implementing Navigation Component.
 
 ### Navigation Pattern (Custom)
 On the other hand, navigation between activities (inter modules navigation) is achieved through a 
-custom Navigation Pattern:
+custom Navigation Pattern. This patter is declared in _core_ module and implemented in _app_ module.
+An Activity in module X that need to start another Activity in module Y doesn't need to know nothing
+about module Y (feature module do not depend on each other).
   * Navigator interface declares possible destinations inside the app. This destinations represents 
     flows entry points (Activities).
     ```
@@ -72,3 +74,5 @@ custom Navigation Pattern:
         origin.navigateTo<CharacterDetailsActivity>(bundle, finishPrevious)
     }
     ```
+  * Each activity has a Navigator implementation instance which allows inter module navigation. This
+    dependency is injected/located in BaseActivity class.
