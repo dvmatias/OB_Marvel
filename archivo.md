@@ -121,14 +121,18 @@ about module Y (feature module do not depend on each other).
   * Each activity has a Navigator implementation instance which allows inter module navigation. This
     dependency is injected/located in BaseActivity class.
 
-## Base Classes
-_TODO_
+## Pattern: MVVM + LiveData + Use Case + Repository
+Activities and Fragments are tied to Android ViewModels. View models talks with UseCases to ask for
+action on data. UseCases depends on Repositories to send/fetch data. Repositories make use of 
+Services and DAOs to send/fetch data from/to API/DB.
 
-## Pattern: MVVM + Use Case + Repository
-_TODO_
+                             ->          ->            -> 
+Activity/Fragment/ViewModel  |  Use Case |  Repository  |  API/DB               
+                            <-          <-            <-
 
 ## API Calls
 _TODO_
 
 ## Testing
-_TODO_
+Implemented Unit Testing (not every class is covered yet, WIP).
+Implemented Functional Testing (not every class is covered yet, WIP).
