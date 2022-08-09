@@ -80,13 +80,13 @@ On the other hand, navigation between activities (inter modules navigation) is a
 custom Navigation Pattern. This patter is declared in _core_ module and implemented in _app_ module.
 An Activity in module X that need to start another Activity in module Y doesn't need to know nothing
 about module Y (feature module do not depend on each other).
-  * Navigator interface declares possible destinations inside the app. This destinations represents 
+  * [Navigator](https://github.com/dvmatias/OB_Marvel/blob/master/core/src/main/java/com/cmdv/core/navigator/Navigator.kt) interface declares possible destinations inside the app. This destinations represents 
     flows entry points (Activities).
     ```
     fun toCharacterDetails(origin: Activity, bundle: Bundle, finishPrevious: Boolean)
     ```
-  * Navigator Implementation implements previous interface. This implementations make use of 
-    Activity's extension function to manage the launch of a new Activity.
+  * [Navigator Implementation](https://github.com/dvmatias/OB_Marvel/blob/master/app/src/main/java/com/cmdv/obmarvel/navigator/NavigatorImpl.kt) implements previous interface. This implementations make use of 
+    [Activity's extension function](https://github.com/dvmatias/OB_Marvel/blob/master/common/src/main/java/com/cmdv/common/extensions/ActivityNavigationExtensions.kt) to manage the launch of a new Activity.
     ```
     override fun toCharacterDetails(origin: Activity, bundle: Bundle, finishPrevious: Boolean) {
         origin.navigateTo<CharacterDetailsActivity>(bundle, finishPrevious)
