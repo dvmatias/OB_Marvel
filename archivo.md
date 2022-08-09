@@ -51,6 +51,32 @@ This app will contains two kinds of modules:
   * Character list fragment to load all the Marvel's available characters.
   * Favorite character list to display user's favorite characters.
 
+## Architecture - Clean
+The project is divided into layers. Each layer contains the classes and the logic which is tied to a 
+specific purpose inside the app.
+
+### Layers
+#### Domain
+This layer contains the application business rules and it is the most isolated layer. This
+layer don't know about any other layer but the common stuffs. It contains the models and use cases
+for data requests and definitions for data providers.
+
+It is represented by _domain_ module.
+
+#### Data
+This layer contains the business logic and includes the _domain_ layer. It contains the
+definitions of the data sources and offers logic to data treatment and data transformation.
+
+It is represented by _data_ module.
+
+#### Presentation (App)
+This layer contains all the logic that interacts with the UI and finally the
+user. In this layer resides activities, fragments, view models, view adapter, item decorators,
+etc. This layer includes both _data_ and _domain_ layers.
+
+It is represented by _app_ module and every feature module (such as _ph_home_ and 
+_ph_character_details_).
+
 ## Dependency Injection - Koin
 This application uses Koin library to provide dependency injection capabilities (even though Koin is 
 a service locator framework).
@@ -95,14 +121,22 @@ about module Y (feature module do not depend on each other).
   * Each activity has a Navigator implementation instance which allows inter module navigation. This
     dependency is injected/located in BaseActivity class.
 
-## Base Classes
-_TODO_
+## Pattern: MVVM + LiveData + Use Case + Repository
+Activities and Fragments are tied to Android ViewModels. View models talks with UseCases to ask for
+action on data. UseCases depends on Repositories to send/fetch data. Repositories make use of 
+Services and DAOs to send/fetch data from/to API/DB.
 
-## Pattern: MVVM + Use Case + Repository
-_TODO_
+```                             
+Activity-Fragment-ViewModel  <->  Use Case  <->  Repository  <->  API-DB               
+```
+
+ViewModels holds data using LiveData which at the same time, combined with data binding, triggers 
+UI actions on the screen such as: refresh data information, print data on the screen, take logical
+decisions (i.e. show/hide loading view, show error screen, display data, etc.)
 
 ## API Calls
 _TODO_
 
 ## Testing
-_TODO_
+Implemented Unit Testing (not every class is covered yet, WIP).
+Implemented Functional Testing (not every class is covered yet, WIP).
