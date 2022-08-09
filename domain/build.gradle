@@ -42,21 +42,16 @@ dependencies {
     testImplementation project(path: ':core')
 
     // TESTS
-    testImplementation libs.junit
-    testImplementation libs.test_core
-    testImplementation libs.test_ktx
     testImplementation libs.mockito
     testImplementation libs.mockito_nhaarman
-    testImplementation libs.roboelectric
     testImplementation libs.mockwebserver
-    // ANDROID
-    implementation libs.core_ktx
-    implementation libs.appcompat
-    implementation libs.material
+    testImplementation libs.roboelectric
+    testImplementation libs.test_core
+    testImplementation libs.test_ktx
     // COROUTINES
-    implementation libs.coroutines_play_services
-    implementation libs.coroutines_core
     implementation libs.coroutines_android
+    implementation libs.coroutines_core
+    implementation libs.coroutines_play_services
     // GSON
     implementation libs.gson
 }

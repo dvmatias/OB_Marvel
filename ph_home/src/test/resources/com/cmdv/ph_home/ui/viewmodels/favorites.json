@@ -1,0 +1,52 @@
+[
+    {
+        "comicsCount": 12,
+        "description": "",
+        "id": 1011334,
+        "isFavourite": true,
+        "name": "3-D Man",
+        "seriesCount": 3,
+        "storiesCount": 21,
+        "thumbnail": "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"
+    },
+    {
+        "comicsCount": 4,
+        "description": "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction! ",
+        "id": 1017100,
+        "isFavourite": true,
+        "name": "A-Bomb (HAS)",
+        "seriesCount": 2,
+        "storiesCount": 7,
+        "thumbnail": "http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16.jpg"
+    },
+    {
+        "comicsCount": 52,
+        "description": "AIM is a terrorist organization bent on destroying the world.",
+        "id": 1009144,
+        "isFavourite": true,
+        "name": "A.I.M.",
+        "seriesCount": 34,
+        "storiesCount": 54,
+        "thumbnail": "http://i.annihil.us/u/prod/marvel/i/mg/6/20/52602f21f29ec.jpg"
+    },
+    {
+        "comicsCount": 14,
+        "description": "",
+        "id": 1010699,
+        "isFavourite": true,
+        "name": "Aaron Stack",
+        "seriesCount": 3,
+        "storiesCount": 27,
+        "thumbnail": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+    },
+    {
+        "comicsCount": 54,
+        "description": "Formerly known as Emil Blonsky, a spy of Soviet Yugoslavian origin working for the KGB, the Abomination gained his powers after receiving a dose of gamma radiation similar to that which transformed Bruce Banner into the incredible Hulk.",
+        "id": 1009146,
+        "isFavourite": true,
+        "name": "Abomination (Emil Blonsky)",
+        "seriesCount": 27,
+        "storiesCount": 64,
+        "thumbnail": "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce18691cbf04.jpg"
+    }
+]

@@ -30,9 +30,22 @@ android {
     dataBinding {
         enabled true
     }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 dependencies {
+    // TESTS
+    androidTestImplementation libs.espresso_core
+    testImplementation libs.espresso_core
+    androidTestImplementation libs.hamcrest_library
+    testImplementation libs.junit
+    testImplementation libs.mockito
+    testImplementation libs.mockito_nhaarman
+    androidTestImplementation libs.test_core
+    androidTestImplementation libs.test_rules
+    androidTestImplementation libs.test_runner
     // ANDROID
     implementation libs.core_ktx
     implementation libs.appcompat

@@ -39,23 +39,23 @@ dependencies {
     api project(path: ':domain')
 
     // TESTS
+    testImplementation libs.arch_core_testing
     implementation libs.junit
-    testImplementation libs.test_core
-    testImplementation libs.test_ktx
-    testImplementation libs.mockito
-    testImplementation libs.mockito_nhaarman
-    testImplementation libs.roboelectric
-    testImplementation libs.mockwebserver
     testImplementation libs.hamcrest
     implementation libs.kotlinx_coroutines_test
+    testImplementation libs.mockito
     testImplementation libs.mockito_kotlin
-    testImplementation libs.arch_core_testing
+    testImplementation libs.mockito_nhaarman
+    testImplementation libs.mockwebserver
+    testImplementation libs.roboelectric
+    testImplementation libs.test_core
+    testImplementation libs.test_ktx
     // ANDROID
-    implementation libs.core_ktx
     implementation libs.appcompat
-    implementation libs.material
     implementation libs.constraintlayout
+    implementation libs.core_ktx
     implementation libs.lifecycle_viewmodel_ktx
+    implementation libs.material
     // KOIN
     implementation libs.koin
     // GLIDE

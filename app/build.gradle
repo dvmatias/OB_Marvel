@@ -44,6 +44,9 @@ android {
     dataBinding {
         enabled true
     }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -54,9 +57,18 @@ dependencies {
     implementation project(path: ':ph_home')
     implementation project(path: ':ph_character_details')
 
+    //TESTING
+    androidTestImplementation libs.espresso_core
+    androidTestImplementation libs.hamcrest_library
+    testImplementation libs.junit
+    testImplementation libs.mockito
+    testImplementation libs.mockito_nhaarman
+    androidTestImplementation libs.test_core
+    androidTestImplementation libs.test_rules
+    androidTestImplementation libs.test_runner
     // ANDROID
-    implementation libs.core_ktx
     implementation libs.appcompat
+    implementation libs.core_ktx
     implementation libs.material
     // KOIN
     implementation libs.koin
@@ -64,9 +76,8 @@ dependencies {
     implementation libs.retrofit
     implementation libs.retrofit_gson_converter
     // OKHTTP
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation libs.okhttp
+    implementation libs.okhttp_log_interceptor
     // ROOM DB
     implementation libs.room
     kapt libs.room_compiler
