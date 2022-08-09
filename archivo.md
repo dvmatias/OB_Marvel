@@ -130,6 +130,10 @@ Services and DAOs to send/fetch data from/to API/DB.
 Activity-Fragment-ViewModel  <->  Use Case  <->  Repository  <->  API-DB               
 ```
 
+ViewModels holds data using LiveData which at the same time, combined with data binding, triggers 
+UI actions on the screen such as: refresh data information, print data on the screen, take logical
+decisions (i.e. show/hide loading view, show error screen, display data, etc.)
+
 ## API Calls
 _TODO_
 
