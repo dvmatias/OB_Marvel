@@ -56,16 +56,26 @@ The project is divided into layers. Each layer contains the classes and the logi
 specific purpose inside the app.
 
 ### Layers
-* Domain: This layer contains the application business rules and it is the most isolated layer. This 
-  layer don't know about any other layer but the common stuffs. It contains the use cases for data 
-  requests and definitions for data providers.
-* Data: This layer contains the business logic and includes the _domain_ layer. It contains the 
-  definitions of the data sources and offers logic to data treatment and data transformation.
-* Presentation (App): This layer contains all the logic that interacts with the UI and finally the 
-  user. In this layer resides activities, fragments, view models, view adapter, item decorators, 
-  etc. This layer includes both _data_ and _domain_ layers.
-
 #### Domain
+This layer contains the application business rules and it is the most isolated layer. This
+layer don't know about any other layer but the common stuffs. It contains the models and use cases
+for data requests and definitions for data providers.
+
+It is represented by _domain_ module.
+
+#### Data
+This layer contains the business logic and includes the _domain_ layer. It contains the
+definitions of the data sources and offers logic to data treatment and data transformation.
+
+It is represented by _data_ module.
+
+#### Presentation (App)
+This layer contains all the logic that interacts with the UI and finally the
+user. In this layer resides activities, fragments, view models, view adapter, item decorators,
+etc. This layer includes both _data_ and _domain_ layers.
+
+It is represented by _app_ module and every feature module (such as _ph_home_ and 
+_ph_character_details_).
 
 ## Dependency Injection - Koin
 This application uses Koin library to provide dependency injection capabilities (even though Koin is 
