@@ -27,23 +27,23 @@ This app will contains two kinds of modules:
   classes which are part of a specific flow inside the app.
 
 ### Modules
-* app: Application module. In here should lie the logic that should be alive the entire app lifecycle.
-* common: Common logic and assets/resources are here. This module will hold custom common view 
+* _app_: Application module. In here should lie the logic that should be alive the entire app lifecycle.
+* _common_: Common logic and assets/resources are here. This module will hold custom common view 
   components, global assets, global constants, extension classes, etc. Common module do not depend
   on any other module.
-* core: Essential core/base logic is in here. This module will hold base classes, navigation pattern
+* _core_: Essential core/base logic is in here. This module will hold base classes, navigation pattern
   classes and everything that is central in the app. Core module depends on data and domain modules
   as well as common implementations.
-* data: Data/Business layer logic resides here. This module will hols classes to handle data such as
+* _data_: Data/Business layer logic resides here. This module will hols classes to handle data such as
   repositories, DAOs, models, etc. Data module only depends on domain module and common/core 
   implementations.
-* domain: Domain layer logic resides here. Domain module only depends on common and core 
+* _domain_: Domain layer logic resides here. Domain module only depends on common and core 
   implementations.
-* ph_character_details: Feature module. This module contains th classes for the 'Character Details'
+* _ph_character_details_: Feature module. This module contains th classes for the 'Character Details'
   flow to display: 
-  ** Character image.
-  ** Character description.
-  ** Character comics.
-  ** Character series.
-  ** Character stories (not implemented yet).
-* ph_home: Feature module. 
+  > Character image.
+  > Character description.
+  > Character comics.
+  > Character series.
+  > Character stories (not implemented yet).
+* _ph_home_: Feature module. 
