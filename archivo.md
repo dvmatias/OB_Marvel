@@ -41,9 +41,9 @@ This app will contains two kinds of modules:
   implementations.
 * _ph_character_details_: Feature module. This module contains th classes for the 'Character Details'
   flow to display: 
-  > Character image.
-  > Character description.
-  > Character comics.
-  > Character series.
-  > Character stories (not implemented yet).
+  * Character image.
+  * Character description.
+  * Character comics.
+  * Character series.
+  * Character stories (not implemented yet).
 * _ph_home_: Feature module. 
