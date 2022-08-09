@@ -40,10 +40,13 @@ This app will contains two kinds of modules:
 * _domain_: Domain layer logic resides here. Domain module only depends on common and core 
   implementations.
 * _ph_character_details_: Feature module. This module contains th classes for the 'Character Details'
-  flow to display: 
+  screen/flow to display: 
   * Character image.
   * Character description.
   * Character comics.
   * Character series.
   * Character stories (not implemented yet).
-* _ph_home_: Feature module. 
+* _ph_home_: Feature module. This module contains the classes for the home screen to display:
+  * Home screen bottom navigation bar.
+  * Character list fragment to load all the Marvel's available characters.
+  * Favorite character list to display user's favorite characters.
