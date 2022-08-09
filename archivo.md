@@ -50,3 +50,17 @@ This app will contains two kinds of modules:
   * Home screen bottom navigation bar.
   * Character list fragment to load all the Marvel's available characters.
   * Favorite character list to display user's favorite characters.
+
+## Navigation
+### Navigation Component (Native)
+Each feature module implements Android's Navigation Component. That means that every module can and 
+will hold a single Activity and each screen is and will be represented with a Fragment. Intra module
+navigation is achieved by implementing Navigation Component.
+
+### Navigation Pattern (Custom)
+On the other hand, navigation between activities (inter modules navigation) is achieved through a 
+custom Navigation Pattern:
+  * Navigator interface declares possible destinations inside the app. This destinations represents 
+    flows entry points (Activities).
+  * Navigator Implementation implements previous interface. This implementations make use of 
+    Activity's extension function to manage the launch of a new Activity.
