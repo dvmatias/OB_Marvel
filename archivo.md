@@ -127,8 +127,8 @@ action on data. UseCases depends on Repositories to send/fetch data. Repositorie
 Services and DAOs to send/fetch data from/to API/DB.
 
 ```                             
-Activity/Fragment/ViewModel  _to/from_  Use Case _to/from_  Repository  _to/from_  API/DB               
-```                             
+Activity-Fragment-ViewModel  <->  Use Case  <->  Repository  <->  API-DB               
+```
 
 ## API Calls
 _TODO_
