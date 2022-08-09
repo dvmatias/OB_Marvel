@@ -51,6 +51,9 @@ This app will contains two kinds of modules:
   * Character list fragment to load all the Marvel's available characters.
   * Favorite character list to display user's favorite characters.
 
+## Architecture
+_TODO_
+
 ## Dependency Injection - Koin
 This application uses Koin library to provide dependency injection capabilities (even though Koin is 
 a service locator framework).
