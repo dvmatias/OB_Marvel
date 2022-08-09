@@ -62,5 +62,13 @@ On the other hand, navigation between activities (inter modules navigation) is a
 custom Navigation Pattern:
   * Navigator interface declares possible destinations inside the app. This destinations represents 
     flows entry points (Activities).
+    ```
+    fun toCharacterDetails(origin: Activity, bundle: Bundle, finishPrevious: Boolean)
+    ```
   * Navigator Implementation implements previous interface. This implementations make use of 
     Activity's extension function to manage the launch of a new Activity.
+    ```
+    override fun toCharacterDetails(origin: Activity, bundle: Bundle, finishPrevious: Boolean) {
+        origin.navigateTo<CharacterDetailsActivity>(bundle, finishPrevious)
+    }
+    ```
