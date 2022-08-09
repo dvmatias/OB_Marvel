@@ -51,8 +51,23 @@ This app will contains two kinds of modules:
   * Character list fragment to load all the Marvel's available characters.
   * Favorite character list to display user's favorite characters.
 
-## Koin
-_TODO_
+## Dependency Injection - Koin
+This application uses Koin library to provide dependency injection capabilities (even though Koin is 
+a service locator framework).
+
+Dependencies are declared in separated files according to the nature and purpose of each one of them.
+For this sake, the app holds a set of files inside _app_ module:
+  * AdapterModule: To declare and provide view adapters dependencies.
+  * ErrorHandlerModule: To declare and provide _ApiErrorHandler_ implementations dependencies.
+  * NavigationModule: To declare and provide navigation classes dependencies (custom implementation
+    of navigation).
+  * NetworkModule: To declare and provide networking related classes such as retrofit and network 
+    handlers implementations.
+  * RepositoryModule: To declare and provide repositories implementations.
+  * RoomModule: To declare and provide Room database classes implementations.
+  * ServiceModule: To declare and provide Retrofit API interfaces implementations.
+  * UseCaseModule: To declare and provide use cases implementations.
+  * ViewModelModule: To declare and provide Android ViewModel implementations.
 
 ## Navigation
 ### Navigation Component (Native)
