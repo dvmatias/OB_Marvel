@@ -126,9 +126,9 @@ Activities and Fragments are tied to Android ViewModels. View models talks with 
 action on data. UseCases depends on Repositories to send/fetch data. Repositories make use of 
 Services and DAOs to send/fetch data from/to API/DB.
 
-                             ->          ->            -> 
-Activity/Fragment/ViewModel  |  Use Case |  Repository  |  API/DB               
-                            <-          <-            <-
+```                             
+Activity/Fragment/ViewModel  _to/from_  Use Case _to/from_  Repository  _to/from_  API/DB               
+```                             
 
 ## API Calls
 _TODO_
