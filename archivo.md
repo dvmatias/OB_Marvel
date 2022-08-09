@@ -51,6 +51,9 @@ This app will contains two kinds of modules:
   * Character list fragment to load all the Marvel's available characters.
   * Favorite character list to display user's favorite characters.
 
+## Koin
+_TODO_
+
 ## Navigation
 ### Navigation Component (Native)
 Each feature module implements Android's Navigation Component. That means that every module can and 
@@ -76,3 +79,15 @@ about module Y (feature module do not depend on each other).
     ```
   * Each activity has a Navigator implementation instance which allows inter module navigation. This
     dependency is injected/located in BaseActivity class.
+
+## Base Classes
+_TODO_
+
+## Pattern: MVVM + Use Case + Repository
+_TODO_
+
+## API Calls
+_TODO_
+
+## Testing
+_TODO_
