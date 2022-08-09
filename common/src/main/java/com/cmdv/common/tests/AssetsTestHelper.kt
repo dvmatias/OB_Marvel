@@ -7,7 +7,7 @@ import java.io.InputStream
  *
  * @author matias.delv.dom@gmail.com
  */
-class AssetsHelpTestHelper {
+class AssetsTestHelper {
     /**
      * Reads a file with [fileName] name and returns a string version of it.
      */

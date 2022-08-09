@@ -104,24 +104,22 @@ class FavoritesViewModelTest : BaseUnitTest<FavoritesViewModel>() {
             uut?.getFavorites()
         }.join()
 
+        verify(viewModelStateObserver, times(3)).onChanged(viewModelStateCaptor.capture())
+        verify(favoriteCharactersObserver, times(1)).onChanged(favoriteCharactersCaptor.capture())
 
-            verify(viewModelStateObserver, times(3)).onChanged(viewModelStateCaptor.capture())
-            verify(favoriteCharactersObserver, times(1)).onChanged(favoriteCharactersCaptor.capture())
-
-            // Verify repositories interactions
-            verify(favoriteCharactersRepository, times(2)).getAll()
-            // Check viewModelState
-            assertThat(viewModelStateCaptor.allValues, hasSize(3))
-            assertThat(viewModelStateCaptor.firstValue, equalTo(ResponseWrapper.Status.LOADING))
-            assertThat(viewModelStateCaptor.secondValue, equalTo(ResponseWrapper.Status.LOADING))
-            assertThat(viewModelStateCaptor.lastValue, equalTo(ResponseWrapper.Status.READY))
-            // Check favoriteCharacters
-            assertThat(favoriteCharactersCaptor.allValues, hasSize(1))
-            assertThat(favoriteCharactersCaptor.allValues[0], hasSize(5))
-            for (character in favoriteCharactersCaptor.allValues[0]) {
-                assertThat(character.isFavourite, equalTo(true))
-            }
-
+        // Verify repositories interactions
+        verify(favoriteCharactersRepository, times(2)).getAll()
+        // Check viewModelState
+        assertThat(viewModelStateCaptor.allValues, hasSize(3))
+        assertThat(viewModelStateCaptor.firstValue, equalTo(ResponseWrapper.Status.LOADING))
+        assertThat(viewModelStateCaptor.secondValue, equalTo(ResponseWrapper.Status.LOADING))
+        assertThat(viewModelStateCaptor.lastValue, equalTo(ResponseWrapper.Status.READY))
+        // Check favoriteCharacters
+        assertThat(favoriteCharactersCaptor.allValues, hasSize(1))
+        assertThat(favoriteCharactersCaptor.allValues[0], hasSize(5))
+        for (character in favoriteCharactersCaptor.allValues[0]) {
+            assertThat(character.isFavourite, equalTo(true))
+        }
     }
 
     @Test

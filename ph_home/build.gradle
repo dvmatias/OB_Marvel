@@ -46,20 +46,16 @@ dependencies {
     implementation project(path: ':core')
 
     // TESTS
-    testImplementation libs.junit
+    testImplementation libs.arch_core_testing
+    testImplementation libs.hamcrest
+    testImplementation libs.mockito
+    testImplementation libs.mockito_kotlin
+    testImplementation libs.mockito_nhaarman
+    testImplementation libs.mockwebserver
+    testImplementation libs.roboelectric
     testImplementation libs.test_core
     testImplementation libs.test_ktx
-    testImplementation libs.mockito
-    testImplementation libs.mockito_nhaarman
-    testImplementation libs.roboelectric
-    testImplementation libs.mockwebserver
-    testImplementation libs.hamcrest
-    testImplementation libs.mockito_kotlin
-    testImplementation libs.arch_core_testing
     // ANDROID
-    implementation libs.core_ktx
-    implementation libs.appcompat
-    implementation libs.material
     implementation libs.constraintlayout
     implementation libs.lifecycle_viewmodel_ktx
     // NAVIGATION

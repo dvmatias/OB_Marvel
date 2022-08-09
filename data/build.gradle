@@ -36,21 +36,16 @@ dependencies {
     implementation project(path: ':domain')
 
     // TESTS
-    testImplementation libs.junit
-    testImplementation libs.test_core
-    testImplementation libs.test_ktx
     testImplementation libs.mockito
     testImplementation libs.mockito_nhaarman
-    testImplementation libs.roboelectric
     testImplementation libs.mockwebserver
-    // ANDROID
-    implementation libs.core_ktx
-    implementation libs.appcompat
-    implementation libs.material
+    testImplementation libs.roboelectric
+    testImplementation libs.test_core
+    testImplementation libs.test_ktx
     // RETROFIT
+    implementation libs.gson
     implementation libs.retrofit
     implementation libs.retrofit_gson_converter
-    implementation libs.gson
     // ROOM DB
     implementation libs.room
     kapt libs.room_compiler

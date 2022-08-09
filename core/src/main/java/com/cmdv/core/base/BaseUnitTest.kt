@@ -1,6 +1,6 @@
 package com.cmdv.core.base
 
-import com.cmdv.common.tests.AssetsHelpTestHelper
+import com.cmdv.common.tests.AssetsTestHelper
 import com.cmdv.common.tests.DataMapperTestHelper
 
 /**
@@ -22,7 +22,7 @@ open class BaseUnitTest<T> {
     /**
      * Assets helper. User this instance to transform json raw files to json objects.
      */
-    open val assets = AssetsHelpTestHelper()
+    open val assets = AssetsTestHelper()
 
     fun <O> fromJson(fileJsonName: String, objectClazz: Class<O>): O {
         return mapper.fromJson(

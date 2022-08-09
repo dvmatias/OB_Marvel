@@ -46,13 +46,9 @@ dependencies {
     implementation project(path: ':core')
 
     // TESTS
-    testImplementation libs.junit
     testImplementation libs.junit_ext
     testImplementation libs.espresso_core
     // ANDROID
-    implementation libs.core_ktx
-    implementation libs.appcompat
-    implementation libs.material
     implementation libs.constraintlayout
     implementation libs.lifecycle_viewmodel_ktx
     // NAVIGATION
