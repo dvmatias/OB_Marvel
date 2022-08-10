@@ -8,4 +8,5 @@ import android.os.Bundle
  */
 interface Navigator {
     fun toCharacterDetails(origin: Activity, bundle: Bundle, finishPrevious: Boolean)
+    fun toSearchCharacter(origin: Activity, bundle: Bundle?, finishPrevious: Boolean)
 }

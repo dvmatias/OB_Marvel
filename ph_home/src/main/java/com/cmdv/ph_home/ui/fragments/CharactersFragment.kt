@@ -125,7 +125,7 @@ class CharactersFragment :
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
-            Toast.makeText(requireContext(), "Launch search flow", Toast.LENGTH_SHORT).show()
+            fragmentListener.onSearchMenuClick()
         }
         return super.onOptionsItemSelected(item)
     }

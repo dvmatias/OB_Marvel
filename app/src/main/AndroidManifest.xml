@@ -30,7 +30,7 @@
             android:exported="false"
             android:theme="@style/Theme.CharacterDetailsActivity"/>
 
-        <activity android:name="com.cmdv.ph_search_character.ui.SearchCharacterActivity"
+        <activity android:name="com.cmdv.ph_search_character.SearchCharacterActivity"
             android:exported="false"
             android:theme="@style/Theme.CharacterDetailsActivity"/>
     </application>

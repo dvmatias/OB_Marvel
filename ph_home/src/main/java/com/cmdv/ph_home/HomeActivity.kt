@@ -79,4 +79,11 @@ class HomeActivity : BaseActivity<HomeActivity, ActivityHomeBinding>(R.layout.ac
             setDisplayShowTitleEnabled(false)
         }
     }
+
+    /**
+     * Triggered when 'search' menu item is clicked. Should start 'Search Character' flow.
+     */
+    override fun onSearchMenuClick() {
+        navigator.toSearchCharacter(this, null, false)
+    }
 }

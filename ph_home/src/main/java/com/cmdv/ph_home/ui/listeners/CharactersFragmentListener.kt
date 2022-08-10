@@ -17,4 +17,9 @@ interface CharactersFragmentListener {
      * @param message Error message to display.
      */
     fun showErrorSnackBar(message: String)
+
+    /**
+     * Triggered when 'search' menu item is clicked. Should start 'Search Character' flow.
+     */
+    fun onSearchMenuClick()
 }
