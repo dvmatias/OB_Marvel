@@ -38,7 +38,7 @@ class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBi
     private lateinit var fragmentListener: CharactersFragmentListener
 
     /**
-     * Implementation.This object implements the functions in [CharacterAdapterListener].
+     * Implementation. This object implements the functions in [CharacterAdapterListener].
      */
     private val characterAdapterListener = object : CharacterAdapterListener {
         override fun onLoadMoreCharacters(offset: Int) {

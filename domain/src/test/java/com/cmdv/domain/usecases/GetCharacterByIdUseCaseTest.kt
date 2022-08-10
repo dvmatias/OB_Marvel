@@ -59,7 +59,7 @@ class GetCharacterByIdUseCaseTest : BaseUnitTest<GetCharacterByIdUserCase>() {
                 assertThat(name, equalTo("A.I.M."))
                 assertThat(description, equalTo("AIM is a terrorist organization bent on destroying the world."))
                 assertThat(thumbnail, equalTo("http://i.annihil.us/u/prod/marvel/i/mg/6/20/52602f21f29ec.jpg"))
-                assertThat(isFavourite, equalTo(false))
+                assertThat(isFavorite, equalTo(false))
                 assertThat(comicsCount, equalTo(52))
                 assertThat(seriesCount, equalTo(34))
                 assertThat(storiesCount, equalTo(54))

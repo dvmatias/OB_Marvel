@@ -112,7 +112,7 @@ class CharacterAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun updateFavorite(position: Int, isFavourite: Boolean) {
-        this.characters[position].isFavourite = isFavourite
+        this.characters[position].isFavorite = isFavourite
         notifyItemChanged(position + 1)
     }
 

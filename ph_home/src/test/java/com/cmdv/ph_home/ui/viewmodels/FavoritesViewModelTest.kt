@@ -118,7 +118,7 @@ class FavoritesViewModelTest : BaseUnitTest<FavoritesViewModel>() {
         assertThat(favoriteCharactersCaptor.allValues, hasSize(1))
         assertThat(favoriteCharactersCaptor.allValues[0], hasSize(5))
         for (character in favoriteCharactersCaptor.allValues[0]) {
-            assertThat(character.isFavourite, equalTo(true))
+            assertThat(character.isFavorite, equalTo(true))
         }
     }
 

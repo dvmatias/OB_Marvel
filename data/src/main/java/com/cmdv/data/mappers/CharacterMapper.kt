@@ -18,7 +18,7 @@ object CharacterMapper : BaseMapper<CharacterEntity, CharacterModel>() {
             name = e.name ?: DEFAULT_STRING,
             description = e.description ?: DEFAULT_STRING,
             transformThumbnail(e.thumbnail),
-            isFavourite = false,
+            isFavorite = false,
             comicsCount = e.comics?.available ?: 0,
             seriesCount = e.series?.available ?: 0,
             storiesCount = e.stories?.available ?: 0,

@@ -61,7 +61,7 @@ class GetCharactersUseCaseTest : BaseUnitTest<GetCharactersUseCase>() {
                 assertThat(name, equalTo("3-D Man"))
                 assertThat(description, equalTo(""))
                 assertThat(thumbnail, equalTo("http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"))
-                assertThat(isFavourite, equalTo(false))
+                assertThat(isFavorite, equalTo(false))
                 assertThat(comicsCount, equalTo(12))
                 assertThat(seriesCount, equalTo(3))
                 assertThat(storiesCount, equalTo(21))
