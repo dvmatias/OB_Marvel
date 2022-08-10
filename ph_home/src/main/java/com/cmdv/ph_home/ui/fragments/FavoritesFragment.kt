@@ -3,7 +3,7 @@ package com.cmdv.ph_home.ui.fragments
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
-import com.cmdv.common.R.*
+import com.cmdv.common.R.string
 import com.cmdv.core.base.BaseFragment
 import com.cmdv.domain.utils.ResponseWrapper.Status.ERROR
 import com.cmdv.ph_home.R
@@ -23,7 +23,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @author matias.delv.dom@gmail.com
  */
 class FavoritesFragment :
-    BaseFragment<FavoritesFragment, FragmentFavoritesBinding>(R.layout.fragment_favorites, R.menu.menu_favorites) {
+    BaseFragment<FavoritesFragment, FragmentFavoritesBinding>(
+        R.layout.fragment_favorites,
+        R.menu.menu_fragment_favorites
+    ) {
     /**
      * Favorites view model.
      */
@@ -46,7 +49,12 @@ class FavoritesFragment :
         override fun onFavoriteClick(id: Int, index: Int, name: String) {
             AlertDialog.Builder(requireContext()).apply {
                 setTitle(resources.getString(string.favorite_fragment_delete_dialog_title))
-                    .setMessage(String.format(resources.getString(string.favorite_fragment_delete_dialog_message), name))
+                    .setMessage(
+                        String.format(
+                            resources.getString(string.favorite_fragment_delete_dialog_message),
+                            name
+                        )
+                    )
                     .setPositiveButton(resources.getString(string.favorite_fragment_delete_dialog_positive)) { dialog, _ ->
                         dialog.dismiss()
                         viewModel.removeFavorite(id, index)

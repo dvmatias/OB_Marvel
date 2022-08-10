@@ -1,5 +1,8 @@
 package com.cmdv.ph_home.ui.fragments
 
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.cmdv.core.base.BaseFragment
 import com.cmdv.domain.utils.ResponseWrapper
@@ -16,7 +19,11 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 /**
  * This Fragment is used to display the list of characters.
  */
-class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBinding>(R.layout.fragment_characters) {
+class CharactersFragment :
+    BaseFragment<CharactersFragment, FragmentCharactersBinding>(
+        R.layout.fragment_characters,
+        R.menu.menu_fragment_characters
+    ) {
     /**
      * View model.
      */
@@ -74,7 +81,7 @@ class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBi
             fragmentListener = activity as CharactersFragmentListener
         else
             throw IllegalAccessError("Calling activity must implement CharactersFragmentListener")
-        
+
         characterLayoutManager = CharacterLayoutManager(requireContext(), characterAdapter)
 
         binding.viewModel = viewModel
@@ -106,6 +113,21 @@ class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBi
                 if (state == ResponseWrapper.Status.ERROR && !characterAdapter.isEmpty()) setErrorViewState()
             }
         }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val valid = viewModel.characters.value?.size != 0
+        menu.findItem(R.id.action_search).apply {
+            isEnabled = valid
+            isVisible = valid
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_search) {
+            Toast.makeText(requireContext(), "Launch search flow", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     /**
