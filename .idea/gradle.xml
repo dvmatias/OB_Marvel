@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/ph_character_details" />
             <option value="$PROJECT_DIR$/ph_home" />
+            <option value="$PROJECT_DIR$/ph_search_character" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
