@@ -8,6 +8,10 @@
         <import type="com.cmdv.domain.utils.ResponseWrapper.Status" />
 
         <variable
+            name="listener"
+            type="com.cmdv.ph_home.ui.listeners.FavoriteCharacterAdapterListener" />
+
+        <variable
             name="viewModel"
             type="com.cmdv.ph_home.ui.viewmodels.FavoritesViewModel" />
 
@@ -32,7 +36,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:loadFavoriteCharacters="@{viewModel.favoriteCharacters}"
+            app:favoriteCharacters="@{viewModel.favoriteCharacters}"
+            app:listener="@{listener}"
             tools:itemCount="3"
             tools:listitem="@layout/item_index_favorite_character" />
 

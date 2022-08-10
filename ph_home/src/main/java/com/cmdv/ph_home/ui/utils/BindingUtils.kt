@@ -8,14 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.cmdv.common.R
-import com.cmdv.common.extensions.secureUrl
 import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.utils.ResponseWrapper.Status
 import com.cmdv.domain.utils.ResponseWrapper.Status.*
 import com.cmdv.ph_home.ui.adapters.CharacterAdapter
 import com.cmdv.ph_home.ui.adapters.IndexFavoriteCharacterAdapter
+import com.cmdv.ph_home.ui.listeners.FavoriteCharacterAdapterListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -49,13 +48,14 @@ fun loadingVisibility(
     }
 }
 
-@BindingAdapter("loadFavoriteCharacters")
+@BindingAdapter(value = ["favoriteCharacters", "listener"], requireAll = true)
 fun RecyclerView.loadFavoriteCharacters(
-    data: MutableList<CharacterModel>?
+    favoriteCharacters: MutableList<CharacterModel>?,
+    listener: FavoriteCharacterAdapterListener
 ) {
     adapter.run {
-        if (this is IndexFavoriteCharacterAdapter && data != null) {
-            if (data.isEmpty()) clear() else setCharacters(data)
+        if (this is IndexFavoriteCharacterAdapter && favoriteCharacters != null) {
+            if (favoriteCharacters.isEmpty()) clear() else setCharacters(favoriteCharacters, listener)
         }
     }
 }
