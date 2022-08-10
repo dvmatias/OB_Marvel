@@ -3,15 +3,17 @@ package com.cmdv.ph_home.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListUpdateCallback
 import androidx.recyclerview.widget.RecyclerView
 import com.cmdv.common.DETACHED_TO_ROOT
-import com.cmdv.common.extensions.addAllNoRepeated
 import com.cmdv.domain.models.CharacterModel
 import com.cmdv.ph_home.databinding.ItemCharacterBinding
 import com.cmdv.ph_home.databinding.ItemCharacterHeaderMainBinding
 import com.cmdv.ph_home.databinding.ItemLoadingBinding
 import com.cmdv.ph_home.ui.adapters.CharacterAdapterViewType.*
 import com.cmdv.ph_home.ui.listeners.CharacterAdapterListener
+
 
 private const val ITEM_COUNT_BEFORE_LOAD_MORE = 6
 
@@ -33,15 +35,34 @@ class CharacterAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             notifyItemChanged(itemCount - 1)
         }
 
+    private val listUpdateCallback = object : ListUpdateCallback {
+        override fun onInserted(position: Int, count: Int) {  }
+
+        override fun onRemoved(position: Int, count: Int) { }
+
+        override fun onMoved(fromPosition: Int, toPosition: Int) { }
+
+        override fun onChanged(position: Int, count: Int, payload: Any?) {
+            notifyItemChanged((position + 1))
+        }
+    }
+
+    lateinit var diffCallback: CharacterDiffCallback
+    lateinit var diffResult: DiffUtil.DiffResult
+
     /**
      * Event listener over character items.
      */
     internal var listener: CharacterAdapterListener? = null
 
     fun addItems(characters: List<CharacterModel>) {
-        val startIndex = itemCount
-        this.characters.addAllNoRepeated(characters)
-        notifyItemRangeChanged(startIndex, characters.size)
+        diffCallback = CharacterDiffCallback(this.characters, characters)
+        diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        this.characters.clear()
+        this.characters.addAll(characters)
+        diffResult.dispatchUpdatesTo(listUpdateCallback)
+        notifyItemRangeChanged(0, 12)
     }
 
     override fun getItemViewType(position: Int): Int =
@@ -131,4 +152,5 @@ class CharacterAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.root.visibility = if (show) View.VISIBLE else View.GONE
         }
     }
+
 }

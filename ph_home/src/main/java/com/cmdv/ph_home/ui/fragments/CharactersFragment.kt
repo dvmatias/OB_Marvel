@@ -74,15 +74,17 @@ class CharactersFragment : BaseFragment<CharactersFragment, FragmentCharactersBi
             fragmentListener = activity as CharactersFragmentListener
         else
             throw IllegalAccessError("Calling activity must implement CharactersFragmentListener")
+        
         characterLayoutManager = CharacterLayoutManager(requireContext(), characterAdapter)
-        binding.recyclerCharacter.apply {
-            addOnScrollListener(scrollListener)
-            itemAnimator = null
-        }
 
         binding.viewModel = viewModel
         binding.adapter = characterAdapter.also { it.listener = characterAdapterListener }
         binding.layoutManager = characterLayoutManager
+
+        binding.recyclerCharacter.apply {
+            addOnScrollListener(scrollListener)
+            itemAnimator = null
+        }
     }
 
     override fun observe() {
