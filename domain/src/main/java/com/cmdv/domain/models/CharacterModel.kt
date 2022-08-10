@@ -10,7 +10,7 @@ data class CharacterModel(
     val name: String,
     val description: String,
     val thumbnail: String,
-    var isFavourite: Boolean,
+    var isFavorite: Boolean,
     val comicsCount: Int,
     val seriesCount: Int,
     val storiesCount: Int

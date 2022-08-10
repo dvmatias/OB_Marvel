@@ -1,6 +1,5 @@
 package com.cmdv.ph_home.ui.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,10 +8,11 @@ import com.cmdv.domain.models.CharacterModel
 import com.cmdv.ph_home.databinding.ItemFavoriteCharacterBinding
 import com.cmdv.ph_home.ui.adapters.CharacterAdapterViewType.CHARACTER
 import com.cmdv.ph_home.ui.adapters.CharacterAdapterViewType.HEADER_MAIN
+import com.cmdv.ph_home.ui.listeners.FavoriteCharacterAdapterListener
 
 private const val HEADER_POSITION = 0
 
-class FavoriteCharacterAdapter :
+class FavoriteCharacterAdapter(private val listener: FavoriteCharacterAdapterListener) :
     RecyclerView.Adapter<FavoriteCharacterAdapter.FavoriteCharacterViewHolder>() {
 
     private val favoriteCharacters: ArrayList<CharacterModel> = arrayListOf()
@@ -37,7 +37,7 @@ class FavoriteCharacterAdapter :
     }
 
     override fun onBindViewHolder(holder: FavoriteCharacterViewHolder, position: Int) {
-        holder.bindItem(favoriteCharacters[position])
+        holder.bindItem(favoriteCharacters[position], listener, position)
     }
 
     override fun getItemCount(): Int = this.favoriteCharacters.size
@@ -46,7 +46,9 @@ class FavoriteCharacterAdapter :
         private val binding: ItemFavoriteCharacterBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindItem(character: CharacterModel) {
+        fun bindItem(character: CharacterModel, listener: FavoriteCharacterAdapterListener, index: Int) {
+            binding.listener = listener
+            binding.characterIndex = index
             binding.character = character
         }
     }

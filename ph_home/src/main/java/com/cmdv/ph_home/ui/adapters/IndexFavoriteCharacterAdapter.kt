@@ -8,15 +8,21 @@ import com.cmdv.common.DETACHED_TO_ROOT
 import com.cmdv.domain.models.CharacterModel
 import com.cmdv.domain.models.IndexedFavoriteCharactersModel
 import com.cmdv.ph_home.databinding.ItemIndexFavoriteCharacterBinding
+import com.cmdv.ph_home.ui.listeners.FavoriteCharacterAdapterListener
 
 class IndexFavoriteCharacterAdapter :
     RecyclerView.Adapter<IndexFavoriteCharacterAdapter.IndexFavoriteCharactersViewHolder>() {
 
     private val items: ArrayList<IndexedFavoriteCharactersModel> = arrayListOf()
+
     private val indexes: ArrayList<String> = arrayListOf()
+
     private val characters: ArrayList<CharacterModel> = arrayListOf()
 
-    fun setCharacters(favoriteCharacters: List<CharacterModel>) {
+    private lateinit var listener: FavoriteCharacterAdapterListener
+
+    fun setCharacters(favoriteCharacters: List<CharacterModel>, listener: FavoriteCharacterAdapterListener) {
+        this.listener = listener
         this.characters.apply {
             clear()
             addAll(favoriteCharacters)
@@ -65,7 +71,7 @@ class IndexFavoriteCharacterAdapter :
     }
 
     override fun onBindViewHolder(holder: IndexFavoriteCharactersViewHolder, position: Int) {
-        holder.bindItem(items[position])
+        holder.bindItem(items[position], listener)
     }
 
     override fun getItemCount(): Int = items.size
@@ -74,12 +80,12 @@ class IndexFavoriteCharacterAdapter :
         private val binding: ItemIndexFavoriteCharacterBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindItem(item: IndexedFavoriteCharactersModel) {
+        fun bindItem(item: IndexedFavoriteCharactersModel, listener: FavoriteCharacterAdapterListener) {
             binding.item = item
 
             binding.recyclerCharacter.apply {
                 layoutManager = GridLayoutManager(context, 3)
-                adapter = FavoriteCharacterAdapter()
+                adapter = FavoriteCharacterAdapter(listener)
             }.also {
                 (it.adapter as FavoriteCharacterAdapter).setItems(item.favoriteCharacters)
             }

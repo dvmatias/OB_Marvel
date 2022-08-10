@@ -69,9 +69,18 @@ class FavoritesViewModel(
     /**
      * Remove a single favorite character from DB.
      *
-     * @param characterId Character unique identifier to be removed from favorites DB.
+     * @param id Character unique identifier to be removed from favorites DB.
+     * @param position Character position inside the adapter.
      */
-    fun removeFavorite(characterId: Int) {
-        // TODO
+    fun removeFavorite(id: Int, position: Int) {
+        viewModelScope.launch {
+            val params = RemoveFavoriteCharacterUseCase.Params(id, position)
+            removeFavoriteCharacterUseCase(params).collect { response ->
+                with(response) {
+                    _viewModelState.value = status
+                    if (status == READY) getFavorites()
+                }
+            }
+        }
     }
 }

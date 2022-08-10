@@ -183,7 +183,7 @@ class CharacterDetailsViewModel(
                     response.data?.let { isFavorite ->
                         val character = _character.value
                         character?.let {
-                            it.isFavourite = isFavorite
+                            it.isFavorite = isFavorite
                             _character.value = it
                         }
                     }

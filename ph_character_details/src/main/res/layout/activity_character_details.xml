@@ -14,6 +14,10 @@
             type="com.cmdv.ph_character_details.ui.viewmodels.CharacterDetailsViewModel" />
 
         <variable
+            name="listener"
+            type="com.cmdv.ph_character_details.ui.listeners.CharacterDetailsListener" />
+
+        <variable
             name="characterName"
             type="String" />
 
@@ -72,9 +76,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:contentDescription="@null"
+                    android:onClick="@{() -> listener.onFavoriteClick(viewModel.character.id, viewModel.character.isFavorite)}"
                     android:visibility="@{viewModel.viewModelState.equals(Status.READY) ? View.VISIBLE : View.GONE, default = gone}"
                     tools:visibility="visible"
-                    android:src="@{viewModel.character.favourite ? @drawable/ic_favorite_selected : @drawable/ic_favorite_unselected}"
+                    android:src="@{viewModel.character.favorite ? @drawable/ic_favorite_selected : @drawable/ic_favorite_unselected}"
                     tools:src="@drawable/ic_favorite_selected"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.AppBarLayout>

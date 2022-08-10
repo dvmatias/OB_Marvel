@@ -28,7 +28,7 @@ object CharacterRoomMapper : BaseMapper<CharacterRoomEntity, CharacterModel>() {
             m.name,
             m.description,
             m.thumbnail,
-            m.isFavourite,
+            m.isFavorite,
             m.comicsCount,
             m.seriesCount,
             m.storiesCount

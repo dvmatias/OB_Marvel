@@ -20,6 +20,6 @@ class CharacterDiffCallback(
         val oldCharacter = oldList[oldPosition]
         val newCharacter = mewList[newPosition]
 
-        return oldCharacter.isFavourite == newCharacter.isFavourite
+        return oldCharacter.isFavorite == newCharacter.isFavorite
     }
 }

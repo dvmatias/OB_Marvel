@@ -39,7 +39,7 @@ class CharacterMapperTest : BaseUnitTest<CharacterMapper>() {
             equalTo("${characterEntity.thumbnail?.path}.${characterEntity.thumbnail?.extension}")
         )
         assertThat(result.thumbnail, equalTo("http://i.annihil.us/u/prod/marvel/i/mg/1/b0/5269678709fb7.jpg"))
-        assertThat(result.isFavourite, equalTo(false))
+        assertThat(result.isFavorite, equalTo(false))
         assertThat(result.comicsCount, equalTo(characterEntity.comics?.available))
         assertThat(result.comicsCount, equalTo(96))
         assertThat(result.seriesCount, equalTo(characterEntity.series?.available))
