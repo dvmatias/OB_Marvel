@@ -1,5 +1,6 @@
 package com.cmdv.ph_character_details
 
+import android.view.MenuItem
 import com.cmdv.common.KEY_CHARACTER_ID_ARG
 import com.cmdv.common.KEY_CHARACTER_NAME_ARG
 import com.cmdv.core.base.BaseActivity
@@ -50,6 +51,16 @@ class CharacterDetailsActivity :
         binding.characterName = characterName
         binding.comicAdapter = comicAdapter
         binding.serieAdapter = serieAdapter
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun observe() {
