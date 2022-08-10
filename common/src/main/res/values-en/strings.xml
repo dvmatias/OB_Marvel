@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_activity_toolbar_title">marvel</string>
+
+    <string name="fragment_characters_button_retry">RETRY</string>
+
+    <string name="item_bottom_nav_menu_characters">characters</string>
+    <string name="item_bottom_nav_menu_favorites">favorites</string>
+
+    <string name="text_item_header_choose_your_heroes">choose your heroes!</string>
+    <string name="text_item_character_no_description">No description available</string>
+
+    <string name="favorite_fragment_delete_all_dialog_title">Delete all your favorites!</string>
+    <string name="favorite_fragment_delete_all_dialog_message">You\'re about to delete all your favorite characters. Do you want to continue?</string>
+    <string name="favorite_fragment_delete_all_dialog_positive">YES</string>
+    <string name="favorite_fragment_delete_all_dialog_negative">NO</string>
+    <string name="favorite_fragment_delete_dialog_title">Remove from favorites</string>
+    <string name="favorite_fragment_delete_dialog_message">You\'re about to remove %s from your favorites. Do you want to continue?</string>
+    <string name="favorite_fragment_delete_dialog_positive">YES</string>
+    <string name="favorite_fragment_delete_dialog_negative">NO</string>
+
+    <string name="character_details_description_title">Description</string>
+    <string name="character_details_description_empty">- No description available for %s -</string>
+    <string name="character_details_comics_title">Comics</string>
+    <string name="character_details_comics_empty">- No comics info available -</string>
+    <string name="character_details_series_title">Series</string>
+    <string name="character_details_series_empty">- No series info available -</string>
+    <string name="character_details_stories_empty">- No stories info available -</string>
+
+    <string name="error_characters_connection">Please make sure you\'re connected to Internet and the service works properly. Try again later.</string>
+    <string name="error_characters_transformation">Your request did not complete successfully.</string>
+    <string name="error_characters_too_many_requests">You have exceeded your rate limit.  Please try again later.</string>
+    <string name="error_characters_others">Something went wrong.</string>
+
+    <string name="error_character_details_server">Please make sure you\'re connected to Internet and the service works properly. Try again later.</string>
+    <string name="error_character_details_transformation">Your request did not complete successfully.</string>
+    <string name="error_character_details_character_not_found">Character not found. We ran into a problem trying to get the details.</string>
+    <string name="error_character_details_data">We ran into a problem trying to get some information about the character.</string>
+
+</resources>

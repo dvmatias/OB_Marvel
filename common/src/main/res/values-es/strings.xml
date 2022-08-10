@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_activity_toolbar_title">marvel</string>
+
+    <string name="fragment_characters_button_retry">REINTENTAR</string>
+
+    <string name="item_bottom_nav_menu_characters">personajes</string>
+    <string name="item_bottom_nav_menu_favorites">favoritos</string>
+
+    <string name="text_item_header_choose_your_heroes">elije tus héroes!</string>
+    <string name="text_item_character_no_description">Descripción no disponible</string>
+
+    <string name="favorite_fragment_delete_all_dialog_title">Elimina todos tus favoritos!</string>
+    <string name="favorite_fragment_delete_all_dialog_message">Estás a punto de eliminar todos tus personajes favoritos ¿Deseas continuar?</string>
+    <string name="favorite_fragment_delete_all_dialog_positive">SI</string>
+    <string name="favorite_fragment_delete_all_dialog_negative">NO</string>
+    <string name="favorite_fragment_delete_dialog_title">Eliminar de ftus favoritos</string>
+    <string name="favorite_fragment_delete_dialog_message">Estás a punto de eliminar a %s de tus favoritos ¿Deseas continuar?</string>
+    <string name="favorite_fragment_delete_dialog_positive">SI</string>
+    <string name="favorite_fragment_delete_dialog_negative">NO</string>
+
+    <string name="character_details_description_title">Descripción</string>
+    <string name="character_details_description_empty">- Descripción no disponible para %s -</string>
+    <string name="character_details_comics_title">Comics</string>
+    <string name="character_details_comics_empty">- No hay información de los comics -</string>
+    <string name="character_details_series_title">Series</string>
+    <string name="character_details_series_empty">- No hay información de las series -</string>
+    <string name="character_details_stories_empty">- No hay información de las historias -</string>
+
+    <string name="error_characters_connection">Por favor, asegurate de que estás conectado a Internet y que el servicio funciona adecuadamente. Intenta de nuevo más tarde.</string>
+    <string name="error_characters_transformation">Tu petición no se completó de manera exitosa.</string>
+    <string name="error_characters_too_many_requests">Has excedido tu límite de tasa. Por favor, intenta de nuevo más tarde.</string>
+    <string name="error_characters_others">Algo salió mal.</string>
+
+    <string name="error_character_details_server">Por favor, asegurate de que estás conectado a Internet y que el servicio funciona adecuadamente. Intenta de nuevo más tarde.</string>
+    <string name="error_character_details_transformation">Tu petición no se completó de manera exitosa.</string>
+    <string name="error_character_details_character_not_found">Personaje no encontrado. Nos encontramos con un problema al tratar de obtener los detalles.</string>
+    <string name="error_character_details_data">Nos encontramos con un problema al tratar de obtener información sobre el personaje.</string>
+
+</resources>
